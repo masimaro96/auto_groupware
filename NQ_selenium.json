@@ -1,0 +1,2298 @@
+{
+    "domain_name": "http://global3.hanbiro.com",
+
+    "user_name": "log-userid",
+    "frameelement": "iframeLoginPassword",
+    "hanbiro_user_1": "automationtest",
+    "hanbiro_user_2": "quynh2",
+    "hanbiro_password_1":"quynh1!!",
+    "hanbiro_password":"automationtest1!",
+    "login_alert": "//div[@id='flip']/div/div[1]/div/div/div[2]/div[3]",
+    "close_popup": "//button[contains(.,'OK')]",
+    "loading_dialog": "//div[@class='loading-dialog hide']",
+
+    "calendar":{
+        "update":{
+            "title": "//div[contains(@class,'modal-dialog ui-draggable')]//h4[contains(.,'Update to the latest version')]",
+            "button_ok": "//button[contains(@ng-click, 'ok(false)') and contains(.,'OK')]"
+        },
+        "settings":{
+            "button_delete":[
+                "//*[@id='calendar_setting_form']//a[contains(@data-action, 'remove')]",
+                "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"
+            ],
+
+            "button_save":[
+                "//button[contains(@data-ng-click, 'saveFolder()') and contains(., 'Save')]",
+                "//*[@id='calendar_setting_form']//button[contains(@ng-click, 'saveCategroy()')]",
+                "//*[@id='calendar_setting_form']//button[contains(@ng-click, 'saveFolder(true)') and contains(., 'OK')]",
+                "//*[@id='calendar_setting_form']//button[contains(@data-ng-click, 'saveUserSetting()')]"
+            ],
+
+            "settings_calendar": "//a[contains(@data-ui-sref, 'ngw.calendar.setting') and contains(.,'Settings')]",
+            "add_button": "//*[@id='calendar_setting_form']//a[contains(@ng-click, 'reset(true)') and contains(@data-action, 'add')]",
+            "input_folder_name": "//*[@id='calendar_setting_form']//input[@name='folder_name']",
+            "name_folder": "meomeo ",
+            "name_folder_2": "meomeo_1",
+            
+            "share_folder": "//input[contains(@data-ng-checked, 'folder.share')]//following-sibling::span",
+            "select_organization": "//*[contains(@data-ng-click, 'openTargetOrg()')]",
+            "organization_input": "//div[@id='calendar_folder_share_my_modal']/div/div/div[2]/div/div/div[3]/div/form/span/input",
+            "organization_input_1": "automationtest",
+            "organization_select": "//*[@id='calendar_folder_share_my_modal']//a[contains(text(),'Selenium/AutomationTest1')]",
+            "organization_add": "//*[@id='calendar_folder_share_my_modal']//a[contains(@data-action, 'add')]",
+            "organization_save": "//*[@id='calendar_folder_share_my_modal']//button[contains(@type, 'button') and contains(., 'Save ')]",
+            "select_folder": "//*[@id='calendar_setting_form']//span[contains(@ng-click, 'toggleDropDown($event)') and contains(., 'My Calendar')]",
+            "dropdown": "//select[contains(@data-ng-options, 'option.name for option in shareOptions')]",
+            "select_permission": "//*[@id='calendar_setting_form']/div/div[3]/div[2]/div/form/div[5]/div[3]/div/ul/li/select",
+            
+            "category": "//*[@id='calendar_setting_form']//button[contains(@ng-click, 'loadCategoryList()') and contains(., 'Manage Categories')]",
+            "input_category_name": "//*[@id='calendar_setting_form']//input[@name='category_name']",
+            "category_name": "random color",
+
+            "color": "//*[@id='calendar_setting_form']//a[contains(@data-toggle, 'dropdown')]",
+            "list_color": "//*[@id='calendar_setting_form']//form[contains(@name,'categoryForm')]/div//ul/li",
+
+            "select_folder_1": "//*[@id='calendar_setting_form']/div/div[1]/div[2]/div/div/ul/li/ul/li[1]/span/span[2]",
+            
+            "setting_view": "//*[@id='calendar_setting_form']//div[contains(@class,'widget-main form-horizontal write-form')]//div//following-sibling::div[contains(@class,'form-group')]//div/label",
+            "view_mode": "//*[@id='calendar_setting_form']//div[contains(@class,'widget-main form-horizontal write-form')]//div//following-sibling::div[contains(@class,'form-group')]//div",
+            
+            "": ""
+
+        },
+
+        "Admin":{
+            "button_delete":[
+                "//*[@id='ngw.calendar.admin_folder']//button[contains(@data-ng-click, 'deleteFolder()') and contains(., 'Delete')]"
+            ],
+            "calendar_admin": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(@data-ng-click,'showAdminSetting($event)') and contains(.,' Admin')]",
+            "setting_calendar": "//a[contains(@href, '/calendar/admin/setting') and contains(., 'Settings')]",
+        
+            "birthday": "//*[@id='ngw.calendar.admin_setting']//input[contains(@ng-model, 'settingForm.birthday_calendar_show')]//following-sibling::span",
+            "holiday": "//*[@id='ngw.calendar.admin_setting']//input[contains(@ng-model, 'settingForm.holiday_calendar_hide')]//following-sibling::span",
+            "dept": "//*[@id='ngw.calendar.admin_setting']//input[contains(@ng-model, 'settingForm.dept_calendar_hide')]//following-sibling::span",
+            "my_calendar": "//*[@id='ngw.calendar.admin_setting']//input[contains(@ng-model, 'settingForm.private_calendar_hide')]//following-sibling::span",
+            "save_settings": "//*[@id='ngw.calendar.admin_setting']//button[contains(@data-ng-click, 'saveSetting()') and contains(., 'Save')]",
+            "close_popup": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]",
+
+            "category_type": "//button[contains(@data-ng-click, 'changeVersion($event)') and contains(., ' Use Category Type')]",
+            
+            "color": "//*[@id='boot-strap-valid']//a[contains(@data-toggle, 'dropdown')]",
+            "list_color": "//*[@id='boot-strap-valid']//a[contains(@data-toggle, 'dropdown')]/following-sibling::ul/li",
+
+            "color_edit": "//*[@id='boot-strap-valid']//div//select[contains(@ng-model, 'folder.color')]//following-sibling::div/a[contains(@data-toggle, 'dropdown')]",
+            "list_color_edit": "//*[@id='boot-strap-valid']//div//select[contains(@ng-model, 'folder.color')]//following-sibling::div/a[contains(@data-toggle, 'dropdown')]/following-sibling::ul/li",
+
+            "color_category": "//*[@id='add-category-form']//a[contains(@data-toggle, 'dropdown')]",
+            "list_color_category": "//*[@id='add-category-form']//a[contains(@data-toggle, 'dropdown')]/following-sibling::ul/li",
+
+            "folder_list": "//a[contains(.,'Calendar folder list')]",
+            "search": "//div[@id='asset-search']/input",
+            "search_input": "meo",
+            "select_list": "//div[@id='ngw.calendar.admin_folder']/div/div[2]/div/calendar-folder-react-list/div/div[2]/table/tbody/tr/td/label/span",
+            
+            "company_folder": "//a[contains(.,'Manage Company Folders')]",
+            "folder_name": "//input[@id='folder_name']",
+            "name_input": "meo_company ",
+            "save": "//*[@id='boot-strap-valid']//button[contains(@data-ng-click, 'saveFolder(folder)') and contains(., 'Save')]",
+            "close_dialog": "//*[contains(@ng-click, 'close($event)')]//button[contains(., 'Close')]",
+            "category_company": "//*[@id='boot-strap-valid']//a[contains(@data-target, '#add-category-form')]",
+            "category_company_input": "//div[@id='add-category-form']/div[2]/input", 
+            "category_input": "test ",
+            "add_category": "//*[@id='add-category-form']//button[contains(@ng-click, 'saveCategory()')]",
+            
+            "share": "//input[contains(@name, 'share')]//following-sibling::span[contains(., 'Shared')]",
+            "organization": "//button[contains(@data-ng-click, 'openTargetOrg')]",
+            "input_organization": "//div[@id='calendar_folder_share_modal']/div/div/div[2]/div/div/div[3]/div/form/span/input",
+            "select_user": "//*[@id='calendar_folder_share_modal']//a[contains(text(),'Selenium/AutomationTest2')]",
+            "add_user": "//*[@id='calendar_folder_share_modal']//a[contains(@data-action, 'add')]",
+            "save_user": "//*[@id='calendar_folder_share_modal']//button[contains(@type, 'button') and contains(., 'Save ')]",
+            "close_dialog_1": "//button[contains(@ng-click, 'ok()') and contains(., 'Delete')]"
+        },
+
+        "category_type":{
+            "title": "//*[@id='ngw.calendar.container.calendar_mycal']//span",
+            "settings": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(@ng-click, 'goSettings($event)') and contains(., 'Settings')]",
+            "add_category": "//*[@id='ngw.calendarnew.settings']//a[contains(@ng-click, 'addCategory()')]",
+            "input": "//input[contains(@ng-model, 'new_category.name')]",
+            "input_text": "automationtest ",
+            "share": "//input[contains(@data-ng-model, 'share_user.checkShare')]//following-sibling::span",
+            "org": "//button[contains(@ng-click, 'openShareUsers($event)')]",
+            "input_org": "//*[@id='categoryShareUser']//input[contains(@autocomplete, 'off')]",
+            "org_text": "auto",
+            "select_user_1": "//*[@id='categoryShareUser']//a[contains(text(),'Selenium/AutomationTest2')]",
+            "add_user": "//*[@id='categoryShareUser']//a[contains(@data-action,'add')]",
+            "button_save_org": "//*[@id='categoryShareUser']//button[contains(.,'Save')]",
+            "button_save": "//*[@id='btn-reg-confirm']",
+
+            "category_edit": "//input[contains(@ng-model, 'new_category.name')]",
+            "category_edit_name": "meo meo edit ",
+            "descriptions": "//textarea[contains(@ng-model, 'new_category.description')]",
+
+            "admin_setting": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(@ng-click, 'goAdminSettings($event)') and contains(., 'Settings')]",
+            "folder_type": "//*[@id='ngw.calendarnew.admin_settings']//button[contains(@ng-click, 'changeMode()')]",
+            "select_user_2": "//*[@id='categoryShareUser']//a[contains(text(),'Selenium/AutomationTest3')]",
+            "delete": "//button[contains(@ng-click, 'ok()') and contains(.,'Delete')]",
+
+            "color": "//div[contains(@ng-click, 'close($event)')]//form[contains(@method, 'post')]/div//a/span",
+            "list_color": "//div[contains(@ng-click, 'close($event)')]//form[contains(@method, 'post')]/div//ul/li",
+
+            "": ""
+        },
+
+        "loading_dialog": "//div[@class='loading-dialog hide']"       
+    },
+    
+    "mail":{
+        "settings_mail": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li/a[contains(@ng-click,'showSetting();') and contains(.,' Settings')]",
+        "folder_settings": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(.,'Folder')]",
+        "pull_the_scroll_bar": "//a[contains(.,' Settings')]",
+        "pull_the_scroll_bar_1": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(.,'Mail Fetching')]",
+        "click_fetching":"//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(.,'Mail Fetching')]",
+
+        "settingsmail": "//a[contains(@ng-click, 'showAdminSetting()') and contains(., 'Admin')]",
+        "settingsmail_1": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(.,'Alias Accounts')]",
+        "click_menu": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(.,'Alias Accounts')]",
+        "settings":{
+            "signature":{
+                "signature_access": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., ' Signature')]",
+                "signature_add": "//*[@id='settingSignatureController']//button[contains(@data-ng-click, 'goWrite()') and contains(., 'Add')]",
+                "image_select": "//*[@id='write-form']//input[contains(@data-ng-model, 'signatureType')]//following-sibling::span[contains(., 'Image')]",
+                "get_image": "//form[@id='write-form']/div[2]/div/div/form/label/input",
+                "image": "C:\\Users\\Nhu Quynh\\Desktop\\Quynh\\Selenium\\automationtest\\image",
+                "add_image": ".ui-resizable .btn-info > .ace-icon",
+
+                "text1": "//*[@id='write-form']//input[contains(@data-ng-model, 'signatureType')]//following-sibling::span[contains(., 'Text')]",
+                "text2": "//body[@id='tinymce']/p",
+                "text3": "test webdriver python",
+                "text_save": "//button[contains(@data-ng-click, 'saveSignature($event)') and contains(., 'Save')]",
+
+                "delete_signature1": "//div[@id='settingSignatureController']/div[2]/ul/li/label/span",
+                "delete_signature2": "//*[@id='settingSignatureController']//button[contains(@data-ng-click, 'deleteSigSelected()') and contains(., 'Delete')]"
+            },
+            "auto_sort":{
+                "autosort": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., ' Auto-Sort')]",
+                "addautosort": "//*[@id='ngw.mail.autosort']//a[contains(@data-toggle, 'collapse')]//span//following-sibling::span[contains(., 'Add')]",
+                "input1": "//div[@id='new-sort']/div/div/input",
+                "input_from": "quynh2",
+                "input2": "//div[@id='new-sort']/div[2]/div/input",
+                "input_to": "quynh1",
+                "input3": "//div[@id='new-sort']/div[3]/div/input",
+                "input_subject": "test",
+                "select1": "//select[@id='mail-moveto']",
+                "select_mailbox": "Drafts",
+                "include_mail": "//*[@id='new-sort']//input[contains(@data-ng-model, 'fData.includeExisting')]//following-sibling::span",
+                "save_button": "//*[@id='new-sort']//button[contains(@ng-click, 'saveAutoSort()') and contains(., 'Save')]",
+                "autosort_delete": "//div[@id='ngw.mail.autosort']/div/div[2]/div[2]/table/tbody/tr/td[3]/div/a[3]/i"
+            },
+            "auto_replies":{
+                "autoreplies": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., ' Vacation Auto-Reply')]",
+                "on/off_autoreplies": "//*[@id='ngw.mail.autoreply']//input[contains(@ng-model, 'autoData.isAuto')]//following-sibling::span",
+                "date_end": "//ace-datetimepicker[@id='mail-auto-end']/div/input",
+                "select_enddate": "tr:nth-child(6) > .day:nth-child(6)",
+                "input_text": "//textarea[@id='autorespond']",
+                "text_msg": "test auto reply",
+                "save_button": "//*[@id='ngw.mail.autoreply']//button[contains(@ng-click, 'saveAutoReply()') and contains(., 'Save')]"
+            },
+            "blockaddress":{
+                "total_list": "//*[@id='ngw.mail.blockaddress']//div[@class='pull-left']",
+                "block_address": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., ' Blocked Addresses')]",
+                "text_address": "//input[@type='email']",
+                "input_address": "quynh2@qa1.hanbiro.net",
+                "add_mail": "//*[@id='ngw.mail.blockaddress']//button[contains(@ng-click, 'blockAddress()') and contains(., 'Block Address')]",
+        
+                "blocked_mail": "//div[@id='ngw.mail.blockaddress']/div/div[2]/div[3]/table/tbody/tr/td[2]",
+                "del_mail": "//*[@id='ngw.mail.blockaddress']//button[contains(@ng-click, 'delData()') and contains(., 'Delete')]"
+            },
+            "whitelist":{
+                "total_list": "//*[@id='ngw.mail.whitelist']//div[@class='pull-left']",
+                "white_list": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., ' Whitelist')]",
+                "addlisst": "//div[@id='ngw.mail.whitelist']/div/div[2]/div[3]/div/div/span/input",
+                "input_list_1": "quynh2@qa1.hanbiro.net",
+                "input_list_2": "quynh3@qa1.hanbiro.net",
+                "add_button": "//*[@id='ngw.mail.whitelist']//button[contains(@ng-click, 'addWhiteList()') and contains(., 'Add')]",
+                
+                "searchwhitelist": "//div[@id='ngw.mail.whitelist']/div/div[2]/div[4]/div/span/input",
+                "input_search_1": "quynh2@qa1.hanbiro.net",
+                "input_search_2": "quynh3",
+                "search": "//*[@id='ngw.mail.whitelist']//button[contains(@ng-click, 'searchWhiteList()')]",
+                "refesh": "//*[@id='ngw.mail.whitelist']//button[contains(@data-ng-click, 'initList()')]",
+                "select_list": "//div[@id='ngw.mail.whitelist']/div/div[2]/div[5]/table/tbody/tr/td/label/span",
+                "del_list": "//*[@id='ngw.mail.whitelist']//button[contains(@ng-click, 'delData()') and contains(., 'Delete')]"
+            },
+            "folders":{
+                "st_folders": "//*[contains(@ng-click, 'goToSetting($event,row)')]//span[contains(., 'Folders')]",
+                "add_folder": "//div[@id='mail_setting_form']//a[contains(@ng-click, 'newForm($event)') and contains(@data-action, 'add')]",
+                "input_name": "//input[@name='folder_name']",
+                "name": "Driver ",
+                "button_save":[
+                    "//span[contains(.,'Save')]",
+                    "//button[contains(@data-ng-click, 'save()') and contains(., 'Save')]",
+                    "//button[contains(@data-ng-click, 'save($event)') and contains(., 'Save')]"
+                ], 
+                "share": "//*[@id='default-mail']//button[contains(@data-ng-if, 'fData.isEmpty') and contains(., 'Share')]",
+                "usingshare": "//*[contains(@ng-click, 'close($event)')]//input[contains(@data-ng-model, 'permissionScope.pData.isshare')]//following-sibling::span",
+                "org_input": "//org-tree/div/div/div[3]/div/form/span/input",
+                "org_text": "automationtest",
+                "org_select": "//a[contains(text(),'Selenium/AutomationTest2')]",
+                "org_add": "//*[contains(@data-ng-click, 'add()')]//following-sibling::i",
+                
+                "org_add_global3": "//*[contains(@data-ng-click, 'add()')]//following-sibling::i",
+                "dropdown": "//*[contains(@data-ng-options, 'option.value as option.name for option in shareOptions')]",
+
+                "Eml": "//span[contains(.,'Upload Eml')]",
+                "addfile": "//span[contains(.,' Add File')]",
+                "getfile": "//div[2]/input",
+                "attached_file": "D:Quynh\\Selenium\\automationtest\\quynh1@meo.qa.hanbiro.net_2323_1608785342.837046.eml",
+                
+                "backup": "//*[@id='mail_setting_form']//a[contains(@ng-click,'backupMailboxNew($event)')]",
+
+                "empty": "//span[contains(.,'Empty Mailbox')]",
+                "close_popup": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]",
+                "pop_up": "//div[contains(@ng-click, 'close($event)')]//div[contains(@class, 'modal-body ') and contains(., 'exists')]",
+                "popup_exits": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]",
+
+                "delete": "//span[contains(.,'Delete')]",
+
+                "share_mailbox": "//a[contains(text(),'Shared Mailbox')]",
+                "downfile": "//*[@id='sahred-mail']//a[contains(@data-ng-click, 'backupMailbox(row.key)')]",
+                "button_close": "//button[contains(@data-ng-click, 'cancel($event)') and contains(., 'Close')]"
+            },
+
+            "forwarding":{
+                "add_forwarding": "//a[contains(@data-toggle,'collapse') and contains(.,'Add')]",
+                "input_email": "fw-email",
+                "text_inpiut": "quynh2@qa1.hanbiro.net",
+
+                "option_list": "//*[@id='new-forward']/div[2]/div/label",
+                "select_option": "//*[@id='new-forward']/div[2]/div",
+
+                "save_button": "//button[contains(@data-ng-click,'insertForward($event)') and contains(.,'Save')]",
+
+                "delete_button": "//button[contains(@ng-click,'deleteForward()')]",
+                
+                "": "",
+                "": ""
+            }
+        },
+        "settings_admin":{
+            "admin": "//a[contains(@ng-click, 'showAdminSetting()') and contains(., 'Admin')]",
+
+            "alias_domian":{
+                "aliasdomain": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//span[contains(., ' Alias Domain')]",
+                "input4": "//div[@id='ngw.mail.adminalias_domain']/div/div[2]/div/div[2]/div/div/div[3]/div/span/input",
+                "aliasdomain_input": "meo.hanbiro.net",
+                "add_aliasdomain": "//*[@id='ngw.mail.adminalias_domain']//button[contains(@data-ng-click, 'addAliasDomain($event, addDomain)') and contains(., 'Add')]",
+                "select2": "//*[@id='ngw.mail.adminalias_domain']/div/div[2]/div/div[3]/table/tbody/tr",
+                "del_aliasdomain": "//*[@id='ngw.mail.adminalias_domain']//button[contains(@ng-click, 'deleteAliasDomain()') and contains(., 'Delete')]",
+
+                "add_domain": "//button[contains(@ng-click, 'openExistingAccount($event)') and contains(.,'Add')]",
+                "text_input": "auto",
+                "user_1": "//*[@id='aliasDomainOrg']//a[contains(text(),'Selenium/AutomationTest1')]",
+                "user_2": "//*[@id='aliasDomainOrg']//a[contains(text(),'Selenium/AutomationTest2')]",
+                "add_button": "//div[@id='aliasDomainOrg']/div/div/div[2]/div[2]/div/div/a/i",
+                "save_button": "//*[@id='aliasDomainOrg']//button[contains(.,'Save')]",
+                "": "",
+                "": ""
+            },
+            
+            "approval_mailbox":{
+                "total_list": "//*[@id='ngw.mail.whitelist']//div[@class='pull-left']",
+                "mailbox": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., ' Approval mailbox')]",
+                "policy": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., ' Approval Policy')]",
+                "add_policy": "//div[@id='ngw.mail.adminmanager']//a[contains(@ng-click, 'onAdd()') and contains(., 'Add')]",
+                "input5": "//div[2]/div/div/div/input",
+                "input_name_1": "Forced approval ",
+                "input_name_2": "Selective approval ",
+                "select_type": "//input[contains(@data-ng-model, 'writeScope.mode')]//following-sibling::span[contains(., 'Selective approval')]",
+                
+                "select_approver": "//button[contains(@data-ng-click, 'openManager()') and contains(., 'Select')]",
+                "approver_input": "//div[@id='getManager']/div/div/div[2]/div/div/div[3]/div/form/span/input",
+                "approver_input_1": "automationtest",
+                "approver_final_1": "//*[@id='getManager']//a[contains(text(),'Selenium/AutomationTest1')]",
+                "approver_final_2": "//*[@id='getManager']//a[contains(text(),'Selenium/AutomationTest2')]",
+                
+                "select_organization_1": "//button[contains(@data-ng-click, 'openTargetOrg()') and contains(., 'Select')]",
+                "organization_input": "//div[@id='getUsers']/div/div/div[2]/div/div/div[3]/div/form/span/input",
+                "organization_input_1": "automationtest",
+                "organization_select_1": "//*[@id='getUsers']//a[contains(text(),'Selenium/AutomationTest3')]",
+                "organization_add_1": "//*[@id='getUsers']/div/div/div[2]/div[2]/div[1]/div/a[1]/i",
+                "organization_save_1": "//*[@id='getUsers']//button[contains(., 'Save')]",
+        
+                "select_organization_2": "//button[contains(@data-ng-click, 'openManagers()') and contains(., 'Select')]",
+                "organization_input_2": "//div[@id='getManager']/div/div/div[2]/div/div/div[3]/div/form/span/input",
+                "organization_select_2": "//*[@id='getManager']//a[contains(text(),'Selenium/AutomationTest4')]",
+                "organization_add_2": "//div[@id='getManager']/div/div/div[2]/div[2]/div/div/a/i",
+                "organization_save_2": "//*[@id='getManager']//button[contains(., 'Save')]",
+
+                "save": "//button[contains(@ng-click, 'ok()') and contains(., 'Save')]",
+        
+                "organization_input_3": "//div[@id='getUsers']/div/div/div[2]/div/div/div[3]/div/form/span/input",
+                "organization_select_3": "//*[@id='getUsers']//a[contains(text(),'Selenium/AutomationTest4')]",
+                "organization_add_3": "//div[@id='getUsers']/div/div/div[2]/div[2]/div/div/a/i",
+        
+                "organization_input_4": "//div[@id='getManager']/div/div/div[2]/div/div/div[3]/div/form/span/input",
+                "organization_select_4": "//*[@id='getManager']//a[contains(text(),'Selenium/AutomationTest3')]",
+                "organization_add_4": "//div[@id='getManager']/div/div/div[2]/div[2]/div/div/a/i",
+        
+                "select_policy_1": "//div[@id='ngw.mail.adminmanager']/div/div[2]/div/div[2]/table/tbody/tr/td/label/span",
+                "select_policy_2": "//div[@id='ngw.mail.adminmanager']/div/div[2]/div/div[2]/table/tbody/tr[2]/td/label/span",
+                "remove_1": "//a[contains(@ng-click, 'onDeleteAll()') and contains(., 'Remove')]",
+                "remove_2": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"
+            },
+            
+            "sentlimit":{
+                "send": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., 'Sent Restriction')]",
+                "input":[
+                    "//input[@type='search']",
+                    "//div[@id='file-limit']/div/div/div/span/input"
+                ], 
+                "input_text":[
+                    "qa.hanbiro.net",
+                    "zip"
+                ], 
+                "button_add":[
+                    "//*[@id='domain-limit']//button[contains(@type, 'button') and contains(., 'Add')]",
+                    "//*[@id='file-limit']//button[contains(@type, 'button') and contains(., 'Add')]"
+                ], 
+                "button_delete": "//button[contains(@type, 'button') and contains(., 'Delete')]",
+                "close_popup": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]",
+                "file": "//a[contains(.,'File')]",
+
+                "select":[
+                    "//*[@id='domain-limit']/div[3]/table/tbody/tr/td[1]/label/span",
+                    "//*[@id='file-limit']/div[3]/table/tbody/tr[1]/td[1]/label/span"
+                ] 
+                
+            },
+
+            "signature_company":{                
+                "input_signature": "http://hanbiro.com  |  http://mofficesoft.vn/ ",
+                "company_signature": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., 'Signature')]",
+                "button_save": "//button[contains(@data-ng-click, 'saveSetting()') and contains(., 'Save')]",
+
+                
+                "force_select": "//*[@id='settingSignatureController']//form/div[contains(.,'Force apply')]/div/div",
+                "force_list": "//*[@id='settingSignatureController']//form/div[contains(.,'Force apply')]/div/div/label",
+
+                "position": "//div[contains(@data-ng-if, 'settingData.forceApply')]/div/div",
+                "signature_position": "//div[contains(@data-ng-if, 'settingData.forceApply')]/div/div/label"
+            },
+
+            "aliasaccount":{
+                "total_list": "//*[@id='ngw.mail.blockaddress']//div[@class='pull-left']",
+                "allias": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., ' Create Alias Account')]",
+                "button_add": "//*[@id='ngw.mail.adminmanage_alias']//button[contains(@data-ng-click, 'goWrite()') and contains(@data-toggle, 'tab')]",
+                "input_name": "//input[@name='Id']",
+                "input_nametext": "account text",
+                "input_allias": "//input[@name='aliasId']",
+                "input_nameallias": "meomeo",
+
+                "choose_org": "//button[contains(@ng-click, 'openExistingAccount($event)')]",
+                "input_org": "//*[@id='existingAccountList']/div/div/div[2]/div/div/div[3]/div/form/span/input",
+                "input_nameorg": "automation",
+                "select_org": "//*[@id='existingAccountList']//a[contains(text(),'Selenium/AutomationTest1')]",
+                "button_add_org": "//*[@id='existingAccountList']//a[contains(@data-action, 'add')]",
+                "button_save_org": "//*[@id='existingAccountList']//button[contains(., 'Save')]",
+
+                "button_save": "//button[contains(@ng-click, 'addAliasAccount()') and contains(., 'Save')]",
+                "close_popup": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]",
+
+                "button_edit": "//div[@id='ngw.mail.adminmanage_alias']/div/div[2]/div/table/tbody/tr[6]/td[4]/span/a/i",
+
+                "view_allas": "//span[contains(.,'Alias Account')]",
+                "input": "//input[@type='search']",
+                "text_input":"meomeo",
+                "button_delete": "//button[contains(@data-ng-click, 'deleteAlias($event)')]",
+                "button_OK": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"
+            },
+
+            "log_analysis":{
+                "loganalysis": "//div[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(.,'Log Analysis')]",
+                "filter_type": "//*[@id='mail_admin_log_analysis']//select[contains(@data-ng-model, 'logScope.search.type')]",
+                "search": "//*[@id='mail_admin_log_analysis']//button[contains(@data-ng-click, 'logScope.searchFn()') and contains(., ' Search')]",
+                
+                "": ""
+            }
+        }
+        
+    },
+
+    "todo":{
+        "todo": "//a[contains(.,' To-Do')]",
+        "settings_todo": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li[contains(@data-category, 'todo')]/a[contains(.,' Settings')]",
+        "add_button": "//*[@id='ngw.todo.list.setting']//a[contains(@data-ng-click, 'folderAdd()') and contains(@data-action, 'add')]",
+        "add_folder_name": "//div[@id='ngw.todo.list.setting']/list-view/div/div[2]/div/div/form/div[2]/div[2]/div/div/div[2]/div/input",
+        "name_folder_1": "Folder ",
+        "save_button": "//*[@id='ngw.todo.list.setting']//button[contains(@data-ng-click, 'folderChange()')]//following-sibling::span[contains(.,'Save')]",
+        "select_folder": "//div[@id='ngw.todo.list.setting']/list-view/div/div[2]/div/div/form/div/div[2]/div/todo-tree-folder/ul/li/span/a",
+        "del_button": "//*[contains(@data-ng-click, 'folderDelete()') and contains(@data-action, 'remove')]",
+        "del_button_1": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]",
+
+        "admin": "//*[@id='todo']//div[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li/a[contains(.,'Admin')]",
+        "manage_categories": "//a[contains(@ui-sref, 'ngw.todo.category') and contains(.,'Manage Categories')]",
+        "manage_categories_add": "//*[@id='ngw.todo.category']//button[contains(@data-ng-click, 'goWrite()') and contains(@data-target, 'write')]",
+        "manage_categories_input": "//input[@name='title']",
+        "manage_categories_name": "todo_auto ",
+        "manage_categories_save": "//button[contains(@data-ng-click, 'ok($event)') and contains(.,' OK')]",
+
+        "edit": "//*[@id='ngw.todo.category']//a[contains(@data-ng-click, 'editCategory(row.id)')]",
+        "manage_categories_name_edit": "todo_auto_edit ",
+
+        "search": "//*[@id='ngw.todo.category']//input[@type='search']",
+        "name_search": "edit",
+        "del_category": "//a[contains(@data-ng-click, 'deleteCategory(row)')]",
+        "button_ok": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]",
+
+
+        "page_total": "//*[@id='ngw.todo.category']//div[contains(@class, 'message-container')]//following-sibling::div[contains(@class, 'clearfix message-footer')]//div"
+    },
+    
+    "archive":{
+        "setting":{
+            "archive": "//span[contains(.,'Archive')]",
+            "settings": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li[contains(@data-category, 'archive')]/a[contains(.,'Settings')]",
+            "manage_myarchive": "//span[contains(text(),'Manage My Archive')]",
+            "pass": "//input[@type='password']",
+            "input_pass": "automationtest1!", 
+            "button_submit": "//button[contains(.,' Submit')]",
+
+            "folder": "//a[contains(text(),'My Archive')]",
+            "add_folder": "//a[contains(@data-ng-click, 'addFolder()') and contains(@data-action, 'add')]",
+            "enabled": "//*[contains(@data-ng-model, 'manageMyArchive.ctDispSort')]//following-sibling::span[contains(.,'Enabled')]",
+            "input_folder": "//input[@id='txtFolderName']",
+            "folder_name": "archive_auto ",
+            "save": "//button[contains(@data-ng-click, 'saveFolder()') and contains(., 'OK')]",
+
+            "modify": "//a[contains(@data-ng-click, 'modifyFolder()') and contains(@data-ng-if, 'canClick')]",
+            "disabled": "//*[contains(@data-ng-model, 'manageMyArchive.ctDispSort')]//following-sibling::span[contains(.,'Disabled')]",
+            "folder_name_edit": "archive_auto_edit ",
+
+            "delete": "//a[contains(@data-ng-click, 'delFolder()') and contains(@data-action, 'remove')]",
+            "button_ok": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"
+        },
+        
+        "admin":{
+            "settings_admin": "//*[@id='archive']//div[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li/a[contains(.,'Admin')]",
+            
+            "backup_folder":{
+                "menu": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//li//a[contains(@data-defaulthref, '#/archive/admin/common/backup/list/') and contains(., ' Backup Folder')]",
+                "button_add": "//*[@id='archive-tab-content']//button[contains(@data-ng-click, 'goWrite()') and contains(@data-target, 'write')]",
+                "input_name": "//*[@id='backup']//input[contains(@data-ng-model, 'viewData.tb_subject')]",
+                "name": "backup webdrive ",
+                "selectfolder": "//*[@id='backup']//a[contains(@data-toggle, 'collapse') and contains(., 'Select a folder.')]",
+                "choosefolder": "//*[@id='backup']//a[contains(text(),'NQuynh_folder')]",
+                "click_date_range_from":"//form[@id='backup']/div[4]/div/div/div/ace-datepicker/div/input",
+                "select_date_range_from":"//td[@class='day'][contains(text(),'1')]",
+                "click_date_range_to":"//form[@id='backup']/div[4]/div/div/div[2]/ace-datepicker/div/input",
+                "select_date_range_to":"//td[@class='day'][contains(text(),'20')]",
+                
+                "save_backup": "//*[@id='archive-tab-content']//button[contains(@data-ng-click, 'processForm()') and contains(., 'Backup/Download')]",
+                "close_popup": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]"
+            },
+            "ArchiveManager":{
+                "Company_Archive": "//span[contains(.,'Company Archive')]",
+                "Archive_Manager": "//span[contains(.,'Add Archive Manager')]",
+                "button_add": "//*[contains(@id, 'archive-tab-content')]//button[contains(@data-ng-click, 'goWrite()') and contains(@data-target, 'write')]",
+                "input_name": "//input[@id='whoUseSearchKey']",
+                "Name": "automationtest",
+                "select_user": "//*[@id='add-manager']//a[contains(text(),'Selenium/AutomationTest3')]",
+                "button_save": "//button[contains(@data-ng-click, 'processForm()') and contains(., 'Save')]",
+                "button_OK.": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]",
+
+                "edit": "//*[@id='archive-tab-content']//a[contains(@data-ng-click, 'addAdmin(row.ta_idx, row.cn)')]//following-sibling::i",
+                
+                "pick_user": "//*[@id='archive-tab-content']//div[contains(@data-ng-include, 'getListView()')]//input[contains(@data-ng-click, 'checkAll()')]//following-sibling::span",
+                "button_delete": "//*[@id='archive-tab-content']//button[contains(@data-ng-click, 'deleteSelected()') and contains(., ' Delete')]",
+                "close_popup": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]",
+
+                "admin_permissions": "//*[@id='add-manager']//input[contains(@name, 'ta_auth')]//following-sibling::span",
+                "folder_permissions": "//*[@id='add-manager']//input[contains(@name, 'ta_type')]//following-sibling::span[contains(.,' Selected folder only')]",
+                "select_folder": "//*[@id='add-manager']//a[contains(@data-toggle, 'collapse')]",
+                "choose_folder": "//*[@id='add-manager']//a[contains(text(),'NQuynh_folder')]",
+                "admin_rights": "//*[@id='add-manager']//input[contains(@name, 'ta_used')]//following-sibling::span[contains(.,' Disabled')]",
+                
+                "": ""
+            },
+            "ManageCompany":{
+                "Manage_Company": "//span[contains(.,'Manage Company Archive')]",
+        
+                "parent_folder": "//a[contains(text(),'Company Archive')]",
+                "private": "//*[contains(@data-ng-model, 'fdData.ct_access')]//following-sibling::span[contains(.,'Private')]",
+                "disabled": "//*[contains(@data-ng-model, 'fdData.ct_disp_sort')]//following-sibling::span[contains(.,'Disabled')]",
+
+                "edit": "//*[@id='archive-tab-content']//a[contains(@data-ng-click, 'categoryModi()')]",
+
+                "public": "//*[contains(@data-ng-model, 'fdData.ct_access')]//following-sibling::span[contains(.,'Public')]",
+                "enabled": "//*[contains(@data-ng-model, 'fdData.ct_disp_sort')]//following-sibling::span[contains(.,'Enabled')]",
+
+                "add_folder_admin": "//*[@id='archive-tab-content']//a[contains(@data-ng-click, 'categoryAdd()') and contains(@data-action, 'add')]",
+                "del_folder": "//*[@id='archive-tab-content']//a[contains(@data-ng-click, 'categoryDel()') and contains(@data-action, 'remove')]",
+                "input_name_folder": "//form[@id='add-manager']/div[4]/div/input",
+                "name_folder": "NQuynh public ",
+                "name_folderprivate": "NQuynh private ",
+                "save_folder": "//button[contains(@data-ng-click, 'save()') and contains(., 'Save')]",
+
+                "folder_admin": "//li[6]/span/a",
+                "add_subfolder": "//*[@id='archive-tab-content']//a[contains(@data-ng-click, 'categoryAdd()') and contains(@data-action, 'add')]",
+                "input_subfolder": "//form[@id='add-manager']/div[4]/div/input",
+                "subfolder": "sub Quynh ",
+                "save_subfolder": "//button[contains(@data-ng-click, 'save()') and contains(., 'Save')]",
+                "button_OK": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]",
+
+                "Select_authorized_Dept.": "//*[@id='add-manager']//a[contains(text(),'Select authorized Dept.')]",
+                "Dept.": "//*[@id='folder-down']//a[contains(text(),'Selenium')]",
+                "add_Dept.": "//button[contains(@data-ng-click, 'insertAuth()') and contains(., 'Add')]",
+                "button_close": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]",
+                
+                "Include_Sub_folder.": "//*[contains(@data-ng-model, 'writeScope.amData.ct_lower')]//following-sibling::span[contains(.,' Include All Sub-Folders')]",
+                "Include_Sub_Dept.": "//*[contains(@data-ng-model, 'writeScope.amData.grp_lower')]//following-sibling::span[contains(.,' Include All Sub-Dept.(s) ')]",
+                "check_all": "//*[contains(@data-ng-model, 'checkdata.isCheckAll')]//following-sibling::span",
+                "del_all": "//a[contains(@data-ng-click, 'delListAuth()') and contains(@data-action, 'remove')]",
+                "button_ok": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"
+            },
+
+            "transfer":{
+                "transfer_company": "//span[contains(.,'Transfer to Company Archive')]",
+                
+                "menu_approval":{
+                    "approval": "//*[contains(@data-ng-model, 'writeScope.scheduleData.menu_type')]//following-sibling::span[contains(.,' Approval')]",
+                    "folders_option": "//select[@name='menu_name']",
+                    "location_option": "//form[@id='transferToCompany']/div[4]/div/div/a/span",
+                    "location": "//*[@id='folder-down']//a[contains(text(),'NQuynh_folder')]",
+                    "language_option": "//select[@name='language']",
+                    
+                    "button_OK": "//button[contains(@data-ng-click, 'goSubmit()') and contains(., 'OK')]",
+                    "close_popup": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]"
+                },
+
+                "menu_board":{
+                    "company_board": "//*[contains(@data-ng-model, 'writeScope.scheduleData.menu_type')]//following-sibling::span[contains(.,' Company Board')]",
+                    "board_option": "//select[@name='bd_menu1']",
+                    "dropdown_board": "//select[@name='bd_menu2']",
+                    "folders_option": "//select[@name='menu_name']",
+                    "location_option": "//form[@id='transferToCompany']/div[4]/div/div/a/span",
+                    "location": "//*[@id='folder-down']//a[contains(text(),'NQuynh_folder')]",
+                    "language_option": "//select[@name='language']",
+                    
+                    "button_OK": "//button[contains(@data-ng-click, 'goSubmit()') and contains(., 'OK')]",
+                    "close_popup": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]"
+                },
+
+                "menu_task":{
+                    "work_dairy": "//*[contains(@data-ng-model, 'writeScope.scheduleData.menu_type')]//following-sibling::span[contains(.,' Dept. Work Diary')]",
+                
+                    "folders_option": "//select[@name='menu_name']",
+                    "location_option": "//form[@id='transferToCompany']/div[4]/div/div/a/span",
+                    "location": "//*[@id='folder-down']//a[contains(text(),'NQuynh_folder')]",
+                    "language_option": "//select[@name='language']",
+                    
+                    "button_OK": "//button[contains(@data-ng-click, 'goSubmit()') and contains(., 'OK')]",
+                    "close_popup": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]"
+                }
+               
+            }
+            
+        }
+
+    },
+
+    "co-manage":{
+        "comanage": "//span[contains(.,'Co-Manage')]",
+        "pull_the_scroll_bar": "//*[@id='projectnew']//div[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li/a[contains(.,'Admin')]",
+        "pull_the_scroll_bar_1": "//span[contains(.,'Manage Work Type')]",
+        "click_manage_folders":"//span[contains(.,'Manage Work Type')]",
+        "admin":{
+            "admin_setting": "//*[@id='projectnew']//div[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li/a[contains(.,'Admin')]",
+            "worktype":{
+                "work_type": "//span[contains(.,'Manage Work Type')]",
+                "button_add": "//button[contains(@data-ng-click, 'createWorkType()')]",
+                "input": "//input[@name='subject']",
+                "input_text": "selenium test ",
+                "button_save": "//div//h1[contains(.,'Work type')]/following::div//button[contains(@type,'button') and contains(@data-style,'zoom-out') and contains(.,'Save')]",
+                "button_OK": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]",
+                "color": "//*[@id='ngw.projectnew.adminWorkType']//form/div/following-sibling::div/div/div",
+                "icon": "//*[@id='dropdownMenuButton']"              
+            }, 
+            "status":{
+                "manage_status": "//span[contains(.,'Manage Status')]",
+                "button_add": "//button[contains(@data-ng-click, 'createStatus()')]",
+                "input_name": "//input[@name='name']",
+                "name": "selenium test ",
+                "input_description": "//textarea[@name='description']",
+                "description": "test description",
+                "select_option": "//select[@id='sel1']",
+                "button_save": "//div//h1[contains(.,'Create a new status')]/following::div//button[contains(@type,'button') and contains(@data-style,'zoom-out') and contains(.,'Save')]",
+                "button_OK": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"  
+            },
+            "folder":{
+                "manage_folders": "//span[contains(.,'Manage Folders')]",
+                "input": "//input[@name='folder_name']",
+                "name_folder": "selenium test ",
+                "button_save": "//button[contains(@data-ng-click, 'saveFolder($event)') and contains(., 'Save')]",
+
+                "parent_folder": "//*[contains(@ng-click, 'toggleDropDown($event)')]//following-sibling::span[contains(.,'Project')]",
+                "name_subfolder": "selenium subfolder ",
+                "button_delete": "//button[contains(@data-ng-click, 'deleteFolder($event)') and contains(., 'Delete')]",
+                "button_del": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"
+            },
+        "project_list":{
+            "list": "//div[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li[contains(@data-section, 'projectnew')]//a[contains(.,'Project List')]",
+            "button_add": "//*[@id='ngw.projectnew.projects']/list-project[contains(@new-project, 'newProject')]//button//following-sibling::button",
+            "name_input": " //div//new-project[contains(@close, 'close')]//div[contains(@class, 'form-group')]//following-sibling::input",
+            "name_text": "Project auto ",
+            "name_text_edit": "Project edit auto ",
+            "kanban": "//button[contains(@type, 'button')]//following-sibling::span[contains(.,'Kanban Project')]",
+            "scrum": "//button[contains(@type, 'button')]//following-sibling::span[contains(.,'Scrum Project')]",
+            "existing": "//button[contains(@type, 'button')]//following-sibling::span[contains(.,'Existing Project')]",
+            "button_save": "//button[contains(@type, 'button') and contains(@data-style, 'zoom-out') and contains(.,'Save')]",
+            "button_check_save": "//*[@id='ngw.projectnew.project']//div[contains(@class, 'quick-btn-saving')]//button[contains(@class, 'btn btn-sm btn-success')]",
+            
+            "select_org_leader": "//*[@id='ngw.projectnew.project']//h5//following-sibling::p[contains(.,'Leader')]//a",
+            "input_org_leader": "//*[starts-with(@id, 'getUserProjectleaders')]//div//form//input",
+            "name_org": "auto",
+            "org_leader": "//*[starts-with(@id, 'getUserProjectleaders')]//a[contains(text(),'Selenium/AutomationTest')]",
+            "add_leader": "//*[starts-with(@id, 'getUserProjectleaders')]//a[contains(@data-action,'add')]",
+            "save_leader": "//*[starts-with(@id, 'getUserProjectleaders')]//button[contains(@type,'button') and contains(.,' Save')]",
+            
+            "select_org_user": "//*[@id='ngw.projectnew.project']//h5//following-sibling::p[contains(.,'Participant(s)')]//a",
+            "input_org_user": "//*[starts-with(@id, 'getUserProjectparticipants')]//div//form//input",
+            "org_user_1": "//*[starts-with(@id, 'getUserProjectparticipants')]//a[contains(text(),'Selenium/AutomationTest1')]",
+            "org_user_2": "//*[starts-with(@id, 'getUserProjectparticipants')]//a[contains(text(),'Selenium/AutomationTest2')]",
+            "org_user_3": "//*[starts-with(@id, 'getUserProjectparticipants')]//a[contains(text(),'Selenium/AutomationTest3')]",
+            "add_user": "//*[starts-with(@id, 'getUserProjectparticipants')]//a[contains(@data-action,'add')]",
+            "save_user": "//*[starts-with(@id, 'getUserProjectparticipants')]//button[contains(@type,'button') and contains(.,' Save')]",
+           
+            "select_org_cc": "//*[@id='ngw.projectnew.project']//h5//following-sibling::p[contains(.,'CC')]//a",
+            "input_org_cc": "//*[starts-with(@id, 'getUserProjectcc')]//div//form//input",
+            "org_cc": "//*[starts-with(@id, 'getUserProjectcc')]//a[contains(text(),'Selenium/AutomationTest4')]",
+            "add_cc": "//*[starts-with(@id, 'getUserProjectcc')]//a[contains(@data-action,'add')]",
+            "save_cc": "//*[starts-with(@id, 'getUserProjectcc')]//button[contains(@type,'button') and contains(.,' Save')]",
+            
+            "delete_project": "//*[@id='ngw.projectnew.project']//h5[contains(.,'Basic Information')]//following-sibling::button[contains(.,'Delete')]",
+            "delete_icon": "//*[@id='ngw.projectnew.project']//detail-project//i[contains(@class, 'fa fa-trash pull-right')]",
+            "input_pass": "//input[contains(@ng-model, 'password') and contains(@ng-enter, 'delete()')]",
+            "pass": "automationtest1!",
+            "button_delete": "//button[contains(@ng-click, 'delete()') and contains(.,'Delete')]",
+
+            "status": "//*[@id='ngw.projectnew.project']//detail-project[contains(@project-detail, 'projectDetail')]//div//following-sibling::div[contains(.,'Status')]//strong[contains(.,'In Progress')]",
+            "status_dropdown": "//*[@id='ngw.projectnew.project']//detail-project[contains(@project-detail, 'projectDetail')]//following-sibling::span[contains(@class,'Select-arrow-zone')]",
+            "input_dropdown": " //*[starts-with(@id, 'react-select') and contains(@id, 'value')]//div[2]/input",
+
+            "move": "//*[@id='ngw.projectnew.project']//button[contains(.,'Move')]",
+            "save_move": "//button[contains(@ng-click, 'save(false)') and contains(., 'Save')]"
+        }
+        
+        }
+    },
+
+    "new_comanage":{
+        "admin": "//*[@id='app']//span[contains(.,'Admin')]",
+        "comanage": "//*[@id='app']//h5[contains(.,'GROUPWARE Project')]",
+        "notify": "//span[contains(@class, 'alert-title') and contains(., 'Success')]",
+
+        "manager":{
+            "button_org": "//*[@id='wrap-content-project']//button//i",
+            "search_input": "//*[@id='org-form-search']//input[contains(@placeholder,'Search')]",
+            "search_name": "auto",
+            "": "",
+
+            "button_save": "//*[@id='wrap-content-project']//button[contains(.,'Save')]"
+        },
+        "manager_status":{
+            "status": "//*[@id='app']//span[contains(., 'Manage Status')]",
+            "button_add": "//*[@id='wrap-content-project']//button[contains(@class,'btn btn-white')]",
+            "input_status": "//input[contains(@class,'form-control')]",
+            "input_name": "Status ",
+            "input_description": "//textarea[contains(@placeholder,'Description')]",
+
+            "category": "//button[@id='managerStatusCategory']",
+
+            "color": "//div[contains(@class,'item-picker')]/div[contains(@class,'review-color')]",
+            "list_color": "//div[contains(@class,'compact-picker color-picker')]/div/span",
+            
+            "button_save": "//button[contains(@class,'btn btn-primary') and contains(.,'Save')]",
+
+            "notify": "//div[starts-with(@id, 'noty_bar_')]//span[contains(@class, 'alert-title') and contains(., 'Success')]",
+            "": ""
+        },
+        "manager_worktype":{
+            "worktype": "//*[@id='app']//span[contains(., 'Manage Work Type')]",
+            "button_add": "//*[@id='wrap-content-project']//button[contains(@class,'btn btn-white')]",
+            "input_status": "//input[contains(@class,'form-control')]",
+            "input_name": "Work type ",
+
+            "color": "//div[contains(@class,'item-picker')]/div[contains(@class,'review-color')]",
+            "list_color": "  ",
+
+            "button_save": "//button[contains(@class,'btn btn-primary') and contains(.,'Save')]",
+            "notify": "//div[starts-with(@id, 'noty_bar_')]//span[contains(@class, 'alert-title') and contains(., 'Success')]"
+        },
+        "managar_folders":{
+            "folder": "//*[@id='app']//span[contains(., 'Manage Folders')]",
+            "button_add": "//*[@id='wrap-content-project']//li//button",
+            "input_project": "//input[contains(@class,'form-control')]",
+            "project_name": "Project ",
+            "project_name_sub": "project name sub ",
+            "project_name_edit": "Project edit ",
+            "button_confirm": "//button[contains(., 'Confirm')]",
+            "button_add_sub": "//*[@id='wrap-content-project']//li[2]//button",
+            "": "",
+            "": "",
+            "": "",
+            "": "",
+            "": ""
+        }       
+    },
+
+    "testcase_result":{
+        "todo":{
+            "add_folder":{
+                "pass":{
+                    "menu": "To-Do",
+                    "sub_menu": "Settings",
+                    "testcase": "Add folder",
+                    "status": "Pass",
+                    "description": "Folder have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "To-Do",
+                    "sub_menu": "Settings",
+                    "testcase": "Add folder",
+                    "status": "Fail",
+                    "description": "Fail to add folder",
+                    "tester": "NQuynh"
+                }
+            },
+            "delete_folder":{
+                "pass":{
+                    "menu": "To-Do",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete folder",
+                    "status": "Pass",
+                    "description": "Folder have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "To-Do",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete folder",
+                    "status": "Fail",
+                    "description": "Fail to delete folder",
+                    "tester": "NQuynh"
+                }
+            },
+            "add_categories":{
+                "pass":{
+                    "menu": "To-Do",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add categories",
+                    "status": "Pass",
+                    "description": "Categories have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "To-Do",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add categories",
+                    "status": "Fail",
+                    "description": "Fail to add categories",
+                    "tester": "NQuynh"
+                }
+            },
+            "edit_categories":{
+                "pass":{
+                    "menu": "To-Do",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Edit categories",
+                    "status": "Pass",
+                    "description": "Categories have edit successfully - edit name categories",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "To-Do",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Edit categories",
+                    "status": "Fail",
+                    "description": "Fail to edit categories",
+                    "tester": "NQuynh"
+                }
+            },
+            "search_categories":{
+                "pass":{
+                    "menu": "To-Do",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Search categories",
+                    "status": "Pass",
+                    "description": "Categories have search successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "To-Do",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Search categories",
+                    "status": "Fail",
+                    "description": "Fail to search categories",
+                    "tester": "NQuynh"
+                }
+            },
+            "delete_categories":{
+                "pass":{
+                    "menu": "To-Do",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete categories",
+                    "status": "Pass",
+                    "description": "Categories have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "To-Do",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete categories",
+                    "status": "Fail",
+                    "description": "Fail to delete categories",
+                    "tester": "NQuynh"
+                }
+            }
+        },
+        
+        "comanage":{
+            "work_type":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add work type",
+                    "status": "Pass",
+                    "description": "Work type have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add work type",
+                    "status": "Fail",
+                    "description": "Fail to add work type",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_work_type":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete work type",
+                    "status": "Pass",
+                    "description": "Work type have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete work type",
+                    "status": "Fail",
+                    "description": "Fail to delete work type",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "status":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add status",
+                    "status": "Pass",
+                    "description": "Status have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add status",
+                    "status": "Fail",
+                    "description": "Fail to add status",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_status":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete status",
+                    "status": "Pass",
+                    "description": "Status have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete status",
+                    "status": "Fail",
+                    "description": "Fail to delete status",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "folder":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder",
+                    "status": "Pass",
+                    "description": "Folder have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder",
+                    "status": "Fail",
+                    "description": "Fail to add folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_folder":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete folder",
+                    "status": "Pass",
+                    "description": "Folder have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete status",
+                    "status": "Fail",
+                    "description": "Fail to delete folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "subfolder":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add Sub-folder",
+                    "status": "Pass",
+                    "description": "Sub-folder have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add Sub-folder",
+                    "status": "Fail",
+                    "description": "Fail to add sub-folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_subfolder":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete Sub-folder",
+                    "status": "Pass",
+                    "description": "Sub-folder have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete Sub-folder",
+                    "status": "Fail",
+                    "description": "Fail to delete sub-folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "project":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Create new project",
+                    "status": "Pass",
+                    "description": "Project have create successfully (add leader - Participant(s) - CC)",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Create new project",
+                    "status": "Fail",
+                    "description": "Fail to create new project",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "change_status":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Change status",
+                    "status": "Pass",
+                    "description": "Status have change successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Change status",
+                    "status": "Fail",
+                    "description": "Fail to change status",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "move_project":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Move project",
+                    "status": "Pass",
+                    "description": "Project have move successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Move project",
+                    "status": "Fail",
+                    "description": "Fail to move project",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_project":{
+                "pass":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete project",
+                    "status": "Pass",
+                    "description": "Project have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete project",
+                    "status": "Fail",
+                    "description": "Fail to delete project",
+                    "tester": "NQuynh"
+                }
+            }
+        },
+
+        "new_comanage":{
+            "work_type":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add work type",
+                    "status": "Pass",
+                    "description": "Work type have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add work type",
+                    "status": "Fail",
+                    "description": "Fail to add work type",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_work_type":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete work type",
+                    "status": "Pass",
+                    "description": "Work type have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete work type",
+                    "status": "Fail",
+                    "description": "Fail to delete work type",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "status":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add status",
+                    "status": "Pass",
+                    "description": "Status have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add status",
+                    "status": "Fail",
+                    "description": "Fail to add status",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_status":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete status",
+                    "status": "Pass",
+                    "description": "Status have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete status",
+                    "status": "Fail",
+                    "description": "Fail to delete status",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "folder":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder",
+                    "status": "Pass",
+                    "description": "Folder have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder",
+                    "status": "Fail",
+                    "description": "Fail to add folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "sub_folder":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add sub folder - edit name sub folder",
+                    "status": "Pass",
+                    "description": "Add sub folder - edit name successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add sub folder - edit name sub folder",
+                    "status": "Fail",
+                    "description": "Fail to add sub folder - edit name",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_sub_folder":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete sub folder",
+                    "status": "Pass",
+                    "description": "Sub folder have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete sub folder",
+                    "status": "Fail",
+                    "description": "Fail to delete sub folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_folder":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete folder",
+                    "status": "Pass",
+                    "description": "Folder have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete folder",
+                    "status": "Fail",
+                    "description": "Fail to delete folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "project":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Create new project",
+                    "status": "Pass",
+                    "description": "Project have create successfully (add leader - Participant(s) - CC)",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Create new project",
+                    "status": "Fail",
+                    "description": "Fail to create new project",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "change_status":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Change status",
+                    "status": "Pass",
+                    "description": "Status have change successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Change status",
+                    "status": "Fail",
+                    "description": "Fail to change status",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "move_project":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Move project",
+                    "status": "Pass",
+                    "description": "Project have move successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Move project",
+                    "status": "Fail",
+                    "description": "Fail to move project",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_project":{
+                "pass":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete project",
+                    "status": "Pass",
+                    "description": "Project have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "New Co - manage",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete project",
+                    "status": "Fail",
+                    "description": "Fail to delete project",
+                    "tester": "NQuynh"
+                }
+            }
+        },
+
+        "archive":{
+            "add_folder":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Settings",
+                    "testcase": "Add folder",
+                    "status": "Pass",
+                    "description": "Folder have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Settings",
+                    "testcase": "Add folder",
+                    "status": "Fail",
+                    "description": "Fail to add folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "edit_folder":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Settings",
+                    "testcase": "Edit folder",
+                    "status": "Pass",
+                    "description": "Folder have edit successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Settings",
+                    "testcase": "Edit folder",
+                    "status": "Fail",
+                    "description": "Fail to edit folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_folder":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete folder",
+                    "status": "Pass",
+                    "description": "Folder have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete folder",
+                    "status": "Fail",
+                    "description": "Fail to delete folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_folder_public":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder public",
+                    "status": "Pass",
+                    "description": "Folder public have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder public",
+                    "status": "Fail",
+                    "description": "Fail to add folder public",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_folder_private":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder private",
+                    "status": "Pass",
+                    "description": "Folder private have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder private",
+                    "status": "Fail",
+                    "description": "Fail to add folder private",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_subfolder":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add sub folder",
+                    "status": "Pass",
+                    "description": "Sub folder have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add sub folder",
+                    "status": "Fail",
+                    "description": "Fail to add sub folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "authorized_Dept":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add authorized_Dept for sub folder",
+                    "status": "Pass",
+                    "description": "Select authorized_Dept for sub folder have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add authorized_Dept for sub folder",
+                    "status": "Fail",
+                    "description": "Fail to add authorized_Dept for sub folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "Dept_settings":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Select Dept.settings",
+                    "status": "Pass",
+                    "description": "Select Dept.settings successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Select Dept.settings",
+                    "status": "Fail",
+                    "description": "Fail to select Dept.settings",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_subfolder":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add sub folder",
+                    "status": "Pass",
+                    "description": "Sub folder have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add sub folder",
+                    "status": "Fail",
+                    "description": "Fail to add sub folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_folder_public":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete folder public",
+                    "status": "Pass",
+                    "description": "Folder public have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete folder public",
+                    "status": "Fail",
+                    "description": "Fail to delete folder public",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_folder_privte":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete folder private",
+                    "status": "Pass",
+                    "description": "Folder private have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete folder private",
+                    "status": "Fail",
+                    "description": "Fail to delete folder private",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "archive_manager":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add Archive Manager",
+                    "status": "Pass",
+                    "description": "Archive Manager have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add Archive Manager",
+                    "status": "Fail",
+                    "description": "Fail to add Archive Manager",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "edit_archive_manager":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Edit Archive Manager",
+                    "status": "Pass",
+                    "description": "Archive manager have edit successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Edit Archive Manager",
+                    "status": "Fail",
+                    "description": "Fail to edit archive manager",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_archive_manager":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete archive manager",
+                    "status": "Pass",
+                    "description": "Archive manager have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete archive manager",
+                    "status": "Fail",
+                    "description": "Fail to delete archive manager",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "backup":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Backup folder",
+                    "status": "Pass",
+                    "description": "Backup folder successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Backup folder",
+                    "status": "Fail",
+                    "description": "Fail to Backup folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "transfer_approval":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Transfer compnay: Approval",
+                    "status": "Pass",
+                    "description": "Transfer compnay: Approval successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Transfer compnay: Approval",
+                    "status": "Fail",
+                    "description": "Fail to transfer compnay: Approval",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "transfer_board":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Transfer compnay: Company Board",
+                    "status": "Pass",
+                    "description": "Transfer  compnay: Company Boardsuccessfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Transfer compnay: Company Board",
+                    "status": "Fail",
+                    "description": "Fail to transfer compnay: Company Board",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "transfer_work_dairy":{
+                "pass":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Transfer compnay: work dairy",
+                    "status": "Pass",
+                    "description": "Transfer compnay: work dairy successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Archive",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Transfer compnay: work dairy",
+                    "status": "Fail",
+                    "description": "Fail to transfer compnay: work dairy",
+                    "tester": "NQuynh"
+                }
+            }
+
+        },
+
+        "mail":{
+            "add_signature":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add signature",
+                    "status": "Pass",
+                    "description": "Add signature style text successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add signature",
+                    "status": "Fail",
+                    "description": "Fail to add signature",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_signature":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete signature",
+                    "status": "Pass",
+                    "description": "Delete signature successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete signature",
+                    "status": "Fail",
+                    "description": "Fail to delete signature",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_auto_sort":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add auto sort",
+                    "status": "Pass",
+                    "description": "Add auto sort successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add auto sort",
+                    "status": "Fail",
+                    "description": "Fail to add auto sort",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_auto_sort":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete auto sort",
+                    "status": "Pass",
+                    "description": "Delete auto sort successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete auto sort",
+                    "status": "Fail",
+                    "description": "Fail to delete auto sort",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_auto_replies":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add auto replies",
+                    "status": "Pass",
+                    "description": "Add auto replies successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add auto replies",
+                    "status": "Fail",
+                    "description": "Fail to add auto replies",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_block":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add block addresses",
+                    "status": "Pass",
+                    "description": "Add block addresses successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add block addresses",
+                    "status": "Fail",
+                    "description": "Fail to add block addresses",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_block":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete block addresses",
+                    "status": "Pass",
+                    "description": "Delete block addresses successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete block addresses",
+                    "status": "Fail",
+                    "description": "Fail to Delete block addresses",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_whilelist":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add while list addresses",
+                    "status": "Pass",
+                    "description": "Add while list addresses successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add while list addresses",
+                    "status": "Fail",
+                    "description": "Fail to add while list addresses",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_whilelist":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete while list addresses",
+                    "status": "Pass",
+                    "description": "Delete while list addresses successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete while list addresses",
+                    "status": "Fail",
+                    "description": "Fail to delete while list addresses",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_folder":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add folder",
+                    "status": "Pass",
+                    "description": "Add folder - share folder successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Add folder",
+                    "status": "Fail",
+                    "description": "Fail to add folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_folder":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete folder",
+                    "status": "Pass",
+                    "description": "Delete folder successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete folder",
+                    "status": "Fail",
+                    "description": "Fail to delete folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "alias_domain":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add alias domain",
+                    "status": "Pass",
+                    "description": "Add alias domain successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add alias domain",
+                    "status": "Fail",
+                    "description": "Fail to add alias domain",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "del_alias_domain":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete alias domain",
+                    "status": "Pass",
+                    "description": "Delete alias domain successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete alias domain",
+                    "status": "Fail",
+                    "description": "Fail to delete alias domain",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "approval_mail_box_forced_approval":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add approval mail box - forced approval",
+                    "status": "Pass",
+                    "description": "Add approval mail box forced approval successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add approval mail box - forced approval",
+                    "status": "Fail",
+                    "description": "Fail to add approval mail box",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "approval_mail_box_selective_approval":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add approval mail box - selective approval",
+                    "status": "Pass",
+                    "description": "Add approval mail box selective approval successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add approval mail box - selective approval",
+                    "status": "Fail",
+                    "description": "Fail to add approval mail box",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "del_approval_mail_box":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete approval mail box",
+                    "status": "Pass",
+                    "description": "Delete approval mail box (Forced - Selective) successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete approval mail box",
+                    "status": "Fail",
+                    "description": "Fail to delete approval mail box",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_domain_limt":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add domain limit",
+                    "status": "Pass",
+                    "description": "Add domain limit successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add domain limit",
+                    "status": "Fail",
+                    "description": "Fail to add domain limit",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "del_domain_limt":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete domain limit",
+                    "status": "Pass",
+                    "description": "Delete domain limit successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete domain limit",
+                    "status": "Fail",
+                    "description": "Fail to delete domain limit",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_file_limt":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add file limit",
+                    "status": "Pass",
+                    "description": "Add file limit successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add file limit",
+                    "status": "Fail",
+                    "description": "Fail to add file limit",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "del_file_limit":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete file limit",
+                    "status": "Pass",
+                    "description": "Delete file limit successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete file limit",
+                    "status": "Fail",
+                    "description": "Fail to delete file limit",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "alias_account":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add alias account",
+                    "status": "Pass",
+                    "description": "Add alias account successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add alias account",
+                    "status": "Fail",
+                    "description": "Fail to add alias account",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_signature_company":{
+                "pass":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add signature company",
+                    "status": "Pass",
+                    "description": "Add signature company successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Mail",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add signature company",
+                    "status": "Fail",
+                    "description": "Fail to add signature company",
+                    "tester": "NQuynh"
+                }
+            }
+        },
+
+        "calendar":{
+            "add_folder_setting":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Add folder",
+                    "status": "Pass",
+                    "description": "Folder of my calendar have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Add folder",
+                    "status": "Fail",
+                    "description": "Fail to add folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_subfolder_setting":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Add sub folder",
+                    "status": "Pass",
+                    "description": "Sub folder of my calendar have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Add sub folder",
+                    "status": "Fail",
+                    "description": "Fail to add sub folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "edit_subfolder_setting":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Edit sub folder",
+                    "status": "Pass",
+                    "description": "Edit sub folder: add categories and share folder successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Edit sub folder",
+                    "status": "Fail",
+                    "description": "Fail to edit sub folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_subfolder_setting":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete sub folder",
+                    "status": "Pass",
+                    "description": "Sub folder have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete sub folder",
+                    "status": "Fail",
+                    "description": "Fail to delete sub folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "edit_folder_setting":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Edit folder",
+                    "status": "Pass",
+                    "description": "Edit: add categories and share folder successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Edit folder",
+                    "status": "Fail",
+                    "description": "Fail to edit folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_folder_setting":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete folder",
+                    "status": "Pass",
+                    "description": "Folder have delete successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Settings",
+                    "testcase": "Delete folder",
+                    "status": "Fail",
+                    "description": "Fail to delete folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "add_folder":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder",
+                    "status": "Pass",
+                    "description": "Folder of company calendar have add successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Add folder",
+                    "status": "Fail",
+                    "description": "Fail to add folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "edit_folder":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Edit folder",
+                    "status": "Pass",
+                    "description": "Edit: add categories and share folder successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Edit folder",
+                    "status": "Fail",
+                    "description": "Fail to edit folder",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "search_folder":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Search folder",
+                    "status": "Pass",
+                    "description": "Search folder successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Search folder",
+                    "status": "Fail",
+                    "description": "Fail to search calendar folder list",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "delete_folder":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete folder",
+                    "status": "Pass",
+                    "description": "Delete folder of company calendar successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Delete folder",
+                    "status": "Fail",
+                    "description": "Fail to delete folder of company calendar",
+                    "tester": "NQuynh"
+                }
+            },
+
+            "select_setting_admin":{
+                "pass":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Select setting admin",
+                    "status": "Pass",
+                    "description": "Save select option of general successfully",
+                    "tester": "NQuynh"
+                },
+                "fail":{
+                    "menu": "Calendar",
+                    "sub_menu": "Admin settings",
+                    "testcase": "Select setting admin",
+                    "status": "Fail",
+                    "description": "Fail to save select",
+                    "tester": "NQuynh"
+                }
+            }
+        }
+    }
+
+}
