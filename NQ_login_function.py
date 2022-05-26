@@ -169,11 +169,6 @@ def ValidateFailResultAndSystem(fail_msg):
     append_fail_result.write("[FAILED TEST CASE] " + str(fail_msg) + "\n")
     append_fail_result.close()
 
-def WaitElementLoaded(time, xpath):
-    '''• Usage: Wait until element VISIBLE in a selected time period'''
-    
-    WebDriverWait(driver, time).until(EC.presence_of_element_located((By.XPATH, xpath)))
-
 
 
 ''' Test Link '''

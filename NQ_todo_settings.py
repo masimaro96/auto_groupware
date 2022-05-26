@@ -18,7 +18,7 @@ from sys import platform
 import NQ_function
 
 from framework_sample import *
-from NQ_login_function import driver, data, ValidateFailResultAndSystem, Logging, TesCase_LogResult#, TestlinkResult_Fail, TestlinkResult_Pass
+from NQ_login_function import driver, data, ValidateFailResultAndSystem, Logging, TesCase_LogResult
 
 n = random.randint(1,3000)
 m = random.randint(3000,6000)
@@ -49,16 +49,16 @@ def add_folder():
     name_folder = data["todo"]["name_folder_1"] + str(n)
 
     ''' Add folder '''
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["add_button"]))).click()
+    Wait10s_ClickElement(data["todo"]["add_button"])
     Logging("- Select button add folder")
     time.sleep(5)
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["add_folder_name"]))).send_keys(name_folder)
+    Wait10s_EnterElement(data["todo"]["add_folder_name"], name_folder)
     Logging("- Input name folder")
     time.sleep(5)
 
     ''' Check button save have work '''
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["save_button"]))).click()
+        Wait10s_ClickElement(data["todo"]["save_button"])
         time.sleep(5)
         Logging("=> Save success")
 
@@ -80,11 +80,11 @@ def add_folder():
 
 def delete_folder(name_folder):   
     try:
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.todo.list.setting']//span//a[contains(., '" + name_folder + "')]"))).click()
+        Wait10s_ClickElement("//*[@id='ngw.todo.list.setting']//span//a[contains(., '" + name_folder + "')]")
         Logging("- Select folder")
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["todo"]["del_button"]))).click()
+        Wait10s_ClickElement(data["todo"]["del_button"])
         time.sleep(5)
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["todo"]["del_button_1"]))).click()
+        Wait10s_ClickElement(data["todo"]["del_button_1"])
         Logging("=> Delete folder")
         TesCase_LogResult(**data["testcase_result"]["todo"]["delete_folder"]["pass"])
         time.sleep(5)
@@ -93,7 +93,7 @@ def delete_folder(name_folder):
         pass
 
 def setting_execution():
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["settings_todo"]))).click() 
+    Wait10s_ClickElement(data["todo"]["settings_todo"])
     time.sleep(5)
 
     page_title = driver.find_element_by_xpath("//*[@id='ngw.todo.list.setting']//span")
@@ -123,12 +123,12 @@ def setting_execution():
 def categories():
     categories_name = data["todo"]["manage_categories_name"] + str(n)
 
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories"]))).click()
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_add"]))).click()
+    Wait10s_ClickElement(data["todo"]["manage_categories"])
+    Wait10s_ClickElement(data["todo"]["manage_categories_add"])
     time.sleep(2)
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_input"]))).send_keys(categories_name)
+    Wait10s_EnterElement(data["todo"]["manage_categories_input"], categories_name)
     time.sleep(2)
-    WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_save"]))).click()
+    Wait10s_ClickElement(data["todo"]["manage_categories_save"])
     Logging("=> Add manage categories")
     time.sleep(5)
 
@@ -147,13 +147,11 @@ def categories():
 def edit_categories(categories_name):
     categories_name_edit = data["todo"]["manage_categories_name_edit"] + str(m)
 
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["edit"]))).click()
+    Wait10s_ClickElement(data["todo"]["edit"])
     time.sleep(5)
-    name_edit = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_input"])))
-    name_edit.clear()
-    name_edit.send_keys(categories_name_edit)
+    Wait10s_Clear_InputElement(data["todo"]["manage_categories_input"], categories_name_edit)
     time.sleep(2)
-    driver.find_element_by_xpath(data["todo"]["manage_categories_save"]).click()
+    Wait10s_ClickElement(data["todo"]["manage_categories_save"])
     Logging("=> Edit manage categories")
     time.sleep(2)
 
@@ -170,12 +168,9 @@ def edit_categories(categories_name):
     return categories_name_edit
 
 def search():
+    search_key = data["todo"]["name_search"]
     try:
-        search_name = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["search"])))
-        time.sleep(2)
-        search_name.send_keys(data["todo"]["name_search"])
-        time.sleep(2)
-        search_name.send_keys(Keys.ENTER)
+        Wait10s_EnterElement(data["todo"]["search"], search_key)
         Logging("=> Search manage categories")
         time.sleep(3)
         TesCase_LogResult(**data["testcase_result"]["todo"]["search_categories"]["pass"])
@@ -185,11 +180,11 @@ def search():
 
 def delete(categories_name_edit):
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.todo.category']//table//tr[contains(., '" + categories_name_edit + "')]")))
+        Wait10s_ElementLoaded("//*[@id='ngw.todo.category']//table//tr[contains(., '" + categories_name_edit + "')]")
         
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["todo"]["del_category"]))).click()
+        Wait10s_ClickElement(data["todo"]["del_category"])
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["button_ok"]))).click()
+        Wait10s_ClickElement(data["todo"]["button_ok"])
         TesCase_LogResult(**data["testcase_result"]["todo"]["delete_categories"]["pass"])
     except:
         TesCase_LogResult(**data["testcase_result"]["todo"]["delete_categories"]["fail"])

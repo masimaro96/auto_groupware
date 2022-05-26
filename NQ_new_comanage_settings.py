@@ -22,7 +22,7 @@ from pathlib import Path
 import os
 from sys import platform
 import NQ_function
-
+from framework_sample import *
 from NQ_login_function import driver, data, ValidateFailResultAndSystem, Logging, TesCase_LogResult#, TestlinkResult_Fail, TestlinkResult_Pass
 
 #chrome_path = os.path.dirname(Path(__file__).absolute())+"\\chromedriver.exe"
@@ -35,7 +35,7 @@ def new_co_manage(domain_name):
     # driver.get(domain_name + "projectnew/projects")
     Logging(" ")
     Logging('============ Menu Comanage ============')
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["comanage"]))).click()
+    Wait10s_ClickElement(data["new_comanage"]["comanage"])
     time.sleep(5)
     try:
         admin = WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["admin"])))
@@ -52,16 +52,16 @@ def new_co_manage(domain_name):
 def manager_add_status():
     text_status = data["new_comanage"]["manager_status"]["input_name"] + str(n)
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_status"]["status"]))).click()
+        Wait10s_ClickElement(data["new_comanage"]["manager_status"]["status"])
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_status"]["button_add"]))).click()
+        Wait10s_ClickElement(data["new_comanage"]["manager_status"]["button_add"])
         Logging("> Add new manager_status")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_status"]["input_status"]))).send_keys(text_status)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_status"]["input_description"]))).send_keys(text_status)
+        InputElement(data["new_comanage"]["manager_status"]["input_status"], text_status)
+        InputElement(data["new_comanage"]["manager_status"]["input_description"], text_status)
         Logging("- Input name - description")
         time.sleep(5)
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_status"]["button_save"]))).click()
+        Wait10s_ClickElement(data["new_comanage"]["manager_status"]["button_save"])
 
         Logging("=> Manager status have been create")
         time.sleep(5)
@@ -89,10 +89,10 @@ def manager_delete_status(text_status):
     driver.execute_script("window.scrollTo(0, 2000)")
     try:
         Logging("** Delete status")
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='wrap-content-project']//div[contains(@class, 'column') and contains(., '" + text_status + "')]//following-sibling::div//button[2]"))).click()
+        Wait10s_ClickElement("//*[@id='wrap-content-project']//div[contains(@class, 'column') and contains(., '" + text_status + "')]//following-sibling::div//button[2]")
         Logging("- Select status to delete")
         time.sleep(4)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_status"]["notify"])))
+        Wait10s_ElementLoaded(data["new_comanage"]["manager_status"]["notify"])
         Logging("=> Delete status success")
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["delete_status"]["pass"])
         time.sleep(5)
@@ -103,12 +103,12 @@ def manager_delete_status(text_status):
 def manager_add_worktype():
     text_worktype = data["new_comanage"]["manager_worktype"]["input_name"] + str(n)
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_worktype"]["worktype"]))).click()
+        Wait10s_ClickElement(data["new_comanage"]["manager_worktype"]["worktype"])
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_worktype"]["button_add"]))).click()
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_worktype"]["input_status"]))).send_keys(text_worktype)
+        Wait10s_ClickElement(data["new_comanage"]["manager_worktype"]["button_add"])
+        InputElement(data["new_comanage"]["manager_worktype"]["input_status"], text_worktype)
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_worktype"]["button_save"]))).click()
+        Wait10s_ClickElement(data["new_comanage"]["manager_worktype"]["button_save"])
         Logging("=> Create work type")
         time.sleep(3)
 
@@ -130,9 +130,9 @@ def manager_add_worktype():
 def manager_delete_worktype(text_worktype):
     try:
         Logging("** Delete work type")
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='wrap-content-project']//div[contains(@class, 'column') and contains(., '" + text_worktype + "')]//following-sibling::div//button[2]"))).click()
+        Wait10s_ClickElement("//*[@id='wrap-content-project']//div[contains(@class, 'column') and contains(., '" + text_worktype + "')]//following-sibling::div//button[2]")
         Logging("- Select work type to delete")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_worktype"]["notify"])))
+        Wait10s_ElementLoaded(data["new_comanage"]["manager_worktype"]["notify"])
         Logging("=> Delete work type success")
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["delete_work_type"]["pass"])
         time.sleep(5)
@@ -143,12 +143,12 @@ def manager_delete_worktype(text_worktype):
 def manager_folder():
     project = data["new_comanage"]["managar_folders"]["project_name"] + str(n)
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["folder"]))).click()
+        Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["folder"])
         Logging("- Manager Folders")
         time.sleep(5)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["button_add"]))).click()
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["input_project"]))).send_keys(project)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["button_confirm"]))).click()
+        Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_add"])
+        InputElement(data["new_comanage"]["managar_folders"]["input_project"], project)
+        Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
         Logging("- Add folder successfully")
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["folder"]["pass"])
         time.sleep(5)
@@ -163,20 +163,18 @@ def manager_subfolder(project):
     project_edit = data["new_comanage"]["managar_folders"]["project_name_edit"] + str(n)
     try:
         time.sleep(5)
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='wrap-content-project']//span[contains(., '" + project + "')]"))).click()
+        Wait10s_ClickElement("//*[@id='wrap-content-project']//span[contains(., '" + project + "')]")
         
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["button_add_sub"]))).click()
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["input_project"]))).send_keys(project_sub)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["button_confirm"]))).click()
+        Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_add_sub"])
+        InputElement(data["new_comanage"]["managar_folders"]["input_project"], project_sub)
+        Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
         Logging("- Add sub folder")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["manager_status"]["notify"])))
+        Wait10s_ElementLoaded(data["new_comanage"]["manager_status"]["notify"])
         time.sleep(5)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='wrap-content-project']//div[contains(@class, 'bd-b') and contains(., '" + project_sub + "')]//following-sibling::div//button[1]"))).click()
-        name_edit = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["input_project"])))
-        name_edit.clear()
-        name_edit.click()
-        name_edit.send_keys(project_edit)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["button_confirm"]))).click()
+        Wait10s_ClickElement("//*[@id='wrap-content-project']//div[contains(@class, 'bd-b') and contains(., '" + project_sub + "')]//following-sibling::div//button[1]")
+        
+        Wait10s_Clear_Click_InputElement(data["new_comanage"]["managar_folders"]["input_project"], project_edit)
+        Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
         time.sleep(5)
         Logging("- Edit name of folder")
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["sub_folder"]["pass"])
@@ -190,13 +188,13 @@ def delete_sub_folder(project_edit):
     project_edit = data["new_comanage"]["managar_folders"]["project_name_edit"] + str(n)
     project = data["new_comanage"]["managar_folders"]["project_name"] + str(n)
     try:
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='wrap-content-project']//span[contains(., '" + project + "')]//following-sibling::span"))).click()
+        Wait10s_ElementLoaded("//*[@id='wrap-content-project']//span[contains(., '" + project + "')]//following-sibling::span")
         time.sleep(5)
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='wrap-content-project']//span[contains(., '" + project_edit + "')]"))).click()
+        Wait10s_ElementLoaded("//*[@id='wrap-content-project']//span[contains(., '" + project_edit + "')]")
         time.sleep(5)
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='wrap-content-project']//li[3]//button"))).click()
+        Wait10s_ElementLoaded("//*[@id='wrap-content-project']//li[3]//button")
         time.sleep(5)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["button_confirm"]))).click()
+        Wait10s_ElementLoaded(data["new_comanage"]["managar_folders"]["button_confirm"])
         Logging("- Delete sub folder")
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["delete_sub_folder"]["pass"])
     except:
@@ -206,10 +204,10 @@ def delete_sub_folder(project_edit):
 def delete_folder(project):
     try:
         time.sleep(5)
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='wrap-content-project']//span[contains(., '" + project + "')]"))).click()
+        Wait10s_ElementLoaded("//*[@id='wrap-content-project']//span[contains(., '" + project + "')]")
         time.sleep(5)
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='wrap-content-project']//li[3]//button"))).click()
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["managar_folders"]["button_confirm"]))).click()
+        Wait10s_ElementLoaded("//*[@id='wrap-content-project']//li[3]//button")
+        Wait10s_ElementLoaded(data["new_comanage"]["managar_folders"]["button_confirm"])
         Logging("- Delete folder")
         
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["delete_folder"]["pass"])

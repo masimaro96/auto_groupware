@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.common.keys import Keys
 
 from NQ_login_function import driver
 
@@ -102,6 +103,39 @@ def Wait10s_InputElement(xpath, value):
 
     WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath)))
     element = driver.find_element_by_xpath(xpath)
+    element.send_keys(value)
+
+    return element
+
+def Wait10s_EnterElement(xpath, value):
+    '''• Usage: Wait until the input box visible and send key value
+            return WebElement'''
+
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath)))
+    element = driver.find_element_by_xpath(xpath)
+    element.send_keys(value)
+    element.send_keys(Keys.ENTER)
+
+    return element
+
+def Wait10s_Clear_InputElement(xpath, value):
+    '''• Usage: Wait until the input box visible and send key value
+            return WebElement'''
+
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath)))
+    element = driver.find_element_by_xpath(xpath)
+    element.clear()
+    element.click()
+    element.send_keys(value)
+
+def Wait10s_Clear_Click_InputElement(xpath, value):
+    '''• Usage: Wait until the input box visible and send key value
+            return WebElement'''
+
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, xpath)))
+    element = driver.find_element_by_xpath(xpath)
+    element.clear()
+    element.click()
     element.send_keys(value)
 
     return element
