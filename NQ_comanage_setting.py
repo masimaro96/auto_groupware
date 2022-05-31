@@ -23,6 +23,7 @@ import os
 from sys import platform
 import NQ_function
 
+from framework_sample import *
 from NQ_login_function import driver, data, ValidateFailResultAndSystem, Logging, TesCase_LogResult#, TestlinkResult_Fail, TestlinkResult_Pass
 
 #chrome_path = os.path.dirname(Path(__file__).absolute())+"\\chromedriver.exe"
@@ -45,13 +46,13 @@ def co_manage(domain_name):
     
 
     try:
-        element = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["pull_the_scroll_bar"])))
+        element = Waits.Wait10s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
         element.location_once_scrolled_into_view
         time.sleep(3)
-        element_1 = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["pull_the_scroll_bar_1"])))
+        element_1 = Waits.Wait10s_ElementLoadeddata["co-manage"]["pull_the_scroll_bar_1"]
         element_1.location_once_scrolled_into_view
         time.sleep(2)
-        admin = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["pull_the_scroll_bar"])))
+        admin = Waits.Wait10s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
         if admin.is_displayed():
             Logging("- Account admin")
             admin.click()
@@ -64,12 +65,12 @@ def work_type():
     text_worktype = data["co-manage"]["admin"]["worktype"]["input_text"] + str(n)
 
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["worktype"]["work_type"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["worktype"]["work_type"])
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["worktype"]["button_add"]))).click()
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["worktype"]["input"]))).send_keys(text_worktype)
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_add"])
+        Commands.Wait10s_InputElement(data["co-manage"]["admin"]["worktype"]["input"], text_worktype)
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["worktype"]["button_save"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_save"])
         Logging("=> Create work type")
         time.sleep(3)
     except:
@@ -91,9 +92,9 @@ def work_type():
 def delete_worktype(text_worktype):
     try:
         Logging("** Delete work type")
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.projectnew.adminWorkType']//table//tr[contains(., '" + text_worktype + "')]//following-sibling::td//following-sibling::a//i"))).click()
+        Commands.Wait10s_ClickElement("//*[@id='ngw.projectnew.adminWorkType']//table//tr[contains(., '" + text_worktype + "')]//following-sibling::td//following-sibling::a//i")
         Logging("- Select work type to delete")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["worktype"]["button_OK"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_OK"])
         Logging("=> Delete work type success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_work_type"]["pass"])
         time.sleep(5)
@@ -109,12 +110,12 @@ def status_manage():
         f = driver.find_element_by_xpath(data["co-manage"]["admin"]["status"]["manage_status"])
         driver.execute_script("arguments[0].scrollIntoView();",f)    
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["status"]["manage_status"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["status"]["manage_status"])
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["status"]["button_add"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["status"]["button_add"])
         Logging("- Add new status")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["status"]["input_name"]))).send_keys(text_status)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["status"]["input_description"]))).send_keys(description)
+        Commands.Wait10s_InputElement(data["co-manage"]["admin"]["status"]["input_name"], text_status)
+        Commands.Wait10s_InputElement(data["co-manage"]["admin"]["status"]["input_description"], description)
         Logging("- Input name - description")
 
         ''' random option list '''
@@ -124,7 +125,7 @@ def status_manage():
         sel.select_by_visible_text(random.choice(options_list))
         Logging("- Select category in random option list")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["status"]["button_save"]))).click()
+        Commands.Wait10s_ClickElement(By.XPATH, data["co-manage"]["admin"]["status"]["button_save"])
         Logging("=> Create status")
         time.sleep(5)
     except:
@@ -151,10 +152,10 @@ def status_manage():
 def delete_status(text_status):
     try:
         Logging("** Delete status")
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.projectnew.adminStatus']//table//tr[contains(., '" + text_status + "')]//following-sibling::td//following-sibling::a//i"))).click()
+        Commands.Wait10s_ClickElement("//*[@id='ngw.projectnew.adminStatus']//table//tr[contains(., '" + text_status + "')]//following-sibling::td//following-sibling::a//i")
         Logging("- Select status to delete")
         time.sleep(4)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["worktype"]["button_OK"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_OK"])
         Logging("=> Delete status success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_status"]["pass"])
         time.sleep(5)
@@ -166,17 +167,17 @@ def manage_folders():
     name = data["co-manage"]["admin"]["folder"]["name_folder"] + str(n)
 
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["manage_folders"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["input"]))).send_keys(name)
+        Commands.Wait10s_InputElement(data["co-manage"]["admin"]["folder"]["input"], ame)
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["button_save"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["folder"]["button_save"])
         Logging("=> Create folder")
         time.sleep(2)
 
         ''' Check folder have create '''
         Logging("** Check folder have create **")
-        manage_folders = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")))
+        manage_folders = Waits.Wait10s_ElementLoaded("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
         if manage_folders.is_displayed:
             Logging("=> Folder have create success")
             TesCase_LogResult(**data["testcase_result"]["comanage"]["folder"]["pass"])
@@ -195,22 +196,22 @@ def sub_folder(name):
     subname = data["co-manage"]["admin"]["folder"]["name_subfolder"] + str(m)
 
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["parent_folder"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["folder"]["parent_folder"])
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='project-folder-setting-down']//li//a[contains(., '" + name + "')]"))).click()
+        Commands.Wait10s_ClickElement("//*[@id='project-folder-setting-down']//li//a[contains(., '" + name + "')]")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["input"]))).send_keys(subname)
+        Commands.Wait10s_InputElement(data["co-manage"]["admin"]["folder"]["input"], subname)
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["button_save"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["folder"]["button_save"])
         Logging("=> Create Sub-folder")
         time.sleep(5)
 
         ''' Check sub-folder have create '''
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]"))).click()
+        Commands.Wait10s_ClickElement("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
         time.sleep(2)
 
         Logging("** Check sub-folder have create **")
-        subfolder = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='project_setting_form']//li//a[contains(., '" + subname + "')]")))    
+        subfolder = Commands.Wait10s_ClickElement("//*[@id='project_setting_form']//li//a[contains(., '" + subname + "')]")
         if subfolder.is_displayed:
             Logging("=> Sub-Folder have create success")
             TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])
@@ -232,14 +233,14 @@ def delete_folder(name):
     driver.execute_script("arguments[0].scrollIntoView();",f) 
     time.sleep(5)
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["manage_folders"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
         Logging("** Delete folder")
-        WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, "//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]"))).click()
+        Commands.Wait10s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
         Logging("- Select folder")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='project_setting_form']//span//a[contains(., '" + subname + "')]"))).click()
+        Commands.Wait10s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + subname + "')]")
         Logging("- Select sub folder")
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["button_delete"]))).click()
-        WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["button_del"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["folder"]["button_delete"])
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["folder"]["button_del"])
         Logging("=> Delete sub folder success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_subfolder"]["pass"])
         time.sleep(5)
@@ -248,11 +249,11 @@ def delete_folder(name):
         pass
 
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]"))).click()
+        Commands.Wait10s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["button_delete"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["folder"]["button_delete"])
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["button_del"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["folder"]["button_del"])
         Logging("=> Delete folder success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_folder"]["pass"])
         time.sleep(5)
@@ -265,26 +266,26 @@ def create_project():
 
     a = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["list"])))
     a.location_once_scrolled_into_view
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["list"]))).click()
+    Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["list"])
     time.sleep(1)
     try:
         Logging("** Create new project")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["list"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["list"])
         Logging("- Select list project")
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["button_add"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_add"])
         Logging("- Select add button")
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["name_input"]))).send_keys(name_project)
+        Commands.Wait10s_InputElement(data["co-manage"]["admin"]["project_list"]["name_input"], name_project)
         Logging("- Input name project")
         time.sleep(3)
 
         ''' Select project '''
         ''' Kanban Project '''
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["kanban"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["kanban"])
         Logging("- Select Kanban Project")
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["button_save"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_save"])
         Logging("- Save kanban project")
         time.sleep(3)
     except:
@@ -301,73 +302,67 @@ def create_project():
         TesCase_LogResult(**data["testcase_result"]["comanage"]["project"]["fail"])
     time.sleep(5)
 
-    '''edit = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.projectnew.project']//strong[contains(., '" + name_project + "')]"))).click()
+    '''edit = Commands.Wait10s_ClickElement("//*[@id='ngw.projectnew.project']//strong[contains(., '" + name_project + "')]")
     edit.clear()
     time.sleep(3)
     edit.send_keys(name_project_edit)
     Logging("- Edit name project")
     time.sleep(3)
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["button_check_save"]))).click()
+    Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_check_save"])
     Logging("- Save name edit")
     time.sleep(3)'''
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["select_org_leader"]))).click()
+        leader_name = data["co-manage"]["admin"]["project_list"]["name_org"]
+
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_leader"])
         Logging("- Select leader")
         time.sleep(3)
-        leader = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["input_org_leader"])))
+        Commands.Wait10s_EnterElement(data["co-manage"]["admin"]["project_list"]["input_org_leader"], leader_name)
         time.sleep(3)
-        leader.send_keys(data["co-manage"]["admin"]["project_list"]["name_org"])
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_leader"])
         time.sleep(3)
-        leader.send_keys(Keys.ENTER)
-        time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["org_leader"]))).click()
-        time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["add_leader"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_leader"])
         Logging("- Select add leader")
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["save_leader"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_leader"])
         Logging("- Save leader")
         time.sleep(3)
     except:
         pass
 
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["select_org_user"]))).click()
+    Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_user"])
     Logging("- Select Participant(s)")
     time.sleep(3)
-    leader = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["input_org_user"])))
-    time.sleep(3)
-    leader.send_keys(data["co-manage"]["admin"]["project_list"]["name_org"])
-    time.sleep(3)
-    leader.send_keys(Keys.ENTER)
+    Commands.Wait10s_EnterElement(data["co-manage"]["admin"]["project_list"]["input_org_leader"], leader_name)
     time.sleep(3)
 
     try:
-        user = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["org_user_1"])))
+        user = Waits.Wait10s_ElementLoaded(data["co-manage"]["admin"]["project_list"]["org_user_1"])
         if user.is_displayed():
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["org_user_1"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_1"])
             time.sleep(3)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["org_user_2"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_2"])
             time.sleep(3)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["org_user_3"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_3"])
             time.sleep(3)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["add_user"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_user"])
             Logging("- Select add Participant(s)")
             time.sleep(3)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["save_user"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_user"])
             Logging("- Save Participant(s)")
             time.sleep(3)
         else:
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["select_org_user"]))).click()
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["org_user_1"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_user"])
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_1"])
             time.sleep(3)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["org_user_2"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_2"])
             time.sleep(3)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["org_user_3"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_3"])
             time.sleep(3)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["add_user"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_user"])
             Logging("- Select add Participant(s)")
             time.sleep(3)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["save_user"]))).click()
+            Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_user"])
             Logging("- Save Participant(s)")
             time.sleep(3)
     except:
@@ -375,22 +370,17 @@ def create_project():
         pass
     
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["select_org_cc"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_cc"])
         Logging("- Select CC")
         time.sleep(3)
-        leader = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["input_org_cc"])))
+        Commands.Wait10s_EnterElement(data["co-manage"]["admin"]["project_list"]["input_org_leader"], leader_name)
         time.sleep(3)
-        leader.send_keys(data["co-manage"]["admin"]["project_list"]["name_org"])
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_cc"])
         time.sleep(3)
-        leader.send_keys(Keys.ENTER)
-        time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["org_cc"]))).click()
-        time.sleep(3)
-        time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["add_cc"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_cc"])
         Logging("- Select add CC")
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["save_cc"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_cc"])
         Logging("- Save CC")
         time.sleep(3)
     except:
@@ -398,10 +388,10 @@ def create_project():
 
     try:
         Logging("** Change stauts of project")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["status"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["status"])
         Logging("- Select status")
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["status_dropdown"]))).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["status_dropdown"])
         Logging("- Click dropdown")
         time.sleep(3)
 
@@ -424,15 +414,15 @@ def move_project(name):
     subname = data["co-manage"]["admin"]["folder"]["name_subfolder"] + str(m)
     try:
         Logging("** Move project")
-        driver.find_element_by_xpath(data["co-manage"]["admin"]["project_list"]["move"]).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["move"])
         Logging("- Select move project")
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//li//span//a[contains(., '" + name + "')]"))).click()
+        Commands.Wait10s_ClickElement("//li//span//a[contains(., '" + name + "')]")
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//li//span//a[contains(., '" + subname + "')]"))).click()
+        Commands.Wait10s_ClickElement("//li//span//a[contains(., '" + subname + "')]")
         Logging("- Select folder to move project")
         time.sleep(3)
-        driver.find_element_by_xpath(data["co-manage"]["admin"]["project_list"]["save_move"]).click()
+        Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_move"])
         Logging("=> Move project success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["move_project"]["pass"])
         time.sleep(5)
@@ -441,18 +431,19 @@ def move_project(name):
         pass
 
 def delete_project():
+    password_key = data["co-manage"]["admin"]["project_list"]["pass"]
     try:
-        delete_button = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["delete_project"])))
+        delete_button = Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["delete_project"])
         if delete_button.is_displayed():
             try:
                 Logging("** Delete project")
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["delete_project"]))).click()
+                Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["delete_project"])
                 Logging("- Delete project")
                 time.sleep(3)
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["input_pass"]))).send_keys(data["co-manage"]["admin"]["project_list"]["pass"])
+                Commands.Wait10s_InputElement(data["co-manage"]["admin"]["project_list"]["input_pass"], password_key)
                 Logging("- Input password")
                 time.sleep(3)
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["button_delete"]))).click()
+                Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_delete"])
                 Logging("=> Delete success")
                 TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_project"]["pass"])
                 time.sleep(5)
@@ -462,13 +453,13 @@ def delete_project():
         else:
             try:
                 Logging("** Delete project")
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["delete_icon"]))).click()
+                Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["delete_icon"])
                 Logging("- Delete project")
                 time.sleep(3)
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["input_pass"]))).send_keys(data["co-manage"]["admin"]["project_list"]["pass"])
+                Commands.Wait10s_InputElement(data["co-manage"]["admin"]["project_list"]["input_pass"], password_key)
                 Logging("- Input password")
                 time.sleep(3)
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["button_delete"]))).click()
+                Commands.Wait10s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_delete"])
                 Logging("=> Delete success")
                 TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_project"]["pass"])
                 time.sleep(5)
@@ -519,7 +510,7 @@ def admin_execution():
     
     ''' Access manage folders -> input name random -> creare folder'''
     try:
-        manage_folder = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["folder"]["manage_folders"])))
+        manage_folder = Waits.Wait10s_ElementLoaded(data["co-manage"]["admin"]["folder"]["manage_folders"])
         if manage_folder.is_displayed():
             try:
                 name = manage_folders()

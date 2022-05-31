@@ -391,7 +391,7 @@ def sub_folder(name_folder_admin):
     ''' Create sub-folder '''
     try:
         Logging(" ")
-        LogPrintYellowing("** Create sub folder in public folder")
+        PrintYellowing("** Create sub folder in public folder")
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
         time.sleep(5)
         folder_public = Commands.Wait10s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
