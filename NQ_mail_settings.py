@@ -401,6 +401,7 @@ def delete_block():
 def add_while_list():
     whilelist = data["mail"]["settings"]["whitelist"]["input_list_1"]
     ''' Add while List '''
+    Commands.ScrollDown()
     try:
         Logging(" ")
         Logging("** Add while List")

@@ -35,7 +35,7 @@ def new_co_manage(domain_name):
     # driver.get(domain_name + "projectnew/projects")
     Logging(" ")
     PrintGreen('============ Menu Comanage ============')
-    Commands.Wait10s_ClickElement(data["new_comanage"]["comanage"])
+    Commands.Wait20s_ClickElement(data["new_comanage"]["comanage"])
     time.sleep(5)
     try:
         admin = WebDriverWait(driver, 40).until(EC.presence_of_element_located((By.XPATH, data["new_comanage"]["admin"])))
@@ -52,16 +52,16 @@ def new_co_manage(domain_name):
 def manager_add_status():
     text_status = data["new_comanage"]["manager_status"]["input_name"] + str(n)
     try:
-        Commands.Wait10s_ClickElement(data["new_comanage"]["manager_status"]["status"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["manager_status"]["status"])
         time.sleep(3)
-        Commands.Wait10s_ClickElement(data["new_comanage"]["manager_status"]["button_add"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["manager_status"]["button_add"])
         Logging("> Add new manager_status")
-        Commands.Wait10s_InputElement(data["new_comanage"]["manager_status"]["input_status"], text_status)
-        Commands.Wait10s_InputElement(data["new_comanage"]["manager_status"]["input_description"], text_status)
+        Commands.Wait20s_InputElement(data["new_comanage"]["manager_status"]["input_status"], text_status)
+        Commands.Wait20s_InputElement(data["new_comanage"]["manager_status"]["input_description"], text_status)
         Logging("- Input name - description")
         time.sleep(5)
 
-        Commands.Wait10s_ClickElement(data["new_comanage"]["manager_status"]["button_save"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["manager_status"]["button_save"])
 
         Logging("=> Manager status have been create")
         time.sleep(5)
@@ -89,10 +89,10 @@ def manager_delete_status(text_status):
     Commands.ScrollDown
     try:
         Logging("** Delete status")
-        Commands.Wait10s_ClickElement("//*[@id='wrap-content-project']//div[contains(@class, 'column') and contains(., '" + text_status + "')]//following-sibling::div//button[2]")
+        Commands.Wait20s_ClickElement("//*[@id='wrap-content-project']//div[contains(@class, 'column') and contains(., '" + text_status + "')]//following-sibling::div//button[2]")
         Logging("- Select status to delete")
         time.sleep(4)
-        Commands.Wait10s_ClickElement(data["new_comanage"]["manager_status"]["notify"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["manager_status"]["notify"])
         Logging("=> Delete status success")
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["delete_status"]["pass"])
         time.sleep(5)
@@ -103,12 +103,12 @@ def manager_delete_status(text_status):
 def manager_add_worktype():
     text_worktype = data["new_comanage"]["manager_worktype"]["input_name"] + str(n)
     try:
-        Commands.Wait10s_ClickElement(data["new_comanage"]["manager_worktype"]["worktype"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["manager_worktype"]["worktype"])
         time.sleep(3)
-        Commands.Wait10s_ClickElement(data["new_comanage"]["manager_worktype"]["button_add"])
-        Commands.Wait10s_InputElement(data["new_comanage"]["manager_worktype"]["input_status"], text_worktype)
+        Commands.Wait20s_ClickElement(data["new_comanage"]["manager_worktype"]["button_add"])
+        Commands.Wait20s_InputElement(data["new_comanage"]["manager_worktype"]["input_status"], text_worktype)
         time.sleep(3)
-        Commands.Wait10s_ClickElement(data["new_comanage"]["manager_worktype"]["button_save"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["manager_worktype"]["button_save"])
         Logging("=> Create work type")
         time.sleep(3)
 
@@ -130,7 +130,7 @@ def manager_add_worktype():
 def manager_delete_worktype(text_worktype):
     try:
         Logging("** Delete work type")
-        Commands.Wait10s_ClickElement("//*[@id='wrap-content-project']//div[contains(@class, 'column') and contains(., '" + text_worktype + "')]//following-sibling::div//button[2]")
+        Commands.Wait20s_ClickElement("//*[@id='wrap-content-project']//div[contains(@class, 'column') and contains(., '" + text_worktype + "')]//following-sibling::div//button[2]")
         Logging("- Select work type to delete")
         Waits.Wait10s_ElementLoaded(data["new_comanage"]["manager_worktype"]["notify"])
         Logging("=> Delete work type success")
@@ -143,12 +143,12 @@ def manager_delete_worktype(text_worktype):
 def manager_folder():
     project = data["new_comanage"]["managar_folders"]["project_name"] + str(n)
     try:
-        Commands.Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["folder"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["managar_folders"]["folder"])
         Logging("- Manager Folders")
         time.sleep(5)
-        Commands.Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_add"])
-        Commands.Wait10s_InputElement(data["new_comanage"]["managar_folders"]["input_project"], project)
-        Commands.Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["managar_folders"]["button_add"])
+        Commands.Wait20s_InputElement(data["new_comanage"]["managar_folders"]["input_project"], project)
+        Commands.Wait20s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
         Logging("- Add folder successfully")
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["folder"]["pass"])
         time.sleep(5)
@@ -163,18 +163,18 @@ def manager_subfolder(project):
     project_edit = data["new_comanage"]["managar_folders"]["project_name_edit"] + str(n)
     try:
         time.sleep(5)
-        Commands.Wait10s_ClickElement("//*[@id='wrap-content-project']//span[contains(., '" + project + "')]")
+        Commands.Wait20s_ClickElement("//*[@id='wrap-content-project']//span[contains(., '" + project + "')]")
         
-        Commands.Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_add_sub"])
-        Commands.Wait10s_InputElement(data["new_comanage"]["managar_folders"]["input_project"], project_sub)
-        Commands.Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["managar_folders"]["button_add_sub"])
+        Commands.Wait20s_InputElement(data["new_comanage"]["managar_folders"]["input_project"], project_sub)
+        Commands.Wait20s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
         Logging("- Add sub folder")
         Waits.Wait10s_ElementLoaded(data["new_comanage"]["manager_status"]["notify"])
         time.sleep(5)
-        Commands.Wait10s_ClickElement("//*[@id='wrap-content-project']//div[contains(@class, 'bd-b') and contains(., '" + project_sub + "')]//following-sibling::div//button[1]")
+        Commands.Wait20s_ClickElement("//*[@id='wrap-content-project']//div[contains(@class, 'bd-b') and contains(., '" + project_sub + "')]//following-sibling::div//button[1]")
         
-        Commands.Wait10s_Clear_Click_InputElement(data["new_comanage"]["managar_folders"]["input_project"], project_edit)
-        Commands.Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
+        Commands.Wait20s_Clear_Click_InputElement(data["new_comanage"]["managar_folders"]["input_project"], project_edit)
+        Commands.Wait20s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
         time.sleep(5)
         Logging("- Edit name of folder")
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["sub_folder"]["pass"])
@@ -188,13 +188,13 @@ def delete_sub_folder(project_edit):
     project_edit = data["new_comanage"]["managar_folders"]["project_name_edit"] + str(n)
     project = data["new_comanage"]["managar_folders"]["project_name"] + str(n)
     try:
-        Commands.Wait10s_ClickElement("//*[@id='wrap-content-project']//span[contains(., '" + project + "')]//following-sibling::span")
+        Commands.Wait20s_ClickElement("//*[@id='wrap-content-project']//span[contains(., '" + project + "')]//following-sibling::span")
         time.sleep(5)
-        Commands.Wait10s_ClickElement("//*[@id='wrap-content-project']//span[contains(., '" + project_edit + "')]")
+        Commands.Wait20s_ClickElement("//*[@id='wrap-content-project']//span[contains(., '" + project_edit + "')]")
         time.sleep(5)
-        Commands.Wait10s_ClickElement("//*[@id='wrap-content-project']//li[3]//button")
+        Commands.Wait20s_ClickElement("//*[@id='wrap-content-project']//li[3]//button")
         time.sleep(5)
-        Commands.Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
+        Commands.Wait20s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
         Logging("- Delete sub folder")
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["delete_sub_folder"]["pass"])
     except:
@@ -204,10 +204,10 @@ def delete_sub_folder(project_edit):
 def delete_folder(project):
     try:
         time.sleep(5)
-        Commands.Wait10s_ClickElement("//*[@id='wrap-content-project']//span[contains(., '" + project + "')]")
+        Commands.Wait20s_ClickElement("//*[@id='wrap-content-project']//span[contains(., '" + project + "')]")
         time.sleep(5)
-        Commands.Wait10s_ClickElement("//*[@id='wrap-content-project']//li[3]//button")
-        Commands.Wait10s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
+        Commands.Wait20s_ClickElement("//*[@id='wrap-content-project']//li[3]//button")
+        Commands.Wait20s_ClickElement(data["new_comanage"]["managar_folders"]["button_confirm"])
         Logging("- Delete folder")
         
         TesCase_LogResult(**data["testcase_result"]["new_comanage"]["delete_folder"]["pass"])
