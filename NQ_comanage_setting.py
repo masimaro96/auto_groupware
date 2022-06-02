@@ -46,13 +46,13 @@ def co_manage(domain_name):
     
 
     try:
-        element = Waits.Wait10s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
+        element = Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
         element.location_once_scrolled_into_view
         time.sleep(3)
-        element_1 = Waits.Wait10s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar_1"])
+        element_1 = Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar_1"])
         element_1.location_once_scrolled_into_view
         time.sleep(2)
-        admin = Waits.Wait10s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
+        admin = Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
         if admin.is_displayed():
             Logging("- Account admin")
             admin.click()
@@ -177,7 +177,7 @@ def manage_folders():
 
         ''' Check folder have create '''
         Logging("** Check folder have create **")
-        manage_folders = Waits.Wait10s_ElementLoaded("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
+        manage_folders = Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
         if manage_folders.is_displayed:
             Logging("=> Folder have create success")
             TesCase_LogResult(**data["testcase_result"]["comanage"]["folder"]["pass"])
@@ -337,7 +337,7 @@ def create_project():
     time.sleep(3)
 
     try:
-        user = Waits.Wait10s_ElementLoaded(data["co-manage"]["admin"]["project_list"]["org_user_1"])
+        user = Waits.Wait20s_ElementLoaded(data["co-manage"]["admin"]["project_list"]["org_user_1"])
         if user.is_displayed():
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_1"])
             time.sleep(3)
@@ -507,7 +507,7 @@ def admin_execution():
     
     ''' Access manage folders -> input name random -> creare folder'''
     try:
-        manage_folder = Waits.Wait10s_ElementLoaded(data["co-manage"]["admin"]["folder"]["manage_folders"])
+        manage_folder = Waits.Wait20s_ElementLoaded(data["co-manage"]["admin"]["folder"]["manage_folders"])
         if manage_folder.is_displayed():
             try:
                 name = manage_folders()

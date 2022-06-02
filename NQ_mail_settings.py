@@ -37,33 +37,33 @@ def mail(domain_name):
     Logging('============ Menu Mail ============')
     # ''' Access to menu '''
     settings()
-    element_admin = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settingsmail"])))
+    element_admin = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail"])
     element_admin.location_once_scrolled_into_view
 
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["admin"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["admin"])
     time.sleep(2)
-    element_admin1 = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settingsmail_1"])))
+    element_admin1 = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail_1"])
     element_admin1.location_once_scrolled_into_view
     time.sleep(2)
     try:
-        admin_settings_user = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["click_menu"])))
+        admin_settings_user = Waits.Wait20s_ElementLoaded(data["mail"]["click_menu"])
         if admin_settings_user.is_displayed():
             Logging("- Account admin")
-            admin_settings_user.click()
+            admin_settings_user
             Logging("- Admin mail")
             admin_settings()
     except WebDriverException:
         Logging("=> Account user") 
   
 def settings():
-    element = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["mail"]["pull_the_scroll_bar"])))
+    element = Waits.Wait20s_ElementLoaded(data["mail"]["pull_the_scroll_bar"])
     element.location_once_scrolled_into_view
     time.sleep(1)
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_mail"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings_mail"])
     time.sleep(1)
-    element_1 = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["mail"]["pull_the_scroll_bar_1"])))
+    element_1 = Waits.Wait20s_ElementLoaded(data["mail"]["pull_the_scroll_bar_1"])
     element_1.location_once_scrolled_into_view
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["click_fetching"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["click_fetching"])
     Logging("- Click setting")
     time.sleep(5)
     Logging(" ")
@@ -113,9 +113,9 @@ def settings():
 
     else:
         if list_counter_number > 0:
-            driver.find_element_by_xpath(data["mail"]["settings"]["blockaddress"]["blocked_mail"]).click()
+            Commands.Wait20s_ClickElement(data["mail"]["settings"]["blockaddress"]["blocked_mail"])
             time.sleep(5)
-            driver.find_element_by_xpath(data["mail"]["settings"]["blockaddress"]["del_mail"]).click()
+            Commands.Wait20s_ClickElement(data["mail"]["settings"]["blockaddress"]["del_mail"])
             Logging("=> Delete Blocked Addresses")
             time.sleep(5)
             TesCase_LogResult(**data["testcase_result"]["mail"]["delete_block"]["pass"])
@@ -137,10 +137,10 @@ def settings():
     
     else:
         if list_data["list_counter_number_update"] > list_data["list_counter_number"]:
-            driver.find_element_by_xpath(data["mail"]["settings"]["whitelist"]["select_list"]).click()
+            Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["select_list"])
             Logging("- Select list to delete")
             time.sleep(5)
-            driver.find_element_by_xpath(data["mail"]["settings"]["whitelist"]["del_list"]).click()
+            Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["del_list"])
             Logging("- Delete list")
             time.sleep(5)
             TesCase_LogResult(**data["testcase_result"]["mail"]["delete_whilelist"]["pass"])
@@ -169,16 +169,16 @@ def settings():
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["fail"])
 
 def block_total():
-    list_counter = driver.find_element_by_xpath(data["mail"]["settings"]["blockaddress"]["total_list"])
+    list_counter = Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["blockaddress"]["total_list"])
     list_counter_number = int(list_counter.text.split(" ")[1])
 
     return list_counter_number
 
 def whilelist_total():
-    list_counter = driver.find_element_by_xpath(data["mail"]["settings"]["whitelist"]["total_list"])
+    list_counter = Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["whitelist"]["total_list"])
     list_counter_number = int(list_counter.text.split(" ")[1])
 
-    list_counter_update = driver.find_element_by_xpath(data["mail"]["settings"]["whitelist"]["total_list"])
+    list_counter_update = Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["whitelist"]["total_list"])
     list_counter_number_update = int(list_counter_update.text.split(" ")[1])
 
     list_data = {
@@ -188,7 +188,7 @@ def whilelist_total():
     return list_data
 
 def alias_total():
-    list_counter = driver.find_element_by_xpath(data["mail"]["settings_admin"]["aliasaccount"]["total_list"])
+    list_counter = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["aliasaccount"]["total_list"])
     Logging("=> Total list number: " + list_counter.text)
     list_counter_number = int(list_counter.text.split(" ")[1])
 
@@ -198,29 +198,26 @@ def add_signature():
     input_text = data["mail"]["settings"]["signature"]["text3"]
     try:
         Logging("** Create signature")
-        driver.find_element_by_xpath(data["mail"]["settings"]["signature"]["signature_access"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["signature"]["signature_access"])
         Logging("- Click signature")
         time.sleep(5)
 
         Logging("- Add signature")
         ''' text '''
         Logging("- Add text signature")
-        driver.find_element_by_xpath(data["mail"]["settings"]["signature"]["signature_add"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["signature"]["signature_add"])
         Logging("- Click add signature")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["signature"]["text1"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["signature"]["text1"])
         Logging("- Select text to signature")
         time.sleep(5)
         frame_task = driver.find_element_by_class_name("tox-edit-area__iframe")
         driver.switch_to.frame(frame_task)
-        content = driver.find_element_by_xpath(data["mail"]["settings"]["signature"]["text2"])
-        Logging("- Click content")
-        content.clear()
-        content.send_keys(input_text)
+        Wait20s_Clear_InputElement(data["mail"]["settings"]["signature"]["text2"], input_text)
         Logging("- Add text")
         time.sleep(5)
         driver.switch_to.default_content()
-        driver.find_element_by_xpath(data["mail"]["settings"]["signature"]["text_save"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["signature"]["text_save"])
         Logging("=> Add signature text success")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_signature"]["pass"])
         #TestlinkResult_Pass("WUI-83")
@@ -235,10 +232,10 @@ def delete_signature():
     ''' Delete signature '''
     try:
         Logging("** Delete signature") 
-        driver.find_element_by_xpath(data["mail"]["settings"]["signature"]["delete_signature1"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["signature"]["delete_signature1"])
         Logging("- Select signature")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["signature"]["delete_signature2"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["signature"]["delete_signature2"])
         Logging("=> Delete signature")
         time.sleep(5)
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_signature"]["pass"])
@@ -249,32 +246,37 @@ def delete_signature():
         #TestlinkResult_Fail("WUI-84")
 
 def add_autosort():
+    from_key = data["mail"]["settings"]["auto_sort"]["input_from"]
+    to_key = data["mail"]["settings"]["auto_sort"]["input_to"]
+    subject_key = data["mail"]["settings"]["auto_sort"]["input_subject"]
+    mail_key = data["mail"]["settings"]["auto_sort"]["select_mailbox"]
+
     ''' Auto sort '''
     Logging(" ")
     Logging("** Auto sort")
     try:
-        driver.find_element_by_xpath(data["mail"]["settings"]["auto_sort"]["autosort"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["autosort"])
         Logging("- Access Auto-Sort")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["auto_sort"]["addautosort"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["addautosort"])
         Logging("- Click add auto sort")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["auto_sort"]["input1"]).send_keys(data["mail"]["settings"]["auto_sort"]["input_from"])
+        Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input1"], from_key)
         Logging("- Input from")       
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["auto_sort"]["input2"]).send_keys(data["mail"]["settings"]["auto_sort"]["input_to"])
+        Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input2"], to_key)
         Logging("- Input to") 
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["auto_sort"]["input3"]).send_keys(data["mail"]["settings"]["auto_sort"]["input_subject"])
+        Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input3"], subject_key)
         Logging("- Input subject") 
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["auto_sort"]["select1"]).send_keys(data["mail"]["settings"]["auto_sort"]["select_mailbox"])
+        Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["select1"], mail_key)
         Logging("- Select mail box") 
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["auto_sort"]["include_mail"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["include_mail"])
         Logging("- Select Include existing mail") 
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["auto_sort"]["save_button"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["save_button"])
         Logging("=> Save auto sort") 
         #TestlinkResult_Pass("WUI-85")
         time.sleep(5)
@@ -285,7 +287,7 @@ def add_autosort():
         #TestlinkResult_Fail("WUI-85")
     
     '''Logging("** Check auto sort create success")
-    autosort = driver.find_element_by_xpath("//*[@id='ngw.mail.autosort']//table/tbody/tr/td")
+    autosort = Commands.Wait20s_ClickElement("//*[@id='ngw.mail.autosort']//table/tbody/tr/td")
     if autosort.text == 'FROM : quynh2, TO : quynh1, SUBJECT : test':
         Logging("=> Auto-sort create success")
     else:
@@ -297,7 +299,7 @@ def delete_autosort():
     Logging(" ")
     try:
         Logging("** Delete auto sort")
-        driver.find_element_by_xpath(data["mail"]["settings"]["auto_sort"]["autosort_delete"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["autosort_delete"])
         Logging("=> Delete Auto-Sort")
         time.sleep(5)
         #TestlinkResult_Pass("WUI-86")
@@ -309,30 +311,31 @@ def delete_autosort():
         #TestlinkResult_Fail("WUI-86")
 
 def vacation_auto_replies():
+    text_key = data["mail"]["settings"]["auto_replies"]["text_msg"]
     ''' Vacation auto replies '''
     Logging(" ")
     Logging("** Vacation auto replies")
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["auto_replies"]["autoreplies"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["autoreplies"])
     Logging("- Access vacation auto replies")
     time.sleep(5)
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["auto_replies"]["on/off_autoreplies"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["on/off_autoreplies"])
     Logging("- Click turn on vacation auto replies")
     time.sleep(5)
 
-    driver.find_element_by_xpath(data["mail"]["settings"]["auto_replies"]["date_end"]).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["date_end"])
     time.sleep(2)
-    driver.find_element_by_css_selector(data["mail"]["settings"]["auto_replies"]["select_enddate"]).click() 
+    driver.find_element_by_css_selector(data["mail"]["settings"]["auto_replies"]["select_enddate"]) 
     Logging("- Set date end of auto reply")
     time.sleep(5)
-    driver.find_element_by_xpath(data["mail"]["settings"]["auto_replies"]["input_text"]).send_keys(data["mail"]["settings"]["auto_replies"]["text_msg"])
+    Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_replies"]["input_text"], text_key)
     Logging("- Input message")
     time.sleep(5)
-    driver.find_element_by_xpath(data["mail"]["settings"]["auto_replies"]["save_button"]).click()   
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["save_button"])   
     Logging("=> Save turn on vacation auto replies")     
     time.sleep(5)
 
     Logging("** Check auto reply have turn on")
-    button = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["auto_replies"]["on/off_autoreplies"])))
+    button = Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["auto_replies"]["on/off_autoreplies"])
     if button.is_enabled():
         Logging("=> Create vacation auto replies success") 
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_auto_replies"]["pass"])
@@ -341,10 +344,10 @@ def vacation_auto_replies():
         ValidateFailResultAndSystem("<div>[Mail]Create vacation auto replies fail </div>")
     time.sleep(5)
 
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["auto_replies"]["on/off_autoreplies"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["on/off_autoreplies"])
     Logging("=> Turn off auto reply")
     time.sleep(5)
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["auto_replies"]["save_button"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["save_button"])
     Logging("=> Save turn off vacation auto replies") 
 
     time.sleep(5)
@@ -355,18 +358,18 @@ def add_block_address():
     time.sleep(5)
     Logging("** Add block")
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["blockaddress"]["block_address"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["blockaddress"]["block_address"])
         Logging("- Access Blocked Addresses")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["blockaddress"]["text_address"]).send_keys(addresses_block)
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["blockaddress"]["text_address"]).send_keys(addresses_block)
         Logging("- Input block addresses")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["blockaddress"]["add_mail"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["blockaddress"]["add_mail"])
         Logging("=> Add Blocked Addresses")
         time.sleep(5)
 
         Logging("** Check add block addresses success")
-        block_name = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.mail.blockaddress']//td[contains(., '" + addresses_block + "')]")))
+        block_name = Waits.Wait20s_ElementLoaded("//*[@id='ngw.mail.blockaddress']//td[contains(., '" + addresses_block + "')]")
         if block_name.text == 'quynh2@qa1.hanbiro.net':
             Logging("=> Add Block success")
             TesCase_LogResult(**data["testcase_result"]["mail"]["add_block"]["pass"])
@@ -387,9 +390,9 @@ def delete_block():
     Logging("")
     try:
         Logging("** Del block")
-        driver.find_element_by_xpath(data["mail"]["settings"]["blockaddress"]["blocked_mail"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["blockaddress"]["blocked_mail"])
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["blockaddress"]["del_mail"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["blockaddress"]["del_mail"])
         Logging("=> Delete Blocked Addresses")
         time.sleep(5)
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_block"]["pass"])
@@ -405,21 +408,22 @@ def add_while_list():
     try:
         Logging(" ")
         Logging("** Add while List")
-        driver.find_element_by_xpath((data["mail"]["settings"]["whitelist"]["white_list"])).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["white_list"])
         Logging("- Access to white list")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["whitelist"]["addlisst"]).send_keys(whilelist)
+
+        Commands.Wait20s_InputElement(data["mail"]["settings"]["whitelist"]["addlisst"], whilelist)
         Logging("- Add white list")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["whitelist"]["add_button"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["add_button"])
         Logging("=> Save white list")
         time.sleep(5)
 
         Logging("** Search while List")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["whitelist"]["searchwhitelist"]))).send_keys(data["mail"]["settings"]["whitelist"]["input_search_1"])
+        Commands.Wait20s_InputElement(data["mail"]["settings"]["whitelist"]["addlisst"], whilelist)
         Logging("Input white list")
         time.sleep(5)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["whitelist"]["search"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["search"])
         Logging("Search white list")
         time.sleep(5)
     except WebDriverException:
@@ -427,7 +431,7 @@ def add_while_list():
     
     try:
         Logging("** Check add while list succes")
-        check_whilelist = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.mail.whitelist']//td[contains(., '" + whilelist + "')]")))
+        check_whilelist = Waits.Wait20s_ElementLoaded("//*[@id='ngw.mail.whitelist']//td[contains(., '" + whilelist + "')]")
         if check_whilelist.is_displayed():
             Logging("=> Add while list success")
             TesCase_LogResult(**data["testcase_result"]["mail"]["add_whilelist"]["pass"])
@@ -441,19 +445,19 @@ def add_while_list():
         pass
     return whilelist
 
-def delete_while_list():
+def delete_while_list(whilelist):
     try:
         Logging("** Del while List")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["whitelist"]["refesh"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["refesh"])
         Logging("Refresh white list")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["whitelist"]["searchwhitelist"]))).send_keys(data["mail"]["settings"]["whitelist"]["input_search_1"])
+        Commands.Wait20s_InputElement(data["mail"]["settings"]["whitelist"]["searchwhitelist"], whilelist)
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["whitelist"]["search"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["search"])
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["whitelist"]["select_list"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["select_list"])
         Logging("Select list to delete")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings"]["whitelist"]["del_list"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["del_list"])
         Logging("Delete list")
         time.sleep(5)
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_whilelist"]["pass"])
@@ -467,32 +471,32 @@ def add_folder():
         Logging(" ")
         Logging("** Folders")
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["st_folders"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["st_folders"])
         Logging("- Access to Folders")
         time.sleep(2)
         Logging("- Create folder")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["add_folder"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["add_folder"])
         time.sleep(2)
-        WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["input_name"]))).send_keys(name_folders)
+        Commands.Wait20s_InputElement(data["mail"]["settings"]["folders"]["input_name"], name_folders)
         Logging("- Input name folder")
         time.sleep(2)
-        WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["button_save"][0]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_save"][0])
         Logging("=> Create folders success")
         time.sleep(5)
 
         try:
-            popup = driver.find_element_by_xpath(data["mail"]["settings"]["folders"]["pop_up"])
+            popup = Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["folders"]["pop_up"])
             if popup.is_displayed():
                 Logging("Folder have exits - Create new folder")
                 time.sleep(3)
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["popup_exits"]))).click()
+                Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["popup_exits"])
                 time.sleep(2)
-                WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["add_folder"]))).click()
+                Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["add_folder"])
                 time.sleep(2)
-                WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["input_name"]))).send_keys(name_folders)
+                Commands.Wait20s_InputElement(data["mail"]["settings"]["folders"]["input_name"], name_folders)
                 Logging("- Input name folder")
                 time.sleep(2)
-                WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["button_save"][0]))).click()
+                Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_save"][0])
                 Logging("=> Create new folders success")
             else:
                 Logging("Pop up error duplicate not show")
@@ -504,7 +508,7 @@ def add_folder():
     
     try:
         Logging("** Check folder have create")
-        check_folder = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_setting_form']//li//a[contains(., '" + name_folders + "')]")))
+        check_folder = Waits.Wait20s_ElementLoaded("//*[@id='mail_setting_form']//li//a[contains(., '" + name_folders + "')]")
         if check_folder.is_displayed():
             Logging("=> Create folders success")
             TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["pass"])
@@ -519,53 +523,50 @@ def add_folder():
     return name_folders
 
 def share_folder(name_folders):
+    org_key = data["mail"]["settings"]["folders"]["org_text"]
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_setting_form']//li//a[contains(., '" + name_folders + "')]"))).click()
+        Commands.Wait20s_ClickElement("//*[@id='mail_setting_form']//li//a[contains(., '" + name_folders + "')]")
         time.sleep(3)
         Logging("- Select share permission")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["share"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["share"])
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["usingshare"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["usingshare"])
         Logging("- Check using share")
         time.sleep(3)
-        org = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["org_input"])))
-        time.sleep(3)
-        org.send_keys(data["mail"]["settings"]["folders"]["org_text"])
-        time.sleep(3)
-        org.send_keys(Keys.ENTER)
+        Commands.Wait20s_EnterElement(data["mail"]["settings"]["folders"]["org_input"], org_key)
         Logging("- Input name user")
         time.sleep(3)
-        WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["org_select"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["org_select"])
         Logging("- Select user")
         time.sleep(3)
-        WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["org_add"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["org_add"])
         Logging("- Add user success")
         time.sleep(3)
 
         options_list = ["Read/Share/Reply/Forward", "Read Mail", "Shared Mail", "Reply/Forward", "Read/Share", "Read/Reply/Forward", "Share/Reply/Forward"]
 
-        sel = Select(driver.find_element_by_xpath(data["mail"]["settings"]["folders"]["dropdown"]))
+        sel = Select(Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["folders"]["dropdown"]))
         time.sleep(2)
         sel.select_by_visible_text(random.choice(options_list))
         Logging("- Select permission for user")
         
         time.sleep(2)
         
-        WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["button_save"][1]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_save"][1])
         Logging("=> Share folder success")
         time.sleep(5)
 
         Logging("** Check Share folder")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["share"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["share"])
         time.sleep(3)
-        button_share = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["usingshare"])))
+        button_share = Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["folders"]["usingshare"])
         if button_share.is_enabled():
             Logging("=> Share folder success")
         else:
             Logging("=> Share folder fail")
             ValidateFailResultAndSystem("<div>[Mail]Share folder fail </div>")
         time.sleep(5)
-        WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["button_close"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_close"])
         time.sleep(5)
     except:
         pass
@@ -574,29 +575,29 @@ def upload_eml(name_folders):
     driver.find_element_by_tag_name("body").send_keys(Keys.END)
     time.sleep(5)
 
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_setting_form']//li//a[contains(., '" + name_folders + "')]"))).click()
+    Commands.Wait20s_ClickElement("//*[@id='mail_setting_form']//li//a[contains(., '" + name_folders + "')]")
 
-    driver.find_element_by_xpath(data["mail"]["settings"]["folders"]["Eml"]).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["Eml"])
     time.sleep(2)
-    driver.find_element_by_xpath(data["mail"]["settings"]["folders"]["addfile"]).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["addfile"])
     time.sleep(2)
-    driver.find_element_by_xpath(data["mail"]["settings"]["folders"]["getfile"]).send_keys(NQ_login_function.file_upload)
+    Commands.Wait20s_InputElement(data["mail"]["settings"]["folders"]["getfile"], NQ_login_function.file_upload)
     Logging("- Select file to upload")
     time.sleep(2)
-    driver.find_element_by_xpath(data["mail"]["settings"]["folders"]["button_save"][2]).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_save"][2])
 
     time.sleep(15)
     Logging("=> Upload EML success")
 
 def backup_mailbox():
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["backup"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["backup"])
     time.sleep(2)
     Logging("=> Backup success")
 
 def empty_mailbox():
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["empty"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["empty"])
     time.sleep(2)
-    driver.find_element_by_xpath(data["mail"]["settings"]["folders"]["close_popup"]).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["close_popup"])
     Logging("=> Empty folder success")
     time.sleep(5)
 
@@ -604,7 +605,7 @@ def delete_folder():
     ''' Delete folders '''
     try:
         Logging("** Delete folder")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["delete"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["delete"])
         time.sleep(2)
         Logging("=> Delete success")
         time.sleep(5)
@@ -617,8 +618,8 @@ def delete_folder():
     time.sleep(5)
 
     '''Logging("** Download folder")
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["share_mailbox"]))).click()
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["downfile"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["share_mailbox"])
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["downfile"])
     time.sleep(2)
     Logging("=> Download share mail box success")
     time.sleep(5)   '''
@@ -627,10 +628,10 @@ def forwarding():
     email = data["mail"]["settings"]["forwarding"]["text_inpiut"]
     Logging(" ")
    
-    WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a[contains(@data-defaulthref,'#/mail/forwarding/setting') and contains(.,' Forwarding')]"))).click()
+    Commands.Wait20s_ClickElement("//a[contains(@data-defaulthref,'#/mail/forwarding/setting') and contains(.,' Forwarding')]")
     Logging("** Forwarding")
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["forwarding"]["add_forwarding"]))).click()
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, data["mail"]["settings"]["forwarding"]["input_email"]))).send_keys(email)
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["forwarding"]["add_forwarding"])
+    Commands.Wait20s_InputElement(data["mail"]["settings"]["forwarding"]["input_email"], email)
     Logging("- Input email")
 
     option_list = int(len(driver.find_elements_by_xpath(data["mail"]["settings_admin"]["forwarding"]["option_list"])))
@@ -638,26 +639,26 @@ def forwarding():
     i = 0
     for i in range(option_list):
         i += 1
-        mode_list = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["forwarding"]["select_option"] + "[" + str(i) + "]")))
+        mode_list = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["forwarding"]["select_option"] + "[" + str(i) + "]")
         forwarding_list.append(mode_list.text)
     
     Logging("- Total of view mode list: " + str(len(forwarding_list)))
     x = random.choice(forwarding_list)
     time.sleep(2)
-    select_mode_view = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["forwarding"]["option_list"] + "[contains(.,'" + str(x) + "')]")))
-    select_mode_view.click()
+    select_mode_view = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["forwarding"]["option_list"] + "[contains(.,'" + str(x) + "')]")
+    select_mode_view
     Logging("- Select Forwarding option")
 
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["forwarding"]["save_button"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["forwarding"]["save_button"])
     Logging("- Save forwarding")
 
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.mail.forwarding']//table//td[contains(., '" + email + "')]"))).click()
+    Commands.Wait20s_ClickElement("//*[@id='ngw.mail.forwarding']//table//td[contains(., '" + email + "')]")
     Logging("- Select email")
-    WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["forwarding"]["delete_button"]))).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["forwarding"]["delete_button"])
     Logging("- Delete email have set forwarding")
 
 def approval_total():
-    list_counter = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["total_list"])
+    list_counter = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["approval_mailbox"]["total_list"])
     list_counter_number = int(list_counter.text.split(" ")[1])
 
     return list_counter_number
@@ -720,15 +721,15 @@ def add_alias_domain():
     try:
         Logging("** Add alias domain")
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["alias_domian"]["aliasdomain"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["aliasdomain"])
         Logging("- Access alias domain")
         time.sleep(5)
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["alias_domian"]["input4"]))).send_keys(aliasdomain_name)
+        Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["alias_domian"]["input4"], aliasdomain_name)
         Logging("- Input domain")
         time.sleep(5)
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["alias_domian"]["add_aliasdomain"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["add_aliasdomain"])
         Logging("- Add alias domain")
         time.sleep(5)
     except:
@@ -736,7 +737,7 @@ def add_alias_domain():
     
     try:
         Logging("** Check alias domain have add")
-        name_domain = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.mail.adminalias_domain']//table[contains(., '" + aliasdomain_name + "')]")))
+        name_domain = Waits.Wait20s_ElementLoaded("//*[@id='ngw.mail.adminalias_domain']//table[contains(., '" + aliasdomain_name + "')]")
         if name_domain.is_displayed:
             Logging("=> Add alias domain success")
             TesCase_LogResult(**data["testcase_result"]["mail"]["alias_domain"]["pass"])
@@ -756,10 +757,10 @@ def add_alias_domain():
 def delete_alias_domain(aliasdomain_name):
     Logging("** Delete alias domain")
     try:
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.mail.adminalias_domain']//table[contains(., '" + aliasdomain_name + "')]//span"))).click()
+        Commands.Wait20s_ClickElement("//*[@id='ngw.mail.adminalias_domain']//table[contains(., '" + aliasdomain_name + "')]//span")
         Logging("- Select alias domain")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["alias_domian"]["del_aliasdomain"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["del_aliasdomain"])
         Logging("=> Delete alias domain")
         time.sleep(5)
         #TestlinkResult_Pass("WUI-131")
@@ -772,40 +773,37 @@ def delete_alias_domain(aliasdomain_name):
 def add_domain_user():
     text = data["mail"]["settings_admin"]["alias_domian"]["add_domain"]
     try:
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["alias_domian"]["add_domain"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["add_domain"])
         Logging("- Add user (group) for domain")
-        add_user = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='aliasDomainOrg']//input[contains(@type, 'text')]")))
-        add_user.send_keys(text)
-        time.sleep(2)
-        add_user.send_keys(Keys.ENTER)
+        Commands.Wait20s_EnterElement("//*[@id='aliasDomainOrg']//input[contains(@type, 'text')]", text)
         Logging("- Input key user")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["alias_domian"]["user_1"]))).click()
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["alias_domian"]["user_2"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["user_1"])
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["user_2"])
         Logging("- Select user")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["alias_domian"]["add_button"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["add_button"])
         Logging("- Add user")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='directive-domains']//label"))).click()
+        Commands.Wait20s_ClickElement("//*[@id='directive-domains']//label")
         Logging("- Select domain")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["alias_domian"]["save_button"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["save_button"])
         Logging("- Save")
     except:
         pass
 
 def approval_mailbox():
     time.sleep(5)
-    element_admin = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settingsmail"])))
+    element_admin = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail"])
     element_admin.location_once_scrolled_into_view
 
     
-    element_admin1 = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settingsmail_1"])))
+    element_admin1 = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail_1"])
     element_admin1.location_once_scrolled_into_view
 
     Logging(" ")
     try:
-        approval = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["mailbox"])
+        approval = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["approval_mailbox"]["mailbox"])
         if approval.is_displayed():
             Logging("Add approval mailbox")
             Forced_approval()
@@ -816,83 +814,75 @@ def approval_mailbox():
     time.sleep(5)
 
 def Forced_approval():
-    driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["mailbox"]).click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["mailbox"])
     Logging("- Select approval mailbox")
-    f = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["policy"])
+    f = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["approval_mailbox"]["policy"])
     driver.execute_script("arguments[0].scrollIntoView();",f)
     try:
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["policy"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["policy"])
         Logging("- Select approval policy")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["add_policy"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["add_policy"])
         Logging("- Add approval policy")
         time.sleep(5)
     #-----------------------------------------Forced approval----------------------------------#
+        user_key = data["mail"]["settings_admin"]["approval_mailbox"]["approver_input_1"]
         forced_approval = data["mail"]["settings_admin"]["approval_mailbox"]["input_name_1"] + str(n)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["input5"]).send_keys(forced_approval)
+
+        Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["approval_mailbox"]["input5"], forced_approval)
 
         Logging("** Select type policy Forced approval")
         time.sleep(5)
         Logging("- Select user final approval")
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["select_approver"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["select_approver"])
         Logging("- Select organization")
         time.sleep(5)
-        final_approver = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["approver_input"])
-        time.sleep(2)
-        final_approver.send_keys(data["mail"]["settings_admin"]["approval_mailbox"]["approver_input_1"])
-        time.sleep(2)
-        final_approver.send_keys(Keys.ENTER)
+        Commands.Wait20s_EnterElement(data["mail"]["settings_admin"]["approval_mailbox"]["approver_input"], user_key)
         Logging("- Input user")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["approver_final_1"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["approver_final_1"])
         Logging("=> Add approval")
         time.sleep(5)
 
         #-------Permission Recipient----------#
+        org_key = data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_1"]
+
         Logging("** Selective approval")
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["select_organization_1"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["select_organization_1"])
         Logging("- Select organization of Permission Recipient**")
         time.sleep(5)
-        permission_recipient = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input"])
-        time.sleep(2)
-        permission_recipient.send_keys(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_1"])
-        time.sleep(2)
-        permission_recipient.send_keys(Keys.ENTER)
+        Commands.Wait20s_EnterElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input"], org_key)
         Logging("- Input user")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_select_1"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_select_1"])
         Logging("- Select user")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_add_1"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_add_1"])
         Logging("- Add user")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_save_1"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_save_1"])
         Logging("=> Save Permission Recipient approver")
         time.sleep(5)
         
         #-------------Mid-Approver----------#
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["select_organization_2"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["select_organization_2"])
         time.sleep(5)
         Logging("** Select organization of mid approver**")
         
-        mid_approver = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_2"])
-        time.sleep(2)
-        mid_approver.send_keys(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_1"])
-        time.sleep(2)
-        mid_approver.send_keys(Keys.ENTER)
+        Commands.Wait20s_EnterElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_2"], org_key)
         Logging("- Mid-Approver")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_select_2"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_select_2"])
         Logging("- Select user")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_add_2"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_add_2"])
         Logging("- Add user")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_save_2"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_save_2"])
         Logging("- Save user")
         time.sleep(5)
 
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["save"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["save"])
         Logging("=> Save Approval Policy - Forced approval")
         TesCase_LogResult(**data["testcase_result"]["mail"]["approval_mail_box_forced_approval"]["pass"])
         time.sleep(5)
@@ -904,88 +894,70 @@ def Selective_approval():
     try:
         selective_approval = data["mail"]["settings_admin"]["approval_mailbox"]["input_name_2"] + str(n)
         Logging("** Selective approval")
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["add_policy"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["add_policy"])
         Logging("- Add approval policy")
         time.sleep(5)
 
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["input5"]).send_keys(selective_approval)
+        Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["approval_mailbox"]["input5"], selective_approval)
         Logging("- Select basic policy")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["select_type"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["select_type"])
         Logging("=> Selective approval")
         time.sleep(5)
 
         #-------Final approval----------#
+        final_user = data["mail"]["settings_admin"]["approval_mailbox"]["approver_input_1"]
+
         Logging("** Select final approval")
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["select_approver"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["select_approver"])
         Logging("- Select organization")
         time.sleep(5)
-        final_approver = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["approver_input"])
-        time.sleep(2)
-        final_approver.send_keys(data["mail"]["settings_admin"]["approval_mailbox"]["approver_input_1"])
-        time.sleep(2)
-        final_approver.send_keys(Keys.ENTER)
+        Commands.Wait20s_EnterElement(data["mail"]["settings_admin"]["approval_mailbox"]["approver_input"], final_user)
         Logging("- Input final approval")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["approver_final_2"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["approver_final_2"])
         Logging("=> Select final approval")
         time.sleep(5)
 
         #-------Permission Recipient----------#
+        org_key_1 = data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_1"]
         Logging("** Select Permission Recipient")
-        select_permission_recipient = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["select_organization_1"])
-        select_permission_recipient.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["select_organization_1"])
         Logging("- Select organization of Permission Recipient")
         time.sleep(5)
-        permission_recipient = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input"])
-        time.sleep(2)
-        permission_recipient.send_keys(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_1"])
-        time.sleep(2)
-        permission_recipient.send_keys(Keys.ENTER)
+        Commands.Wait20s_EnterElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input"], org_key_1)
         time.sleep(5)
         Logging("- Input user")
-        approver_recipient = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_select_3"])
-        approver_recipient.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_select_3"])
         Logging("- Select user")
         time.sleep(5)
-        add_approver_recipient = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_add_3"])
-        add_approver_recipient.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_add_3"])
         Logging("- Add user")
         time.sleep(5)
-        save_approver_recipient = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_save_1"])
-        save_approver_recipient.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_save_1"])
         Logging("=> Save Permission Recipient approver")
         time.sleep(5)
 
         #-------Mid-Approver----------#
         Logging("** Select Mid-Approver")
-        select_mid_approver = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["select_organization_2"])
-        select_mid_approver.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["select_organization_2"])
         Logging("** Select organization of mid approver**")
         time.sleep(5)
         
-        mid_approver = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_4"])
-        time.sleep(2)
-        mid_approver.send_keys(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_1"])
-        time.sleep(2)
-        mid_approver.send_keys(Keys.ENTER)
+        Commands.Wait20s_EnterElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_input_4"], org_key_1)
         Logging("- Input user")
         time.sleep(5)
-        approver = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_select_4"])
-        approver.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_select_4"])
         Logging("- Select user")
         time.sleep(5)
-        add_approver_recipient = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_add_4"])
-        add_approver_recipient.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_add_4"])
         Logging("- Add user")
         time.sleep(5)
-        save_approver_recipient = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["organization_save_2"])
-        save_approver_recipient.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["organization_save_2"])
         Logging("- Save Mid-Approver approver")
         time.sleep(5)
 
-        save_approval_policy = driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["save"])
-        save_approval_policy.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["save"])
         Logging("=> Save Approval Policy Selective approval")
         TesCase_LogResult(**data["testcase_result"]["mail"]["approval_mail_box_selective_approval"]["pass"])
         #TestlinkResult_Pass("WUI-128")
@@ -999,14 +971,14 @@ def Selective_approval():
 def delete_approval_mail_box():
     try:
         Logging("** Del approval mailbox")
-        driver.find_element_by_xpath((data["mail"]["settings_admin"]["approval_mailbox"]["select_policy_1"])).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["select_policy_1"])
         time.sleep(5)
-        driver.find_element_by_xpath((data["mail"]["settings_admin"]["approval_mailbox"]["select_policy_2"])).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["select_policy_2"])
         Logging("-  Select policy to delete")
         time.sleep(5)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["remove_1"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["remove_1"])
         time.sleep(2)
-        driver.find_element_by_xpath(data["mail"]["settings_admin"]["approval_mailbox"]["remove_2"]).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["approval_mailbox"]["remove_2"])
         Logging("=> Delete policy")
         #TestlinkResult_Pass("WUI-129")
         TesCase_LogResult(**data["testcase_result"]["mail"]["del_approval_mail_box"]["pass"])
@@ -1023,20 +995,20 @@ def send_limit():
     text_file = data["mail"]["settings_admin"]["sentlimit"]["input_text"][1]
 
     try:
-        send_limit = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["sentlimit"]["send"])))
+        send_limit = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["sentlimit"]["send"])
         if send_limit.is_displayed():
-            send_limit.click()
+            send_limit
             time.sleep(2)
             Logging("-> Asset send limit")
             time.sleep(5)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["sentlimit"]["input"][0]))).send_keys(text_domain)
+            Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["sentlimit"]["input"][0], text_domain)
             time.sleep(5)
-            WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["sentlimit"]["button_add"][0]))).click()
+            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_add"][0])
             Logging("** Create domain")
             time.sleep(5)
 
             Logging("** Check domain limt create success")
-            domain = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='domain-limit']//td[contains(., '" + text_domain + "')]")))
+            domain = Waits.Wait20s_ElementLoaded("//*[@id='domain-limit']//td[contains(., '" + text_domain + "')]")
             if domain.is_displayed():
                 Logging("=> Create domain limit success")
                 TesCase_LogResult(**data["testcase_result"]["mail"]["add_domain_limt"]["pass"])
@@ -1048,11 +1020,11 @@ def send_limit():
 
             try:
                 Logging("** Delete domain")
-                driver.find_element_by_xpath(data["mail"]["settings_admin"]["sentlimit"]["select"][0]).click()
+                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["select"][0])
                 time.sleep(2)
-                driver.find_element_by_xpath(data["mail"]["settings_admin"]["sentlimit"]["button_delete"]).click()
+                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_delete"])
                 time.sleep(2)
-                driver.find_element_by_xpath(data["mail"]["settings_admin"]["sentlimit"]["close_popup"]).click()
+                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["close_popup"])
                 Logging("=> Delete domain")
                 time.sleep(2)
                 TesCase_LogResult(**data["testcase_result"]["mail"]["del_domain_limt"]["pass"])
@@ -1061,16 +1033,16 @@ def send_limit():
                 pass
             
             Logging("** Create file limit")
-            driver.find_element_by_xpath(data["mail"]["settings_admin"]["sentlimit"]["file"]).click()
+            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["file"])
             time.sleep(2)
-            driver.find_element_by_xpath(data["mail"]["settings_admin"]["sentlimit"]["input"][1]).send_keys(text_file)
+            Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["sentlimit"]["input"][1], text_file)
             time.sleep(2)
-            driver.find_element_by_xpath(data["mail"]["settings_admin"]["sentlimit"]["button_add"][1]).click()
+            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_add"][1])
             Logging("=> File limit have create")
             time.sleep(5)
 
             Logging("** Check file limit create success")
-            file_limit = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='file-limit']//td[contains(., '" + text_file + "')]")))
+            file_limit = Waits.Wait20s_ElementLoaded("//*[@id='file-limit']//td[contains(., '" + text_file + "')]")
             if file_limit.is_displayed():
                 Logging("=> Create file limit success")
                 TesCase_LogResult(**data["testcase_result"]["mail"]["add_file_limt"]["pass"])
@@ -1082,11 +1054,11 @@ def send_limit():
 
             try:
                 Logging("** Delete file limit")
-                driver.find_element_by_xpath(data["mail"]["settings_admin"]["sentlimit"]["select"][1]).click()
+                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["select"][1])
                 time.sleep(2)
-                driver.find_element_by_xpath(data["mail"]["settings_admin"]["sentlimit"]["button_delete"]).click()
+                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_delete"])
                 time.sleep(2)
-                driver.find_element_by_xpath(data["mail"]["settings_admin"]["sentlimit"]["close_popup"]).click()
+                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["close_popup"])
                 Logging("=> Delete file limit")
                 TesCase_LogResult(**data["testcase_result"]["mail"]["del_file_limit"]["pass"])
             except:
@@ -1104,7 +1076,7 @@ def company_signature():
     Logging(" ")
     Logging("** Company signature **")
    
-    WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//a[contains(@data-defaulthref, '#/mail/admin/signature')]"))).click()
+    Commands.Wait20s_ClickElement("//a[contains(@data-defaulthref, '#/mail/admin/signature')]")
     
     time.sleep(5)
 
@@ -1113,14 +1085,13 @@ def company_signature():
     i = 0
     for i in range(force_list):
         i += 1
-        mode_list = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["signature_company"]["force_select"] + "[" + str(i) + "]")))
+        mode_list = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["signature_company"]["force_select"] + "[" + str(i) + "]")
         force_apply_list.append(mode_list.text)
     
     Logging("- Total of view mode list: " + str(len(force_apply_list)))
     x = random.choice(force_apply_list)
     time.sleep(2)
-    select_mode_view = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["signature_company"]["force_list"] + "[contains(.,'" + str(x) + "')]")))
-    select_mode_view.click()
+    Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["signature_company"]["force_list"] + "[contains(.,'" + str(x) + "')]")
     Logging("- Select Force apply")
     
     if str(x) == "Forced-Appending":
@@ -1132,14 +1103,13 @@ def company_signature():
         i = 0
         for i in range(position_list):
             i += 1
-            signature_list = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["signature_company"]["position"] + "[" + str(i) + "]")))
+            signature_list = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["signature_company"]["position"] + "[" + str(i) + "]")
             signature_position_list.append(signature_list.text)
         
         Logging("- Total of signature position: " + str(len(signature_position_list)))
         x = random.choice(signature_position_list)
         time.sleep(2)
-        select_position = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["signature_company"]["signature_position"] + "[contains(.,'" + str(x) + "')]")))
-        select_position.click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["signature_company"]["signature_position"] + "[contains(.,'" + str(x) + "')]")
         Logging("- Select Signature position")
 
         input_text = data["mail"]["settings_admin"]["signature_company"]["input_signature"]
@@ -1152,7 +1122,7 @@ def company_signature():
         time.sleep(2)
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["signature_company"]["button_save"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["signature_company"]["button_save"])
         Logging("- Add company signature")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_signature_company"]["pass"])
     elif str(x) == "Force replace":
@@ -1166,7 +1136,7 @@ def company_signature():
         time.sleep(2)
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["signature_company"]["button_save"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["signature_company"]["button_save"])
         Logging("- Add company signature")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_signature_company"]["pass"])
     elif str(x) == "None":
@@ -1180,7 +1150,7 @@ def company_signature():
         time.sleep(2)
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["signature_company"]["button_save"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["signature_company"]["button_save"])
         Logging("- Add company signature")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_signature_company"]["pass"])
     else:
@@ -1190,45 +1160,43 @@ def company_signature():
 def alias_account():
     name_account = data["mail"]["settings_admin"]["aliasaccount"]["input_nametext"] + str(n)
     name_alias = data["mail"]["settings_admin"]["aliasaccount"]["input_nameallias"] + str(n)
+    name_org = data["mail"]["settings_admin"]["aliasaccount"]["input_nameorg"]
     ''' Alias account '''
     try:
         Logging(" ")
         Logging("** Alias account")
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
         time.sleep(3)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["allias"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["allias"])
         Logging("- Access alias account")
         time.sleep(5)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["input_name"]))).send_keys(name_account)
+        Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["aliasaccount"]["input_name"], name_account)
         Logging("- Input name account")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["input_allias"]))).send_keys(name_alias)
+        Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["aliasaccount"]["input_allias"], name_alias)
         Logging("- Input alias account")
         time.sleep(5)
         
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["choose_org"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["choose_org"])
         time.sleep(2)
-        org = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["input_org"])))
-        time.sleep(2)
-        org.send_keys(data["mail"]["settings_admin"]["aliasaccount"]["input_nameorg"])
-        org.send_keys(Keys.ENTER)
+        Commands.Wait20s_EnterElement(data["mail"]["settings_admin"]["aliasaccount"]["input_org"], name_org)
         Logging("- Input user")
         time.sleep(5)
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["select_org"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["select_org"])
         Logging("- Select user")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["button_add_org"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["button_add_org"])
         Logging("- Add user")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["button_save_org"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["button_save_org"])
         Logging("=> Save Organization")
         time.sleep(5)
 
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["button_save"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["button_save"])
         Logging("=> Save alias account")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["aliasaccount"]["close_popup"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["close_popup"])
         time.sleep(5)
         TesCase_LogResult(**data["testcase_result"]["mail"]["alias_account"]["pass"])
     except:
@@ -1239,23 +1207,23 @@ def alias_account():
 def log_analysis():
     try:
         ''' Log Analysis '''
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["log_analysis"]["loganalysis"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["log_analysis"]["loganalysis"])
         Logging("** Log Analysis **")
         time.sleep(2)
-        #WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["log_analysis"]["filter_type"]))).click()
+        #Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["log_analysis"]["filter_type"])
         Logging("- Select filter type")
         time.sleep(2)
         options_list = ["Received", "Send", "Spam", "Block", "Etc."]
 
-        sel = Select(driver.find_element_by_xpath(data["mail"]["settings_admin"]["log_analysis"]["filter_type"]))
+        sel = Select(Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["log_analysis"]["filter_type"]))
         sel.select_by_visible_text(random.choice(options_list))
         Logging("=> Select type ")
         time.sleep(2)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["log_analysis"]["search"]))).click()
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["log_analysis"]["search"])
         Logging("=> Search")
         time.sleep(2)
 
-        type_select = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_admin_log_analysis']//div[contains(@data-ng-show, 'isListView()')]")))
+        type_select = Waits.Wait20s_ElementLoaded("//*[@id='mail_admin_log_analysis']//div[contains(@data-ng-show, 'isListView()')]")
         type_select_text = type_select.text
         text = type_select_text.split(" ")[1]
         if text == '0':
