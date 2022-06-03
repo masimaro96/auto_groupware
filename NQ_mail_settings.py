@@ -133,7 +133,7 @@ def settings():
 
     if bool(whilelist) == True:
         
-        delete_while_list()
+        delete_while_list(whilelist)
     
     else:
         if list_data["list_counter_number_update"] > list_data["list_counter_number"]:
@@ -213,7 +213,7 @@ def add_signature():
         time.sleep(5)
         frame_task = driver.find_element_by_class_name("tox-edit-area__iframe")
         driver.switch_to.frame(frame_task)
-        Wait20s_Clear_InputElement(data["mail"]["settings"]["signature"]["text2"], input_text)
+        Commands.Wait20s_Clear_InputElement(data["mail"]["settings"]["signature"]["text2"], input_text)
         Logging("- Add text")
         time.sleep(5)
         driver.switch_to.default_content()
@@ -264,10 +264,10 @@ def add_autosort():
         Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input1"], from_key)
         Logging("- Input from")       
         time.sleep(5)
-        Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input2"], to_key)
+        Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input2"], to_key)
         Logging("- Input to") 
         time.sleep(5)
-        Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input3"], subject_key)
+        Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input3"], subject_key)
         Logging("- Input subject") 
         time.sleep(5)
         Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["select1"], mail_key)
@@ -420,7 +420,7 @@ def add_while_list():
         time.sleep(5)
 
         Logging("** Search while List")
-        Commands.Wait20s_InputElement(data["mail"]["settings"]["whitelist"]["addlisst"], whilelist)
+        Commands.Wait20s_Clear_InputElement(data["mail"]["settings"]["whitelist"]["searchwhitelist"], whilelist)
         Logging("Input white list")
         time.sleep(5)
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["search"])
@@ -430,8 +430,8 @@ def add_while_list():
         pass
     
     try:
-        Logging("** Check add while list succes")
-        check_whilelist = Waits.Wait20s_ElementLoaded("//*[@id='ngw.mail.whitelist']//td[contains(., '" + whilelist + "')]")
+        Logging("** Check add while list success")
+        check_whilelist = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.mail.whitelist']//td[contains(., '" + whilelist + "')]")))
         if check_whilelist.is_displayed():
             Logging("=> Add while list success")
             TesCase_LogResult(**data["testcase_result"]["mail"]["add_whilelist"]["pass"])
@@ -450,7 +450,7 @@ def delete_while_list(whilelist):
         Logging("** Del while List")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["refesh"])
         Logging("Refresh white list")
-        Commands.Wait20s_InputElement(data["mail"]["settings"]["whitelist"]["searchwhitelist"], whilelist)
+        Commands.Wait20s_Clear_InputElement(data["mail"]["settings"]["whitelist"]["searchwhitelist"], whilelist)
         time.sleep(5)
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["search"])
         time.sleep(5)
