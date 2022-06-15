@@ -211,7 +211,7 @@ def sub_folder(name):
         time.sleep(2)
 
         Logging("** Check sub-folder have create **")
-        subfolder = Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//li//a[contains(., '" + subname + "')]")
+        subfolder = WebDriverWait(driver, 20).until(EC.presence_of_element_located(("//*[@id='project_setting_form']//li//a[contains(., '" + subname + "')]")))
         if subfolder.is_displayed:
             Logging("=> Sub-Folder have create success")
             TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])

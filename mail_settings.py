@@ -50,7 +50,7 @@ def mail(domain_name):
         admin_settings_user = Waits.Wait20s_ElementLoaded(data["mail"]["click_menu"])
         if admin_settings_user.is_displayed():
             Logging("- Account admin")
-            admin_settings_user
+            admin_settings_user.click()
             Logging("- Admin mail")
             admin_settings()
     except WebDriverException:
@@ -467,7 +467,7 @@ def delete_while_list(whilelist):
         pass
 
 def add_folder():
-    name_folders = data["title"] + date_time 
+    name_folders = data["title"] + str(n)
     try:
         Logging(" ")
         Logging("** Folders")
@@ -507,20 +507,15 @@ def add_folder():
     except WebDriverException:
         pass
     
-    try:
-        Logging("** Check folder have create")
-        check_folder = Waits.Wait20s_ElementLoaded("//*[@id='mail_setting_form']//li//a[contains(., '" + name_folders + "')]")
-        if check_folder.is_displayed():
-            Logging("=> Create folders success")
-            TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["pass"])
-        else:
-            Logging("=> Create folders fail")
-            TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["fail"])
-            ValidateFailResultAndSystem("<div>[Mail]Create folders fail </div>")
-        time.sleep(5)
-    except WebDriverException:
-        TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["fail"])
-        pass
+    # try:
+    #     Logging("** Check folder have create")
+    #     check_folder = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_setting_form']//li//a[contains(., '" + str(name_folders) + "')]")))
+    #     Logging("=> Create folders success")
+    #     TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["pass"])
+    # except:
+    #     Logging("=> Create folders fail")
+    #     TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["fail"])
+
     return name_folders
 
 def share_folder(name_folders):
@@ -692,12 +687,6 @@ def admin_settings():
     except:
         Logging(">> Can't continue execution")
         pass
-
-    try:
-        delete_approval_mail_box()
-    except:
-        Logging(">> Can't continue execution")
-        pass 
     
     try:
         company_signature()
@@ -809,6 +798,7 @@ def approval_mailbox():
             Logging("Add approval mailbox")
             Forced_approval()
             Selective_approval()
+            delete_approval_mail_box()
     except WebDriverException:
         Logging("=> Domain don't have menu approval mail box")
         pass
@@ -1160,7 +1150,7 @@ def company_signature():
 
 def alias_account():
     name_account = data["title"] + date_time
-    name_alias = data["title"] + date_time
+    name_alias = ["mail"]["settings_admin"]["aliasaccount"]["input_nameallias"] + str(n)
     name_org = data["mail"]["settings_admin"]["aliasaccount"]["input_nameorg"]
     ''' Alias account '''
     try:

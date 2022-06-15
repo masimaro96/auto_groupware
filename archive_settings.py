@@ -323,7 +323,7 @@ def folder_public():
     try:
         Logging(" ")
         PrintYellow("-> Create folder public")
-        Waits.Wait20s_ElementLoaded( data["loading_dialog"])
+        # Waits.Wait20s_ElementLoaded( data["loading_dialog"])
 
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["parent_folder"])
         Logging("- Select folder to create")
