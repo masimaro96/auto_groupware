@@ -986,7 +986,7 @@ def send_limit():
     text_file = data["mail"]["settings_admin"]["sentlimit"]["input_text"][1]
 
     try:
-        send_limit = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["sentlimit"]["send"])
+        send_limit = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["sentlimit"]["send"])))
         if send_limit.is_displayed():
             send_limit
             time.sleep(2)
@@ -1150,7 +1150,7 @@ def company_signature():
 
 def alias_account():
     name_account = data["title"] + date_time
-    name_alias = ["mail"]["settings_admin"]["aliasaccount"]["input_nameallias"] + str(n)
+    name_alias = data["mail"]["settings_admin"]["aliasaccount"]["input_nameallias"] + str(n)
     name_org = data["mail"]["settings_admin"]["aliasaccount"]["input_nameorg"]
     ''' Alias account '''
     try:

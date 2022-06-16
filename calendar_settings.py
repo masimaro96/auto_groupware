@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import WebDriverException, NoSuchElementException
 from selenium.webdriver.common.keys import Keys
+from datetime import datetime
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.chrome.options import Options
@@ -25,6 +26,7 @@ from NQ_login_function import driver, data, ValidateFailResultAndSystem, Logging
 
 n = random.randint(1,3000)
 m = random.randint(3000,6000)
+date_time = datetime.now().strftime("%Y/%m/%d, %H:%M:%S")
 
 def calendar(domain_name):
     driver.get(domain_name + "calendar/list/mycal/")
@@ -33,7 +35,7 @@ def calendar(domain_name):
     try:
         popup = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["update"]["title"])))
         if popup.is_displayed():
-            Wait20s_ClickElement(data["calendar"]["update"]["button_ok"])
+            Commands.Wait20s_ClickElement(data["calendar"]["update"]["button_ok"])
             Logging("Pop up update display")
         else:
             Logging("Pop up not display")
@@ -324,7 +326,6 @@ def delete_folder(namefolder):
         ''' Delete main folder '''
         Logging(" ")
         Logging("** Delete main folder")
-        Commands.Wait20s_ClickElement(data["calendar"]["settings"]["share_folder"])
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//li//a[contains(., '" + namefolder + "')]")
         Logging("- Select folder")
         time.sleep(2)
@@ -377,7 +378,8 @@ def setting_view():
     WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["settings"]["button_save"][3]))).click()
 
 def folder_company():
-    name = data["calendar"]["Admin"]["name_input"] + str(n)
+    # name = data["calendar"]["Admin"]["name_input"] + str(n)
+    name = data["title"] + date_time
     ''' Go to manage company folders '''
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["company_folder"])
     Logging(" ")

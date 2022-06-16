@@ -193,7 +193,7 @@ def manage_folders():
     return name
 
 def sub_folder(name):
-    subname = data["title"] + date_time
+    subname = data["title"] + date_time + str(n)
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["parent_folder"])
@@ -211,7 +211,7 @@ def sub_folder(name):
         time.sleep(2)
 
         Logging("** Check sub-folder have create **")
-        subfolder = WebDriverWait(driver, 20).until(EC.presence_of_element_located(("//*[@id='project_setting_form']//li//a[contains(., '" + subname + "')]")))
+        subfolder = WebDriverWait(driver, 20).until(EC.presence_of_element_located(("//*[@id='project_setting_form']//li//a[contains(., '" + str(subname) + "')]")))
         if subfolder.is_displayed:
             Logging("=> Sub-Folder have create success")
             TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])
@@ -227,14 +227,14 @@ def sub_folder(name):
     
     return subname
 
-def delete_folder(name):
-    subname = data["title"] + date_time
+def delete_folder(name, subname):
+    # subname = data["title"] + date_time
     f = driver.find_element_by_xpath(data["co-manage"]["admin"]["status"]["manage_status"])
     driver.execute_script("arguments[0].scrollIntoView();",f) 
     time.sleep(5)
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
-        Logging("** Delete folder")
+        Logging("** Delete sub folder")
         Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
         Logging("- Select folder")
         Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + subname + "')]")
@@ -249,6 +249,7 @@ def delete_folder(name):
         pass
 
     try:
+        Logging("** Delete folder")
         Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
         time.sleep(2)
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_delete"])
@@ -260,6 +261,8 @@ def delete_folder(name):
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_folder"]["fail"])
         pass
+    
+    return name
 
 def create_project():
     name_project = data["title"] + date_time
@@ -410,8 +413,8 @@ def create_project():
 
     return name_project
 
-def move_project(name):
-    subname = data["title"] + date_time
+def move_project(name, subname):
+    # subname = data["title"] + date_time
     try:
         Logging("** Move project")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["move"])
@@ -468,7 +471,7 @@ def delete_project():
     time.sleep(5)
 
 def admin_execution():
-    name_project_edit = data["title"] + date_time
+    # name_project_edit = data["title"] + date_time
 
     Logging(" ")
     Logging("============ Test case settings admin co-manage ============")
@@ -516,7 +519,7 @@ def admin_execution():
 
             if bool(name) == True:
                 try:
-                    sub_folder(name)
+                    subname = sub_folder(name)
                 except:
                     Logging(">> Can't continue execution")
                     pass
@@ -547,7 +550,7 @@ def admin_execution():
             pass
 
         try:
-            delete_folder(name)
+            delete_folder(name, subname)
         except:
             Logging(">> Can't continue execution")
             pass
