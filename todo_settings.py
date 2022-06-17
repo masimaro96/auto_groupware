@@ -124,7 +124,7 @@ def setting_execution():
         TesCase_LogResult(**data["testcase_result"]["todo"]["add_folder"]["fail"])
 
 def categories():
-    categories_name = data["todo"]["manage_categories_name"] + str(n)
+    categories_name = data["title"] + date_time
 
     Commands.Wait20s_ClickElement(data["todo"]["manage_categories"])
     Commands.Wait20s_ClickElement(data["todo"]["manage_categories_add"])
@@ -148,7 +148,7 @@ def categories():
     return categories_name
 
 def edit_categories(categories_name):
-    categories_name_edit = data["todo"]["manage_categories_name_edit"] + str(m)
+    categories_name_edit = data["title"] + date_time
 
     Commands.Wait20s_ClickElement(data["todo"]["edit"])
     time.sleep(5)
@@ -171,7 +171,7 @@ def edit_categories(categories_name):
     return categories_name_edit
 
 def search():
-    search_key = data["todo"]["name_search"]
+    search_key = data["title"]
     try:
         Commands.Wait20s_EnterElement(data["todo"]["search"], search_key)
         Logging("=> Search manage categories")

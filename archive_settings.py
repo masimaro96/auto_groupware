@@ -574,7 +574,7 @@ def delete_private_folder(name_folder_private):
         pass
 
 def archive_manager():
-    name_manager = data["title"] + date_time
+    name_manager = ["archive"]["admin"]["ArchiveManager"]["Name"]
     ''' Add Archive Manager '''
     Logging(" ")
     PrintYellow("** Add Archive Manager")
