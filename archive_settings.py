@@ -30,17 +30,18 @@ def archive(domain_name):
 
     Logging(" ")
     PrintGreen('============ Menu Archive ============')
-    #settings_execution()
     try:
         admin_user = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["archive"]["admin"]["settings_admin"])))
         if admin_user.is_displayed():
             Logging("- Account admin")
+            #settings_execution()
             time.sleep(5)
             admin_user.click()
             Logging("- Admin archive")
             admin_execution()
     except WebDriverException:
         Logging("=> Account user") 
+        settings_execution()
     
 
 def settings_execution():
@@ -300,7 +301,7 @@ def add_folder_test():
 
     Logging("- Check domain have folder test")
     try:
-        folder_comapany =  WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='archive-tab-content']//div[contains(@class, 'col-lg-5')]//a[contains(.,'"+ str(NQuynh_folder) +"')]")))
+        folder_comapany =  WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='archive-tab-content']//div[contains(@class, 'col-lg-5')]//a[contains(.,'NQuynh_folder')]")))
         Logging("- Domain have folder test")
     except:
         Logging("- Domain don't have folder test")
@@ -545,7 +546,7 @@ def delete_public_folder(name_folder_admin):
         Logging(" ")
         PrintYellow("** Delete public folder")
         Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
-        time.sleep(3)
+        time.sleep(3)            
         Logging("- Select parent folder")
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_folder"])
         time.sleep(3)
@@ -675,7 +676,7 @@ def transfer_company_approval():
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_approval"]["approval"])
         Logging("- Transfer company - Approval")
         time.sleep(5)
-        Commands.Selectbox_ByValue(data["archive"]["admin"]["transfer"]["menu_approval"]["folders_option"], dept_key)
+        Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_approval"]["folders_option"], dept_key)
         Logging("- Select Dept to transfer")
         time.sleep(2)
 
@@ -686,7 +687,7 @@ def transfer_company_approval():
         time.sleep(2)
 
         ''' select language '''       
-        Commands.Selectbox_ByValue(data["archive"]["admin"]["transfer"]["menu_task"]["language_option"], language_key) 
+        Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_task"]["language_option"], language_key) 
         Logging("- Select language")
         time.sleep(2)
 
@@ -716,7 +717,9 @@ def transfer_company_board():
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_board"]["company_board"])
         Logging("- Transfer company - Company Board")
         time.sleep(2)
-        Commands.Selectbox_ByValue(data["archive"]["admin"]["transfer"]["menu_board"]["board_option"], board_key)          
+        
+
+        Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_board"]["board_option"], board_key)          
         Logging("- Select Company Board transfer")
 
         time.sleep(2)
@@ -728,7 +731,7 @@ def transfer_company_board():
         time.sleep(2)
 
         ''' select language '''       
-        Commands.Selectbox_ByValue(data["archive"]["admin"]["transfer"]["menu_task"]["language_option"], language_key) 
+        Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_task"]["language_option"], language_key) 
         Logging("- Select language")
         time.sleep(2)
 
@@ -751,7 +754,7 @@ def transfer_company_task():
         Logging(" ")
         PrintYellow("** Transfer compnay -> work dairy")
 
-        Commands.Selectbox_ByValue(data["archive"]["admin"]["transfer"]["menu_task"]["folders_option"], dept_key)     
+        Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_task"]["folders_option"], dept_key)     
         Logging("- Select Dept to transfer")
         time.sleep(2)
 
@@ -762,7 +765,7 @@ def transfer_company_task():
         time.sleep(2)
 
         ''' select language '''   
-        Commands.Selectbox_ByValue(data["archive"]["admin"]["transfer"]["menu_task"]["language_option"], language_key) 
+        Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_task"]["language_option"], language_key) 
         Logging("- Select language")
         time.sleep(2)
 
