@@ -1,5 +1,5 @@
 import re,json, openpyxl
-import time, random, testlink
+import time, random
 from datetime import datetime
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -48,11 +48,11 @@ if platform == "linux" or platform == "linux2":
     file_upload = local_path+"/Attachment/quynh1@meo.qa.hanbiro.net_2323_1608785342.837046.eml"
     file_zip_upload = local_path +"/Attachment/sent_mail.zip"
     execution_log = local_path + log_folder + "execution_log_" + str(objects.date_id) + ".txt"
-    fail_log = execution_log.replace("execution_log_", "fail_log_")
-    error_log = execution_log.replace("execution_log_", "error_log_")
+    # fail_log = execution_log.replace("execution_log_", "fail_log_")
+    # error_log = execution_log.replace("execution_log_", "error_log_")
     testcase_log = local_path + log_testcase + "NQuynh_TestcaseAllmenu_" + str(objects.date_id) + ".xlsx"
 else :
-    local_path = "E:\\Quynh\\auto-gw"
+    local_path = os.path.dirname(Path(__file__).absolute())
     json_file = local_path + "\\NQ_selenium.json"
     with open(json_file) as json_data_file:
         data = json.load(json_data_file)
@@ -62,8 +62,8 @@ else :
     file_upload = local_path +"/Attachment/quynh1@meo.qa.hanbiro.net_2323_1608785342.837046.eml"
     file_zip_upload = local_path +"/Attachment/sent_mail.zip"
     execution_log = local_path + log_folder + "execution_log_" + str(objects.date_id) + ".txt"
-    fail_log = execution_log.replace("execution_log_", "fail_log_")
-    error_log = execution_log.replace("execution_log_", "error_log_")
+    # fail_log = execution_log.replace("execution_log_", "fail_log_")
+    # error_log = execution_log.replace("execution_log_", "error_log_")
     testcase_log = local_path + log_testcase + "NQuynh_TestcaseAllmenu_" + str(objects.date_id) + ".xlsx"
 
 '''# create log file of fail test case
@@ -77,7 +77,7 @@ open(error_log, "x").close()'''
 
 # excel file
 
-logs = [execution_log, fail_log, error_log, testcase_log]
+logs = [testcase_log]
 for log in logs:
     if ".txt" in log:
         open(log, "x").close()
@@ -122,10 +122,12 @@ for log in logs:
 
         wb.save(log)
 
-def Logging(msg):
+def Logging(*messages):
+    msg = str(" ".join(list(messages))) 
     print(msg)
     log_msg = open(execution_log, "a")
-    log_msg.write(str(msg) + "\n")
+    written_msg = str(msg).encode(encoding="ascii",errors="ignore")
+    log_msg.write(str(written_msg) + "\n")
     log_msg.close()
 
 def TesCase_LogResult(menu, sub_menu, testcase, status, description, tester):
@@ -171,11 +173,11 @@ def ValidateFailResultAndSystem(fail_msg):
 
 
 
-''' Test Link '''
-TESTLINK_API_PYTHON_SERVER_URL = 'http://qa1.hanbiro.net/testlink/lib/api/xmlrpc/v1/xmlrpc.php'
-TESTLINK_API_PYTHON_DEVKEY = 'b52edc5fc95e4fc0149d47da85e05f18'
+# ''' Test Link '''
+# TESTLINK_API_PYTHON_SERVER_URL = 'http://qa1.hanbiro.net/testlink/lib/api/xmlrpc/v1/xmlrpc.php'
+# TESTLINK_API_PYTHON_DEVKEY = 'b52edc5fc95e4fc0149d47da85e05f18'
 
-tls = testlink.TestLinkHelper(TESTLINK_API_PYTHON_SERVER_URL, TESTLINK_API_PYTHON_DEVKEY).connect(testlink.TestlinkAPIClient)
+# tls = testlink.TestLinkHelper(TESTLINK_API_PYTHON_SERVER_URL, TESTLINK_API_PYTHON_DEVKEY).connect(testlink.TestlinkAPIClient)
 
 # def TestlinkResult_Pass(external_id):
 #     tls.reportTCResult(testcaseexternalid=external_id, testplanid=7378, buildname="V3.8.33", status='p', notes='Test Case [' + external_id + '] passed')

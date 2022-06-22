@@ -23,7 +23,7 @@ from NQ_login_function import driver, data, ValidateFailResultAndSystem, Logging
 
 n = random.randint(1,3000)
 m = random.randint(3000,6000)
-date_time = datetime.now().strftime("%Y/%m/%d, %H:%M:%S")
+date_time = datetime.now().strftime("%Y/%m/%d %H:%M:%S")
 
 def archive(domain_name):
     driver.get(domain_name + "archive/search/detail/")
@@ -236,7 +236,7 @@ def admin_execution():
             pass
 
         try:
-            delete_public_folder(name_folder_admin)
+            delete_public_folder(name_folder_admin, name_subfolder)
         except:
             PrintRed(">> Can't countinue execution")
             pass
@@ -364,7 +364,7 @@ def folder_public():
     return name_folder_admin
 
 def folder_private():
-    name_folder_private = data["title"] + date_time
+    name_folder_private = data["title"] + date_time + str("parent")
 
     ''' Create folder private -> Permission Disable '''
     try:
@@ -516,7 +516,7 @@ def add_authorized_sub_folder(name_subfolder):
         TesCase_LogResult(**data["testcase_result"]["archive"]["Dept_settings"]["fail"])
         pass
 
-def delete_sub_folder(name_subfolder):
+def delete_sub_folder(name_subfolder, name_folder_admin):
     ''' Delete sub folder '''
     try:
         Logging(" ")

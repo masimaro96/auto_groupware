@@ -37,24 +37,25 @@ def mail(domain_name):
     driver.get(domain_name + "mail/list/all/")
     Logging('============ Menu Mail ============')
     # ''' Access to menu '''
-    settings()
-    element_admin = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail"])
-    element_admin.location_once_scrolled_into_view
+    # settings()
+    # element_admin = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail"])
+    # element_admin.location_once_scrolled_into_view
 
-    Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["admin"])
-    time.sleep(2)
-    element_admin1 = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail_1"])
-    element_admin1.location_once_scrolled_into_view
-    time.sleep(2)
+    # Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["admin"])
+    # time.sleep(2)
+    # element_admin1 = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail_1"])
+    # element_admin1.location_once_scrolled_into_view
+    # time.sleep(2)
     try:
-        admin_settings_user = Waits.Wait20s_ElementLoaded(data["mail"]["click_menu"])
+        admin_settings_user = Waits.Wait20s_ElementLoaded(data["mail"]["admin_mail"])
         if admin_settings_user.is_displayed():
             Logging("- Account admin")
-            admin_settings_user.click()
+            settings()
             Logging("- Admin mail")
             admin_settings()
     except WebDriverException:
         Logging("=> Account user") 
+        settings()
   
 def settings():
     element = Waits.Wait20s_ElementLoaded(data["mail"]["pull_the_scroll_bar"])
@@ -663,7 +664,15 @@ def admin_settings():
     Logging(" ")
     Logging("** Open settings admin mail")
     Logging('============ Test case settings admin mail ============')
+    element_admin = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail"])
+    element_admin.location_once_scrolled_into_view
 
+    Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["admin"])
+    time.sleep(2)
+    element_admin1 = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail_1"])
+    element_admin1.location_once_scrolled_into_view
+    time.sleep(2)
+    Commands.Wait20s_ClickElement(data["mail"]["admin_mail"])
     Logging("=> Click settings admin")
     time.sleep(5)
 

@@ -3,7 +3,7 @@
 
     "user_name": "log-userid",
     "frameelement": "iframeLoginPassword",
-    "hanbiro_user_1": "automationtest",
+    "hanbiro_user_1": "automationtest1",
     "hanbiro_user_2": "quynh2",
     "hanbiro_password_1":"quynh1!!",
     "hanbiro_password":"automationtest1!",
@@ -147,6 +147,7 @@
     },
     
     "mail":{
+        "admin_mail": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(.,'Admin')]",
         "settings_mail": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li/a[contains(@ng-click,'showSetting();') and contains(.,' Settings')]",
         "folder_settings": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(.,'Folder')]",
         "pull_the_scroll_bar": "//a[contains(.,' Settings')]",
@@ -559,7 +560,7 @@
 
             "transfer":{
                 "transfer_company": "//span[contains(.,'Transfer to Company Archive')]",
-                "dept": "selenium",
+                "dept": "Selenium",
                 "language": "English",
                 "board": "Company Board",
                 
