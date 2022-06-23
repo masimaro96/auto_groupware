@@ -236,7 +236,7 @@ def admin_execution():
             pass
 
         try:
-            delete_public_folder(name_folder_admin, name_subfolder)
+            delete_public_folder(name_folder_admin)
         except:
             PrintRed(">> Can't countinue execution")
             pass
@@ -319,7 +319,7 @@ def add_folder_test():
     return folder_test
 
 def folder_public():
-    name_folder_admin = data["title"] + date_time
+    name_folder_admin = data["title"] + date_time + " " + str(n)
     ''' create folder public '''
     try:
         Logging(" ")
@@ -516,20 +516,20 @@ def add_authorized_sub_folder(name_subfolder):
         TesCase_LogResult(**data["testcase_result"]["archive"]["Dept_settings"]["fail"])
         pass
 
-def delete_sub_folder(name_subfolder, name_folder_admin):
+def delete_sub_folder(name_subfolder):
     ''' Delete sub folder '''
     try:
         Logging(" ")
         PrintYellow("** Delete sub folder")
-        Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_subfolder + "')]")
-        time.sleep(3)
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["check_all"])
         time.sleep(3)
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_all"])
         time.sleep(3)
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_ok"])
         time.sleep(3)
+        Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_subfolder + "')]")
         Logging("- Select sub folder")
+        time.sleep(3)
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_folder"])
         time.sleep(3)
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_OK"])
@@ -568,6 +568,7 @@ def delete_private_folder(name_folder_private):
         time.sleep(3)
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_OK"])
         Logging("=> Delete private folder")
+        Commands.Wait20s_ClickElement(data["archive"]["admin"]["company_archive"])
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder_privte"]["pass"])
         time.sleep(5)
     except:

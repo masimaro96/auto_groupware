@@ -50,7 +50,7 @@ def mail(domain_name):
         admin_settings_user = Waits.Wait20s_ElementLoaded(data["mail"]["admin_mail"])
         if admin_settings_user.is_displayed():
             Logging("- Account admin")
-            settings()
+            #settings()
             Logging("- Admin mail")
             admin_settings()
     except WebDriverException:
@@ -672,7 +672,6 @@ def admin_settings():
     element_admin1 = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail_1"])
     element_admin1.location_once_scrolled_into_view
     time.sleep(2)
-    Commands.Wait20s_ClickElement(data["mail"]["admin_mail"])
     Logging("=> Click settings admin")
     time.sleep(5)
 
@@ -1090,6 +1089,7 @@ def company_signature():
     
     Logging("- Total of view mode list: " + str(len(force_apply_list)))
     x = random.choice(force_apply_list)
+    Logging(x)
     time.sleep(2)
     Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["signature_company"]["force_list"] + "[contains(.,'" + str(x) + "')]")
     Logging("- Select Force apply")
@@ -1118,12 +1118,12 @@ def company_signature():
         text = driver.find_element_by_id("tinymce")
         text.clear()
         text.send_keys(input_text)
-        driver.switch_to.default_content()
+        Commands.SwitchToDefaultContent()
         time.sleep(2)
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
 
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["signature_company"]["button_save"])
-        Logging("- Add company signature")
+        Logging("- Add company signature - Forced-Appending")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_signature_company"]["pass"])
     elif str(x) == "Force replace":
         input_text = data["mail"]["settings_admin"]["signature_company"]["input_signature"]
@@ -1132,12 +1132,12 @@ def company_signature():
         text = driver.find_element_by_id("tinymce")
         text.clear()
         text.send_keys(input_text)
-        driver.switch_to.default_content()
+        Commands.SwitchToDefaultContent()
         time.sleep(2)
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
 
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["signature_company"]["button_save"])
-        Logging("- Add company signature")
+        Logging("- Add company signature - Force replace")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_signature_company"]["pass"])
     elif str(x) == "None":
         input_text = data["mail"]["settings_admin"]["signature_company"]["input_signature"]
@@ -1146,12 +1146,12 @@ def company_signature():
         text = driver.find_element_by_id("tinymce")
         text.clear()
         text.send_keys(input_text)
-        driver.switch_to.default_content()
+        Commands.SwitchToDefaultContent()
         time.sleep(2)
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
 
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["signature_company"]["button_save"])
-        Logging("- Add company signature")
+        Logging("- Add company signature - None")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_signature_company"]["pass"])
     else:
         Logging("- Can't add signature company")
