@@ -540,23 +540,23 @@ def delete_sub_folder(name_subfolder):
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_subfolder"]["fail"])
         pass
 
-def delete_public_folder(name_folder_admin):
-    try:
-        ''' Delete folder '''
-        Logging(" ")
-        PrintYellow("** Delete public folder")
-        Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
-        time.sleep(3)            
-        Logging("- Select parent folder")
-        Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_folder"])
-        time.sleep(3)
-        Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_OK"])
-        Logging("=> Delete public folder")
-        TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder_public"]["pass"])
-        time.sleep(5)
-    except:
-        TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder_public"]["fail"])
-        pass
+# def delete_public_folder(name_folder_admin):
+#     try:
+#         ''' Delete folder '''
+#         Logging(" ")
+#         PrintYellow("** Delete public folder")
+#         Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
+#         time.sleep(3)            
+#         Logging("- Select parent folder")
+#         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_folder"])
+#         time.sleep(3)
+#         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_OK"])
+#         Logging("=> Delete public folder")
+#         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder_public"]["pass"])
+#         time.sleep(5)
+#     except:
+#         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder_public"]["fail"])
+#         pass
 
 def delete_private_folder(name_folder_private):
     try:
@@ -576,12 +576,13 @@ def delete_private_folder(name_folder_private):
         pass
 
 def archive_manager():
-    name_manager = ["archive"]["admin"]["ArchiveManager"]["Name"]
+    name_manager = data["archive"]["admin"]["ArchiveManager"]["name"]
+
     ''' Add Archive Manager '''
     Logging(" ")
     PrintYellow("** Add Archive Manager")
-    Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["Company_Archive"])
-    time.sleep(5)
+    # Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["Company_Archive"])
+    # time.sleep(5)
     Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["Archive_Manager"])
     Logging("Access Archive_Manager")
     time.sleep(5)
