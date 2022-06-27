@@ -538,7 +538,7 @@ def admin_execution():
 
     if bool(name_project) == True:
         try:
-            move_project(name)
+            move_project(name, subname)
         except:
             Logging(">> Can't continue execution")
             pass

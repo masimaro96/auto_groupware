@@ -34,8 +34,8 @@
             "settings_calendar": "//a[contains(@data-ui-sref, 'ngw.calendar.setting') and contains(.,'Settings')]",
             "add_button": "//*[@id='calendar_setting_form']//a[contains(@ng-click, 'reset(true)') and contains(@data-action, 'add')]",
             "input_folder_name": "//*[@id='calendar_setting_form']//input[@name='folder_name']",
-            "name_folder": "meomeo ",
-            "name_folder_2": "meomeo_1",
+            "name_folder": "NQuynh_folder ",
+            "name_sub_folder": "NQuynh_sub_folder ",
             
             "share_folder": "//input[contains(@data-ng-checked, 'folder.share')]//following-sibling::span",
             "select_organization": "//*[contains(@data-ng-click, 'openTargetOrg()')]",
@@ -91,17 +91,17 @@
 
             "folder_list": "//a[contains(.,'Calendar folder list')]",
             "search": "//div[@id='asset-search']/input",
-            "search_input": "meo",
+            "search_input": "NQuynh",
             "select_list": "//div[@id='ngw.calendar.admin_folder']/div/div[2]/div/calendar-folder-react-list/div/div[2]/table/tbody/tr/td/label/span",
             
             "company_folder": "//a[contains(.,'Manage Company Folders')]",
             "folder_name": "//input[@id='folder_name']",
-            "name_input": "meo_company ",
+            "name_input": "NQuynh_company ",
             "save": "//*[@id='boot-strap-valid']//button[contains(@data-ng-click, 'saveFolder(folder)') and contains(., 'Save')]",
             "close_dialog": "//*[contains(@ng-click, 'close($event)')]//button[contains(., 'Close')]",
             "category_company": "//*[@id='boot-strap-valid']//a[contains(@data-target, '#add-category-form')]",
             "category_company_input": "//div[@id='add-category-form']/div[2]/input", 
-            "category_input": "test ",
+            "category_input": "Category  ",
             "add_category": "//*[@id='add-category-form']//button[contains(@ng-click, 'saveCategory()')]",
             
             "share": "//input[contains(@name, 'share')]//following-sibling::span[contains(., 'Shared')]",
@@ -480,6 +480,8 @@
             "settings_admin": "//*[@id='archive']//div[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li/a[contains(.,'Admin')]",
             "folder_name": "//*[@id='archive-tab-content']//a[contains(., 'NQuynh_folder')]",
             "name_folder_test": "NQuynh_folder",
+
+            "company_archive": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//li[contains(@data-section,'user_directory')]//a[contains(.,'Company Archive')]",
             
             "backup_folder":{
                 "menu": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//li//a[contains(@data-defaulthref, '#/archive/admin/common/backup/list/') and contains(., ' Backup Folder')]",
@@ -501,7 +503,7 @@
                 "Archive_Manager": "//span[contains(.,'Add Archive Manager')]",
                 "button_add": "//*[contains(@id, 'archive-tab-content')]//button[contains(@data-ng-click, 'goWrite()') and contains(@data-target, 'write')]",
                 "input_name": "//input[@id='whoUseSearchKey']",
-                "Name": "automationtest",
+                "name": "automationtest",
                 "select_user": "//*[@id='add-manager']//a[contains(text(),'Selenium/AutomationTest3')]",
                 "button_save": "//button[contains(@data-ng-click, 'processForm()') and contains(., 'Save')]",
                 "button_OK.": "//button[contains(@ng-click, 'cancel(false)') and contains(., 'Close')]",

@@ -50,7 +50,7 @@ def mail(domain_name):
         admin_settings_user = Waits.Wait20s_ElementLoaded(data["mail"]["admin_mail"])
         if admin_settings_user.is_displayed():
             Logging("- Account admin")
-            #settings()
+            settings()
             Logging("- Admin mail")
             admin_settings()
     except WebDriverException:

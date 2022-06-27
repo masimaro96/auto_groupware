@@ -49,7 +49,7 @@ def calendar(domain_name):
     try:
         page_title = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//list-view//h1/span")))
         if page_title.text == 'Custom Calendar':
-            setting_user()
+            # setting_user()
             try:
                 admin_user = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["Admin"]["calendar_admin"])))
                 if admin_user.is_displayed():
@@ -58,7 +58,8 @@ def calendar(domain_name):
                     PrintGreen("- Admin calendar")
                     admin_setting()
             except WebDriverException:
-                PrintGreen("=> Account user")    
+                PrintGreen("=> Account user")
+                setting_user()    
         else:
             Logging("- Calendar: Category type -> Change to folder type")
             time.sleep(5)
@@ -77,8 +78,10 @@ def calendar(domain_name):
                         admin_setting()
                 except WebDriverException:
                     PrintGreen("=> Account user")
+                    setting_user()
             except WebDriverException:
-                PrintGreen("=> Account user") 
+                PrintGreen("=> Account user")
+                setting_user() 
 
     except WebDriverException:
         PrintRed("=> Fail")   
@@ -206,10 +209,11 @@ def folder_mycalendar():
         TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder_setting"]["fail"])
         pass
     time.sleep(5)
+    
     return namefolder
 
 def sub_folder_mycalendar(namefolder):
-    name_subfolder = data["calendar"]["settings"]["name_folder_2"] + str(n)
+    name_subfolder = data["calendar"]["settings"]["name_sub_folder"] + str(n)
     try:
         Logging(" ")
         Logging("** Create sub folder of main folder have create")
@@ -378,8 +382,8 @@ def setting_view():
     WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["settings"]["button_save"][3]))).click()
 
 def folder_company():
-    # name = data["calendar"]["Admin"]["name_input"] + str(n)
-    name = data["title"] + date_time
+    name = data["calendar"]["Admin"]["name_input"] + str(n)
+    # name = data["title"] + date_time
     ''' Go to manage company folders '''
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["company_folder"])
     Logging(" ")
@@ -406,6 +410,7 @@ def folder_company():
         a = random.choice(list_color_calendar)
         filter_color = driver.find_element_by_xpath("//*[@id='boot-strap-valid']//a[contains(@data-toggle, 'dropdown')]/following-sibling::ul/li[" + str(a) + "]")
         filter_color.click()
+        Logging("- Select color")
     except:
         pass
 

@@ -230,16 +230,16 @@ def admin_execution():
             pass
 
         try:
-            delete_sub_folder(name_subfolder)
+            delete_public_folder(name_subfolder)
         except:
             PrintRed(">> Can't countinue execution")
             pass
 
-        try:
-            delete_public_folder(name_folder_admin)
-        except:
-            PrintRed(">> Can't countinue execution")
-            pass
+        # try:
+        #     delete_public_folder(name_folder_admin)
+        # except:
+        #     PrintRed(">> Can't countinue execution")
+        #     pass
     else:
         PrintRed("=> Create folder public fail")
 
@@ -415,7 +415,7 @@ def folder_private():
     return name_folder_private
     
 def sub_folder(name_folder_admin):
-    name_subfolder = data["title"] + date_time
+    name_subfolder = data["title"] + str(" sub folder")
 
     ''' Create sub-folder '''
     try:
@@ -516,7 +516,7 @@ def add_authorized_sub_folder(name_subfolder):
         TesCase_LogResult(**data["testcase_result"]["archive"]["Dept_settings"]["fail"])
         pass
 
-def delete_sub_folder(name_subfolder):
+def delete_public_folder(name_subfolder):
     ''' Delete sub folder '''
     try:
         Logging(" ")
