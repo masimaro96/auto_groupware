@@ -34,7 +34,7 @@ def archive(domain_name):
         admin_user = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["archive"]["admin"]["settings_admin"])))
         if admin_user.is_displayed():
             Logging("- Account admin")
-            #settings_execution()
+            settings_execution()
             time.sleep(5)
             admin_user.click()
             Logging("- Admin archive")

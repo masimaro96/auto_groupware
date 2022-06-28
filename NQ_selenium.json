@@ -639,11 +639,11 @@
             "folder":{
                 "manage_folders": "//span[contains(.,'Manage Folders')]",
                 "input": "//input[@name='folder_name']",
-                "name_folder": "selenium test ",
+                "name_folder": "NQuynh_folder",
                 "button_save": "//button[contains(@data-ng-click, 'saveFolder($event)') and contains(., 'Save')]",
 
                 "parent_folder": "//*[contains(@ng-click, 'toggleDropDown($event)')]//following-sibling::span[contains(.,'Project')]",
-                "name_subfolder": "selenium subfolder ",
+                "name_subfolder": "NQuynh_subfolder ",
                 "button_delete": "//button[contains(@data-ng-click, 'deleteFolder($event)') and contains(., 'Delete')]",
                 "button_del": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"
             },
@@ -748,10 +748,6 @@
             "project_name_edit": "Project edit ",
             "button_confirm": "//button[contains(., 'Confirm')]",
             "button_add_sub": "//*[@id='wrap-content-project']//li[2]//button",
-            "": "",
-            "": "",
-            "": "",
-            "": "",
             "": ""
         }       
     },

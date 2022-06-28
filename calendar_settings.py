@@ -49,10 +49,10 @@ def calendar(domain_name):
     try:
         page_title = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//list-view//h1/span")))
         if page_title.text == 'Custom Calendar':
-            # setting_user()
             try:
                 admin_user = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["Admin"]["calendar_admin"])))
                 if admin_user.is_displayed():
+                    setting_user()
                     PrintGreen("- Account admin")
                     admin_user.click()
                     PrintGreen("- Admin calendar")

@@ -164,7 +164,7 @@ def delete_status(text_status):
         pass
 
 def manage_folders():
-    name = data["title"] + date_time
+    name = data["co-manage"]["admin"]["folder"]["name_folder"]
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
@@ -193,7 +193,7 @@ def manage_folders():
     return name
 
 def sub_folder(name):
-    subname = data["title"] + date_time + str(n)
+    subname = data["co-manage"]["admin"]["folder"]["name_subfolder"]
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["parent_folder"])
@@ -208,10 +208,11 @@ def sub_folder(name):
 
         ''' Check sub-folder have create '''
         Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
+        Logging("- Select parent folder")
         time.sleep(2)
 
         Logging("** Check sub-folder have create **")
-        subfolder = WebDriverWait(driver, 20).until(EC.presence_of_element_located(("//*[@id='project_setting_form']//li//a[contains(., '" + str(subname) + "')]")))
+        subfolder = Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//span//a[contains(., 'NQuynh_subfolder')]")
         if subfolder.is_displayed:
             Logging("=> Sub-Folder have create success")
             TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])
@@ -227,7 +228,7 @@ def sub_folder(name):
     
     return subname
 
-def delete_folder(name, subname):
+def delete_subfolder(subname):
     # subname = data["title"] + date_time
     f = driver.find_element_by_xpath(data["co-manage"]["admin"]["status"]["manage_status"])
     driver.execute_script("arguments[0].scrollIntoView();",f) 
@@ -235,9 +236,9 @@ def delete_folder(name, subname):
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
         Logging("** Delete sub folder")
-        Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
-        Logging("- Select folder")
-        Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + subname + "')]")
+        # Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
+        # Logging("- Select folder")
+        Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//li//span//a[contains(., 'NQuynh_subfolder')]")
         Logging("- Select sub folder")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_delete"])
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_del"])
@@ -248,6 +249,7 @@ def delete_folder(name, subname):
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_subfolder"]["fail"])
         pass
 
+def delete_folder(name):
     try:
         Logging("** Delete folder")
         Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
@@ -510,6 +512,9 @@ def admin_execution():
     
     ''' Access manage folders -> input name random -> creare folder'''
     try:
+        f = driver.find_element_by_xpath(data["co-manage"]["admin"]["status"]["manage_status"])
+        driver.execute_script("arguments[0].scrollIntoView();",f) 
+        
         manage_folder = Waits.Wait20s_ElementLoaded(data["co-manage"]["admin"]["folder"]["manage_folders"])
         if manage_folder.is_displayed():
             try:
@@ -520,6 +525,12 @@ def admin_execution():
             if bool(name) == True:
                 try:
                     subname = sub_folder(name)
+                except:
+                    Logging(">> Can't continue execution")
+                    pass
+
+                try:
+                    delete_subfolder(subname)
                 except:
                     Logging(">> Can't continue execution")
                     pass

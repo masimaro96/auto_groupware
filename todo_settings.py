@@ -36,17 +36,18 @@ def todo(domain_name):
     ''' Access to page To-Do '''
     PrintGreen("- Access menu")
     time.sleep(5)
-    setting_execution()
     try:
         time.sleep(5)
         admin = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["todo"]["admin"])))
         if admin.is_displayed():
+            setting_execution()
             PrintGreen("- Account admin")
             admin.click()
             time.sleep(3)
             admin_execution()
     except:
         PrintGreen("=> Account user")
+        setting_execution()
 
 def add_folder():
     name_folder = data["title"] + date_time
