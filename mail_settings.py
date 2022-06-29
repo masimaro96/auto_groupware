@@ -51,7 +51,8 @@ def mail(domain_name):
         if admin_settings_user.is_displayed():
             Logging("- Account admin")
             settings()
-            Logging("- Admin mail")
+            Logging(" ")
+            Logging("----- Admin mail -----")
             admin_settings()
     except WebDriverException:
         Logging("=> Account user") 
@@ -508,14 +509,15 @@ def add_folder():
     except WebDriverException:
         pass
     
-    # try:
-    #     Logging("** Check folder have create")
-    #     check_folder = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_setting_form']//li//a[contains(., '" + str(name_folders) + "')]")))
-    #     Logging("=> Create folders success")
-    #     TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["pass"])
-    # except:
-    #     Logging("=> Create folders fail")
-    #     TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["fail"])
+    try:
+        Logging("** Check folder have create")
+        check_folder = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_setting_form']//li//a[contains(., '" + str(name_folders) + "')]")))
+        if check_folder.is_displayed():
+            Logging("=> Create folders success")
+            TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["pass"])
+    except:
+        Logging("=> Create folders fail")
+        TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["fail"])
 
     return name_folders
 
@@ -661,9 +663,9 @@ def approval_total():
     return list_counter_number
 
 def admin_settings():
-    Logging(" ")
     Logging("** Open settings admin mail")
     Logging('============ Test case settings admin mail ============')
+    Commands.Wait20s_ClickElement(data["mail"]["settings_mail"])
     element_admin = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail"])
     element_admin.location_once_scrolled_into_view
 

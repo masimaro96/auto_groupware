@@ -35,7 +35,7 @@
             "add_button": "//*[@id='calendar_setting_form']//a[contains(@ng-click, 'reset(true)') and contains(@data-action, 'add')]",
             "input_folder_name": "//*[@id='calendar_setting_form']//input[@name='folder_name']",
             "name_folder": "NQuynh_folder ",
-            "name_sub_folder": "NQuynh_sub_folder ",
+            "name_sub_folder": "Sub_folder ",
             
             "share_folder": "//input[contains(@data-ng-checked, 'folder.share')]//following-sibling::span",
             "select_organization": "//*[contains(@data-ng-click, 'openTargetOrg()')]",
@@ -639,11 +639,11 @@
             "folder":{
                 "manage_folders": "//span[contains(.,'Manage Folders')]",
                 "input": "//input[@name='folder_name']",
-                "name_folder": "NQuynh_folder",
+                "name_folder": "NQuynh_folder ",
                 "button_save": "//button[contains(@data-ng-click, 'saveFolder($event)') and contains(., 'Save')]",
 
                 "parent_folder": "//*[contains(@ng-click, 'toggleDropDown($event)')]//following-sibling::span[contains(.,'Project')]",
-                "name_subfolder": "NQuynh_subfolder ",
+                "name_subfolder": "Subfolder ",
                 "button_delete": "//button[contains(@data-ng-click, 'deleteFolder($event)') and contains(., 'Delete')]",
                 "button_del": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"
             },

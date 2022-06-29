@@ -164,7 +164,7 @@ def delete_status(text_status):
         pass
 
 def manage_folders():
-    name = data["co-manage"]["admin"]["folder"]["name_folder"]
+    name = data["co-manage"]["admin"]["folder"]["name_folder"] + str(n)
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
@@ -178,7 +178,7 @@ def manage_folders():
         ''' Check folder have create '''
         Logging("** Check folder have create **")
         manage_folders = Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
-        if manage_folders.is_displayed:
+        if manage_folders.is_displayed():
             Logging("=> Folder have create success")
             TesCase_LogResult(**data["testcase_result"]["comanage"]["folder"]["pass"])
         else:
@@ -193,7 +193,7 @@ def manage_folders():
     return name
 
 def sub_folder(name):
-    subname = data["co-manage"]["admin"]["folder"]["name_subfolder"]
+    subname = data["co-manage"]["admin"]["folder"]["name_subfolder"] + str(n)
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["parent_folder"])
@@ -212,8 +212,8 @@ def sub_folder(name):
         time.sleep(2)
 
         Logging("** Check sub-folder have create **")
-        subfolder = Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//span//a[contains(., 'NQuynh_subfolder')]")
-        if subfolder.is_displayed:
+        subfolder = Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//span//a[contains(., '" + subname + "')]")
+        if subfolder.is_displayed():
             Logging("=> Sub-Folder have create success")
             TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])
         else:
@@ -238,7 +238,7 @@ def delete_subfolder(subname):
         Logging("** Delete sub folder")
         # Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
         # Logging("- Select folder")
-        Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//li//span//a[contains(., 'NQuynh_subfolder')]")
+        Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//li//span//a[contains(., '" + subname + "')]")
         Logging("- Select sub folder")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_delete"])
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_del"])
@@ -415,7 +415,7 @@ def create_project():
 
     return name_project
 
-def move_project(name, subname):
+def move_project(name):
     # subname = data["title"] + date_time
     try:
         Logging("** Move project")
@@ -423,9 +423,6 @@ def move_project(name, subname):
         Logging("- Select move project")
         time.sleep(3)
         Commands.Wait20s_ClickElement("//li//span//a[contains(., '" + name + "')]")
-        time.sleep(3)
-        Commands.Wait20s_ClickElement("//li//span//a[contains(., '" + subname + "')]")
-        Logging("- Select folder to move project")
         time.sleep(3)
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_move"])
         Logging("=> Move project success")
@@ -549,7 +546,7 @@ def admin_execution():
 
     if bool(name_project) == True:
         try:
-            move_project(name, subname)
+            move_project(name)
         except:
             Logging(">> Can't continue execution")
             pass
@@ -561,7 +558,7 @@ def admin_execution():
             pass
 
         try:
-            delete_folder(name, subname)
+            delete_folder(name)
         except:
             Logging(">> Can't continue execution")
             pass

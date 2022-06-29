@@ -183,7 +183,7 @@ def folder_mycalendar():
         pass
 
     try:
-        folder_exist = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, "//*[@id='calendar_setting_form']//span[contains(., 'A folder with the same name already exists. Force apply?')]")))
+        folder_exist = Waits.Wait20s_ElementLoaded("//*[@id='calendar_setting_form']//span[contains(., 'A folder with the same name already exists. Force apply?')]")
         if folder_exist.is_displayed():
             Logging("A folder with the same name already exists")
             Commands.Wait20s_Clear_InputElement(data["calendar"]["settings"]["input_folder_name"], namefolder)
@@ -196,7 +196,7 @@ def folder_mycalendar():
     try:
         ''' Check if folder have been create '''
         Logging("** Check if folder have been create **")
-        folder_mycalendar = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='calendar_setting_form']//span//a[contains(., '" + namefolder + "')]")))
+        folder_mycalendar = Waits.Wait20s_ElementLoaded("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(namefolder) + "')]")
         if folder_mycalendar.is_displayed():
             Logging("=> Create folder success")
             TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder_setting"]["pass"])
@@ -236,8 +236,8 @@ def sub_folder_mycalendar(namefolder):
         Logging("** Check if sub folder have been create **")
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//span//a[contains(., '" + namefolder + "')]")
         time.sleep(3)              
-        subfolder_mycalendar = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='calendar_setting_form']//span//a[contains(., '" + name_subfolder + "')]")))
-        if subfolder_mycalendar.is_displayed():
+        subfolder = Waits.Wait20s_ElementLoaded("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(name_subfolder) + "')]")
+        if subfolder.is_displayed():
             Logging("=> Create sub folder success => Pass")
             TesCase_LogResult(**data["testcase_result"]["calendar"]["add_subfolder_setting"]["pass"])
         else:
@@ -260,7 +260,7 @@ def edit_sub_folder(name_subfolder):
     try:
         Logging(" ")
         Logging("** Edit sub folder **")
-        Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//span//a[contains(., '" + name_subfolder + "')]")
+        Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(name_subfolder) + "')]")
         Logging("- Select sub folder to edit")
         time.sleep(2)
 
@@ -280,7 +280,7 @@ def delete_sub_folder(name_subfolder):
         ''' Delete sub folder '''
         Logging(" ")
         Logging("** Delete sub folder **")
-        Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//li//a[contains(., '" + name_subfolder + "')]")
+        Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//li//a[contains(., '" + str(name_subfolder) + "')]")
         Logging("- Select sub folder")
         time.sleep(2)
         delete()
