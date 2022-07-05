@@ -236,19 +236,13 @@ def sub_folder_mycalendar(namefolder):
         Logging("** Check if sub folder have been create **")
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//span//a[contains(., '" + namefolder + "')]")
         time.sleep(3)              
-        subfolder = Waits.Wait20s_ElementLoaded("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(name_subfolder) + "')]")
-        if subfolder.is_displayed():
-            Logging("=> Create sub folder success => Pass")
-            TesCase_LogResult(**data["testcase_result"]["calendar"]["add_subfolder_setting"]["pass"])
-        else:
-            Logging("=> Create sub folder fail => Fail")
-            TesCase_LogResult(**data["testcase_result"]["calendar"]["add_subfolder_setting"]["fail"])
-            ValidateFailResultAndSystem("<div>[Calendar]Create sub folder fail </div>")
-        time.sleep(5)
+        Waits.Wait20s_ElementLoaded("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(name_subfolder) + "')]")
+        Logging("=> Create sub folder success => Pass")
+        TesCase_LogResult(**data["testcase_result"]["calendar"]["add_subfolder_setting"]["pass"])
     except:
         Logging("=> Create sub folder fail => Fail")
         TesCase_LogResult(**data["testcase_result"]["calendar"]["add_subfolder_setting"]["fail"])
-        pass
+
     return name_subfolder
 
 def edit_sub_folder(name_subfolder):
@@ -271,9 +265,8 @@ def edit_sub_folder(name_subfolder):
 
         TesCase_LogResult(**data["testcase_result"]["calendar"]["edit_subfolder_setting"]["pass"])
     except:
-        TesCase_LogResult(**data["testcase_result"]["calendar"]["edit_subfolder_setting"]["fail"])
-        pass       
-    time.sleep(5)
+        TesCase_LogResult(**data["testcase_result"]["calendar"]["edit_subfolder_setting"]["fail"])      
+   
 
 def delete_sub_folder(name_subfolder):
     try:

@@ -372,15 +372,9 @@ def add_block_address():
         time.sleep(5)
 
         Logging("** Check add block addresses success")
-        block_name = Waits.Wait20s_ElementLoaded("//*[@id='ngw.mail.blockaddress']//td[contains(., '" + addresses_block + "')]")
-        if block_name.text == 'quynh2@qa1.hanbiro.net':
-            Logging("=> Add Block success")
-            TesCase_LogResult(**data["testcase_result"]["mail"]["add_block"]["pass"])
-            #TestlinkResult_Pass("WUI-87")
-        else:
-            Logging("=> Block addresses fail")
-            TesCase_LogResult(**data["testcase_result"]["mail"]["add_block"]["fail"])
-            ValidateFailResultAndSystem("<div>Add block addresses fail </div>")
+        Waits.Wait20s_ElementLoaded("//*[@id='ngw.mail.blockaddress']//td[contains(., '" + addresses_block + "')]")
+        Logging("=> Add Block success")
+        TesCase_LogResult(**data["testcase_result"]["mail"]["add_block"]["pass"])
         time.sleep(5)
     except WebDriverException:
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_block"]["fail"])
@@ -434,18 +428,11 @@ def add_while_list():
     
     try:
         Logging("** Check add while list success")
-        check_whilelist = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.mail.whitelist']//td[contains(., '" + whilelist + "')]")))
-        if check_whilelist.is_displayed():
-            Logging("=> Add while list success")
-            TesCase_LogResult(**data["testcase_result"]["mail"]["add_whilelist"]["pass"])
-        else:
-            Logging("=> Add while list fail")
-            TesCase_LogResult(**data["testcase_result"]["mail"]["add_whilelist"]["fail"])
-            ValidateFailResultAndSystem("<div>[Mail]Add while list fail </div>")
-        time.sleep(5)
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.mail.whitelist']//td[contains(., '" + whilelist + "')]")))
+        Logging("=> Add while list success")
+        TesCase_LogResult(**data["testcase_result"]["mail"]["add_whilelist"]["pass"])
     except WebDriverException:
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_whilelist"]["fail"])
-        pass
     return whilelist
 
 def delete_while_list(whilelist):
@@ -511,10 +498,9 @@ def add_folder():
     
     try:
         Logging("** Check folder have create")
-        check_folder = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_setting_form']//li//a[contains(., '" + str(name_folders) + "')]")))
-        if check_folder.is_displayed():
-            Logging("=> Create folders success")
-            TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["pass"])
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_setting_form']//li//a[contains(., '" + str(name_folders) + "')]")))
+        Logging("=> Create folders success")
+        TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["pass"])
     except:
         Logging("=> Create folders fail")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["fail"])
@@ -737,21 +723,14 @@ def add_alias_domain():
     
     try:
         Logging("** Check alias domain have add")
-        name_domain = Waits.Wait20s_ElementLoaded("//*[@id='ngw.mail.adminalias_domain']//table[contains(., '" + aliasdomain_name + "')]")
-        if name_domain.is_displayed:
-            Logging("=> Add alias domain success")
-            TesCase_LogResult(**data["testcase_result"]["mail"]["alias_domain"]["pass"])
-            #TestlinkResult_Pass("WUI-130")
-        else:
-            Logging("=> Add alias domain fail")
-            TesCase_LogResult(**data["testcase_result"]["mail"]["alias_domain"]["fail"])
-            #TestlinkResult_Fail("WUI-130")
-            ValidateFailResultAndSystem("<div>[Mail]Add alias domain fail </div>")
+        Waits.Wait20s_ElementLoaded("//*[@id='ngw.mail.adminalias_domain']//table[contains(., '" + aliasdomain_name + "')]")
+        Logging("=> Add alias domain success")
+        TesCase_LogResult(**data["testcase_result"]["mail"]["alias_domain"]["pass"])
         time.sleep(5) 
     except:
         Logging("=> Add alias domain fail")
         TesCase_LogResult(**data["testcase_result"]["mail"]["alias_domain"]["fail"])
-        pass
+
     return aliasdomain_name
 
 def delete_alias_domain(aliasdomain_name):
@@ -1031,7 +1010,7 @@ def send_limit():
                 TesCase_LogResult(**data["testcase_result"]["mail"]["del_domain_limt"]["pass"])
             except:
                 TesCase_LogResult(**data["testcase_result"]["mail"]["del_domain_limt"]["fail"])
-                pass
+                
             
             Logging("** Create file limit")
             Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["file"])
@@ -1042,15 +1021,14 @@ def send_limit():
             Logging("=> File limit have create")
             time.sleep(5)
 
-            Logging("** Check file limit create success")
-            file_limit = Waits.Wait20s_ElementLoaded("//*[@id='file-limit']//td[contains(., '" + text_file + "')]")
-            if file_limit.is_displayed():
+            try:
+                Logging("** Check file limit create success")
+                Waits.Wait20s_ElementLoaded("//*[@id='file-limit']//td[contains(., '" + text_file + "')]")
                 Logging("=> Create file limit success")
                 TesCase_LogResult(**data["testcase_result"]["mail"]["add_file_limt"]["pass"])
-            else:
+            except:
                 Logging("=> Create file limit fail")
                 TesCase_LogResult(**data["testcase_result"]["mail"]["add_file_limt"]["fail"])
-                ValidateFailResultAndSystem("<div>[Mail]Create file limit fail </div>")
             time.sleep(5)
 
             try:
@@ -1064,7 +1042,7 @@ def send_limit():
                 TesCase_LogResult(**data["testcase_result"]["mail"]["del_file_limit"]["pass"])
             except:
                 TesCase_LogResult(**data["testcase_result"]["mail"]["del_file_limit"]["fail"])
-                pass
+               
         else:
             print("=> Domain don't have send limit")
     except:
