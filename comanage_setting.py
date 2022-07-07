@@ -100,7 +100,6 @@ def delete_worktype(text_worktype):
         time.sleep(5)
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_work_type"]["fail"])
-        pass
 
 def status_manage():
     text_status = data["title"] + date_time
@@ -133,19 +132,12 @@ def status_manage():
     
     try:
         Logging("** Check status have been create")
-        status = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.projectnew.adminStatus']//table//tr[contains(., '" + text_status + "')]")))
-        if status.is_displayed():
-            Logging("=> Status have been create")
-            TesCase_LogResult(**data["testcase_result"]["comanage"]["status"]["pass"])
-        else:
-            Logging("=> Status have been create fail")
-            TesCase_LogResult(**data["testcase_result"]["comanage"]["status"]["fail"])
-            ValidateFailResultAndSystem("<div>[Comanage]Status have been create fail </div>")
-        time.sleep(5)
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.projectnew.adminStatus']//table//tr[contains(., '" + text_status + "')]")))
+        Logging("=> Status have been create")
+        TesCase_LogResult(**data["testcase_result"]["comanage"]["status"]["pass"])
     except:
         Logging("=> Status have been create fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["status"]["fail"])
-        pass
 
     return text_status
 
@@ -161,7 +153,6 @@ def delete_status(text_status):
         time.sleep(5)
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_status"]["fail"])
-        pass
 
 def manage_folders():
     name = data["co-manage"]["admin"]["folder"]["name_folder"] + str(n)
@@ -177,19 +168,13 @@ def manage_folders():
 
         ''' Check folder have create '''
         Logging("** Check folder have create **")
-        manage_folders = Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
-        if manage_folders.is_displayed():
-            Logging("=> Folder have create success")
-            TesCase_LogResult(**data["testcase_result"]["comanage"]["folder"]["pass"])
-        else:
-            Logging("=> Folder have create fail")
-            TesCase_LogResult(**data["testcase_result"]["comanage"]["folder"]["fail"])
-            ValidateFailResultAndSystem("<div>[Comanage]Folder have create fail </div>")
-        time.sleep(5)
+        Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
+        Logging("=> Folder have create success")
+        TesCase_LogResult(**data["testcase_result"]["comanage"]["folder"]["pass"])
     except:
         Logging("=> Folder have create fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["folder"]["fail"])
-        pass
+
     return name
 
 def sub_folder(name):
@@ -212,19 +197,13 @@ def sub_folder(name):
         time.sleep(2)
 
         Logging("** Check sub-folder have create **")
-        subfolder = Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//span//a[contains(., '" + subname + "')]")
-        if subfolder.is_displayed():
-            Logging("=> Sub-Folder have create success")
-            TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])
-        else:
-            Logging("=> Sub-Folder have create fail")
-            TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["fail"])
-            ValidateFailResultAndSystem("<div>[Comanage]Sub-Folder have create fail </div>")
+        Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//span//a[contains(., '" + subname + "')]")
+        Logging("=> Sub-Folder have create success")
+        TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])
         time.sleep(5)
     except:
         Logging("=> Sub-Folder have create fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["fail"])
-        pass
     
     return subname
 
@@ -247,7 +226,6 @@ def delete_subfolder(subname):
         time.sleep(5)
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_subfolder"]["fail"])
-        pass
 
 def delete_folder(name):
     try:
@@ -262,7 +240,6 @@ def delete_folder(name):
         time.sleep(5)
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_folder"]["fail"])
-        pass
     
     return name
 
@@ -297,12 +274,12 @@ def create_project():
         pass
 
     ''' Check project template '''
-    Logging("** Check project template")
-    project_type = driver.find_element_by_xpath("//*[@id='ngw.projectnew.project']//strong[contains(.,'Kanban')]")
-    if project_type.text == 'Kanban':
+    try:
+        Logging("** Check project template")
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.projectnew.project']//strong[contains(.,'Kanban')]")))
         Logging("=> Create kanban project success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["project"]["pass"])
-    else:
+    except:
         Logging("=> Create kanban project fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["project"]["fail"])
     time.sleep(5)
@@ -372,7 +349,6 @@ def create_project():
             time.sleep(3)
     except:
         Logging("=> Can't select Participant(s)")
-        pass
     
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_cc"])
@@ -411,7 +387,6 @@ def create_project():
         time.sleep(5)
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["change_status"]["fail"])
-        pass
 
     return name_project
 
@@ -430,7 +405,6 @@ def move_project(name):
         time.sleep(5)
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["move_project"]["fail"])
-        pass
 
 def delete_project():
     password_key = data["co-manage"]["admin"]["project_list"]["pass"]
@@ -448,7 +422,6 @@ def delete_project():
                 time.sleep(5)
             except:
                 TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_project"]["fail"])
-                pass
         else:
             try:
                 Logging("** Delete project")
@@ -464,7 +437,6 @@ def delete_project():
                 time.sleep(5)
             except:
                 TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_project"]["fail"])
-                pass
     except:
         pass
     time.sleep(5)
@@ -486,7 +458,6 @@ def admin_execution():
             delete_status(text_status)
         except:
             Logging(">> Can't continue execution")
-            pass
     else:
         Logging("=> Status have been create fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["status"]["fail"])
@@ -502,7 +473,6 @@ def admin_execution():
             delete_worktype(text_worktype)
         except:
             Logging(">> Can't continue execution")
-            pass
     else:
         Logging("=> Work type have been create fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["work_type"]["fail"])
@@ -524,13 +494,11 @@ def admin_execution():
                     subname = sub_folder(name)
                 except:
                     Logging(">> Can't continue execution")
-                    pass
 
                 try:
                     delete_subfolder(subname)
                 except:
                     Logging(">> Can't continue execution")
-                    pass
             else:
                 Logging("=> Folder have create fail")
         else:
@@ -549,19 +517,16 @@ def admin_execution():
             move_project(name)
         except:
             Logging(">> Can't continue execution")
-            pass
 
         try:
             delete_project()
         except:
             Logging(">> Can't continue execution")
-            pass
 
         try:
             delete_folder(name)
         except:
             Logging(">> Can't continue execution")
-            pass
     else:
         Logging("=> Can't move folder")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["folder"]["fail"])

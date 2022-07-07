@@ -230,7 +230,7 @@ def admin_execution():
             pass
 
         try:
-            delete_public_folder(name_subfolder)
+            delete_public_folder(name_folder_admin)
         except:
             PrintRed(">> Can't countinue execution")
             pass
@@ -516,7 +516,7 @@ def add_authorized_sub_folder(name_subfolder):
         TesCase_LogResult(**data["testcase_result"]["archive"]["Dept_settings"]["fail"])
         pass
 
-def delete_public_folder(name_subfolder):
+def delete_public_folder(name_folder_admin):
     ''' Delete sub folder '''
     try:
         Logging(" ")
@@ -527,7 +527,7 @@ def delete_public_folder(name_subfolder):
         time.sleep(3)
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_ok"])
         time.sleep(3)
-        Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_subfolder + "')]")
+        Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
         Logging("- Select sub folder")
         time.sleep(3)
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_folder"])
