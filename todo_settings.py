@@ -35,15 +35,15 @@ def todo(domain_name):
 
     ''' Access to page To-Do '''
     PrintGreen("- Access menu")
-    time.sleep(5)
+    
     try:
-        time.sleep(5)
+        
         admin = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.XPATH, data["todo"]["admin"])))
         if admin.is_displayed():
             setting_execution()
             PrintGreen("- Account admin")
             admin.click()
-            time.sleep(3)
+            
             admin_execution()
     except:
         PrintGreen("=> Account user")
@@ -55,30 +55,27 @@ def add_folder():
     PrintYellow("-----Add folder------")
     Commands.Wait20s_ClickElement(data["todo"]["add_button"])
     Logging("- Select button add folder")
-    time.sleep(5)
+    
     Commands.Wait20s_InputElement(data["todo"]["add_folder_name"], name_folder)
     Logging("- Input name folder")
-    time.sleep(5)
+    
 
     ''' Check button save have work '''
     try:
         Commands.Wait20s_ClickElement(data["todo"]["save_button"])
-        time.sleep(5)
+        
         Logging("=> Save success")
 
         ''' Check folder to-do have create '''
         PrintYellow("** Check folder have save yet!!")
-        folder_todo = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.todo.list.setting']//span//a[contains(., '" + name_folder + "')]")))
-        if folder_todo.is_displayed():
-            Logging("=> Folder have add successfully")
-            TesCase_LogResult(**data["testcase_result"]["todo"]["add_folder"]["pass"])
-        else:
-            PrintRed("=> Folder have add fail")
-            TesCase_LogResult(**data["testcase_result"]["todo"]["add_folder"]["fail"])
-            ValidateFailResultAndSystem("<div>[Todo]Folder have add fail </div>")
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.todo.list.setting']//span//a[contains(., '" + name_folder + "')]")))
+        Logging("=> Folder have add successfully")
+        TesCase_LogResult(**data["testcase_result"]["todo"]["add_folder"]["pass"])
+            
     except WebDriverException:
         Logging("=> Save fail")
-    time.sleep(5)
+        TesCase_LogResult(**data["testcase_result"]["todo"]["add_folder"]["fail"])
+    
 
     return name_folder
 
@@ -87,25 +84,25 @@ def delete_folder(name_folder):
         Commands.Wait20s_ClickElement("//*[@id='ngw.todo.list.setting']//span//a[contains(., '" + name_folder + "')]")
         Logging("- Select folder")
         Commands.Wait20s_ClickElement(data["todo"]["del_button"])
-        time.sleep(5)
+        
         Commands.Wait20s_ClickElement(data["todo"]["del_button_1"])
         PrintYellow("=> Delete folder")
         TesCase_LogResult(**data["testcase_result"]["todo"]["delete_folder"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["todo"]["delete_folder"]["fail"])
         pass
 
 def setting_execution():
     Commands.Wait20s_ClickElement(data["todo"]["settings_todo"])
-    time.sleep(5)
+    
 
     page_title = driver.find_element_by_xpath("//*[@id='ngw.todo.list.setting']//span")
     if page_title.text == 'Settings':
         Logging("- Click settings success")
     else:
         Logging("- Click settings fail")
-    time.sleep(5)
+    
     Logging(" ")
     PrintGreen("============ Test case settings To-Do ============")
 
@@ -129,12 +126,12 @@ def categories():
 
     Commands.Wait20s_ClickElement(data["todo"]["manage_categories"])
     Commands.Wait20s_ClickElement(data["todo"]["manage_categories_add"])
-    time.sleep(2)
+    
     Commands.Wait20s_InputElement(data["todo"]["manage_categories_input"], categories_name)
-    time.sleep(2)
+    
     Commands.Wait20s_ClickElement(data["todo"]["manage_categories_save"])
     Logging("=> Add manage categories")
-    time.sleep(5)
+    
 
     Logging("** Check categories have been create!!")
     categories_todo = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.todo.category']//table//tr[contains(., '" + categories_name + "')]")))
@@ -152,13 +149,10 @@ def edit_categories(categories_name):
     categories_name_edit = data["title"] + date_time
 
     Commands.Wait20s_ClickElement(data["todo"]["edit"])
-    time.sleep(5)
     Commands.Wait20s_Clear_InputElement(data["todo"]["manage_categories_input"], categories_name_edit)
-    time.sleep(2)
     Commands.Wait20s_ClickElement(data["todo"]["manage_categories_save"])
     Logging("=> Edit manage categories")
-    time.sleep(2)
-
+    
     Logging("** Check categories have been create!!")
     categories_todo_edit = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.todo.category']//table//tr[contains(., '" + categories_name_edit + "')]")))
     if categories_todo_edit.is_displayed():
@@ -176,7 +170,6 @@ def search():
     try:
         Commands.Wait20s_EnterElement(data["todo"]["search"], search_key)
         Logging("=> Search manage categories")
-        time.sleep(3)
         TesCase_LogResult(**data["testcase_result"]["todo"]["search_categories"]["pass"])
     except:
         TesCase_LogResult(**data["testcase_result"]["todo"]["search_categories"]["fail"])
@@ -187,7 +180,7 @@ def delete(categories_name_edit):
         Commands.Wait20s_ClickElement("//*[@id='ngw.todo.category']//table//tr[contains(., '" + categories_name_edit + "')]")
         Logging("- Select category")
         Commands.Wait20s_ClickElement(data["todo"]["del_category"])
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["todo"]["button_ok"])
         TesCase_LogResult(**data["testcase_result"]["todo"]["delete_categories"]["pass"])
     except:

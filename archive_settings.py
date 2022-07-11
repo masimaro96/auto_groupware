@@ -35,7 +35,7 @@ def archive(domain_name):
         if admin_user.is_displayed():
             Logging("- Account admin")
             settings_execution()
-            time.sleep(5)
+            
             admin_user.click()
             Logging("- Admin archive")
             admin_execution()
@@ -48,16 +48,16 @@ def settings_execution():
     ''' Access menu -> click settings '''
     # driver.find_element_by_xpath(data["archive"]["setting"]["archive"]).click()
     Logging("- Access menu")
-    time.sleep(2)
+    
     Commands.Wait20s_ClickElement(data["archive"]["setting"]["settings"])
     Logging("- Click setting")
-    time.sleep(5)
+    
 
     Logging(" ")
     PrintGreen("============ Test case settings Archive ============")
     Commands.Wait20s_ClickElement(data["archive"]["setting"]["manage_myarchive"])
     Logging("- Click manage my archive")
-    time.sleep(2)
+    
 
     try:
         password = input_password()
@@ -88,7 +88,7 @@ def input_password():
         Commands.Wait20s_InputElement(data["archive"]["setting"]["pass"], password)
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["button_submit"])
         Logging("** Input password **")
-        time.sleep(2)
+        
 
         PrintYellow("** Check input password success")
         title_page = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "set-my-arch")))
@@ -97,10 +97,10 @@ def input_password():
         else:
             Logging("=> Input password fail")
             ValidateFailResultAndSystem("<div>[Archive]Input password fail </div>")
-        time.sleep(5)
+        
 
         WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "set-my-arch")))
-        time.sleep(2)
+        
     except:
         False
     return password
@@ -113,19 +113,19 @@ def add_folder():
         PrintYellow("** Create folder in my archive")
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["folder"])
         Logging("- Select folder")
-        time.sleep(4)
+        
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["add_folder"])
         Logging("- Select my archive")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["enabled"])
         Logging("- Select Permission")
-        time.sleep(2)
+        
         Commands.Wait20s_InputElement(data["archive"]["setting"]["input_folder"], name_folder)
         Logging("- Input name folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["save"])
         Logging("=> Create folder in my archive success")
-        time.sleep(5)
+        
     except:
         pass
     
@@ -140,7 +140,7 @@ def add_folder():
             Logging("=> Create folder fail")
             TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder"]["fail"])
             ValidateFailResultAndSystem("<div>[Archive]Create folder in settings fail </div>")
-        time.sleep(5)
+        
     except:
         Logging("=> Create folder fail")
         TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder"]["fail"])
@@ -155,17 +155,17 @@ def edit_folder(name_folder):
         Commands.Wait20s_ClickElement("//*[@id='set-my-arch']//span[contains(., '" + name_folder + "')]")
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["modify"])
         Logging("- Select edit folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["disabled"])
         Logging("- Edit Permission")
-        time.sleep(2)
+        
         Commands.Wait20s_Clear_InputElement(data["archive"]["setting"]["input_folder"], name_folder_edit)
         Logging("- Input edit name")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["save"])
         Logging("=> Edit folder in my archive")
         TesCase_LogResult(**data["testcase_result"]["archive"]["edit_folder"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["edit_folder"]["fail"])
         pass
@@ -178,13 +178,13 @@ def delete_folder(name_folder_edit):
         PrintYellow("** Delete folder have edit")
         Commands.Wait20s_ClickElement("//*[@id='set-my-arch']//span[contains(., '" + name_folder_edit + "')]")
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["delete"])
-        time.sleep(2)
+        
         Logging("- Select folder to delete - Click button delete")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["button_ok"])
         Logging("=> Delete folder success")
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder"]["fail"])
         pass
@@ -199,7 +199,7 @@ def admin_execution():
     PrintYellow("** Manage Company Archive") 
     Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["Manage_Company"])
     Logging("- Click Manage Company")
-    time.sleep(5)
+    
 
     ''' Add folder public first 
     -> Create sub folder in folder public
@@ -308,10 +308,10 @@ def add_folder_test():
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["parent_folder"])
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["add_folder_admin"])
         Logging("- Create folder test")
-        time.sleep(2)
+        
         Commands.Wait20s_InputElement(data["archive"]["admin"]["ManageCompany"]["input_name_folder"], folder_test)
         Logging("- Input name folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["save_folder"])
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_close"])
         Logging("- Save folder")
@@ -328,27 +328,27 @@ def folder_public():
 
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["parent_folder"])
         Logging("- Select folder to create")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["add_folder_admin"])
         Logging("- Create folder")
-        time.sleep(2)
+        
         Commands.Wait20s_InputElement(data["archive"]["admin"]["ManageCompany"]["input_name_folder"], name_folder_admin)
-        Logging("- Public folder")
+        Logging("- Public folder") 
         Logging("- Input name folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["save_folder"])
         Logging("- Save public folder")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_close"])
         Logging("=> Confirm create folder public")
-        time.sleep(5)
+        
     except:
         pass
 
     ''' Check folder public have create '''
     try:
         Logging(" ")
-        PrintYellow("** Check folder public have save **")
+        PrintYellow(" ** Check folder public have save ** ")
         folder_public = Waits.Wait20s_ElementLoaded("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
         if folder_public.is_displayed:
             Logging("=> Create folder public success")
@@ -357,7 +357,7 @@ def folder_public():
             Logging("=> Create folder public fail")
             TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_public"]["fail"])
             ValidateFailResultAndSystem("<div>[Archive]Create folder public fail </div>")
-        time.sleep(5)
+        
     except:
         pass
     
@@ -371,28 +371,28 @@ def folder_private():
         Logging(" ")
         PrintYellow("-> Create folder private")
         
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["parent_folder"])
         Logging("- Select folder to create")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["add_folder_admin"])
         Logging("- Create folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["private"])
         Logging("- Private folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["disabled"])
         Logging("- Permission: disabled")
-        time.sleep(2)
+        
         Commands.Wait20s_InputElement(data["archive"]["admin"]["ManageCompany"]["input_name_folder"], name_folder_private)
         Logging("- Input name folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["save_folder"])
         Logging("- Save private folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_close"])
         Logging("Create folder private")
-        time.sleep(5)
+        
     except:
         pass
     
@@ -408,7 +408,7 @@ def folder_private():
             Logging("=> Create folder private fail")
             TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_privte"]["fail"])
             ValidateFailResultAndSystem("<div>[Archive]Create folder private fail </div>")
-        time.sleep(5)
+        
     except:
         pass
     
@@ -422,22 +422,22 @@ def sub_folder(name_folder_admin):
         Logging(" ")
         PrintYellow("** Create sub folder in public folder")
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
-        time.sleep(5)
+        
         Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
         Logging("- Select puclic to create sub folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["add_subfolder"])
         Logging("- Add sub folder")
-        time.sleep(2)
+        
         Commands.Wait20s_InputElement(data["archive"]["admin"]["ManageCompany"]["input_subfolder"], name_subfolder)
         Logging("- Input name sub folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["save_subfolder"])
         Logging("- Save sub folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_close"])
         Logging("=> Create sub folder admin")
-        time.sleep(5)
+        
     except:
         pass
 
@@ -446,7 +446,7 @@ def sub_folder(name_folder_admin):
         Logging(" ")
         PrintYellow("** Check sub folder have create")
         Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
-        time.sleep(2)
+        
         PrintYellow("**Check subfolder have save**")
         sub_folder = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//*[@id='archive-tab-content']//span[contains(., '" + name_subfolder + "')]")))
         if sub_folder.is_displayed:
@@ -456,7 +456,7 @@ def sub_folder(name_folder_admin):
             Logging("=> Create subfolder fail")
             TesCase_LogResult(**data["testcase_result"]["archive"]["add_subfolder"]["fail"])
             ValidateFailResultAndSystem("<div>[Archive]Create sub folder in folder public fail </div>")
-        time.sleep(5)
+        
     except:
         pass
 
@@ -470,20 +470,20 @@ def add_authorized_sub_folder(name_subfolder):
         PrintYellow("(Selected Dept. Only + Selected Folders Only)")
         Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_subfolder + "')]")
         Logging("- Select sub folder")
-        time.sleep(5)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["Select_authorized_Dept."])
         Logging("- Select authorized Dept")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["Dept."])
         Logging("- Select Dept.")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["add_Dept."])
         Logging("=> Save settings")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_close"])
         Logging("=> Confirm close popup")
         TesCase_LogResult(**data["testcase_result"]["archive"]["authorized_Dept"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["authorized_Dept"]["fail"])
         pass
@@ -493,25 +493,25 @@ def add_authorized_sub_folder(name_subfolder):
         PrintYellow("(Include All Sub-Dept.(s) + Include All Sub-Folders)")
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["Include_Sub_Dept."])
         Logging("- Select Dept.settings: Include All Sub-Dept.(s)")
-        time.sleep(5)
+        
         Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_subfolder + "')]")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["Select_authorized_Dept."])
         Logging("- Select Authorized Dept.")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["Dept."])
         Logging("- Select Dept.")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["Include_Sub_folder."])
         Logging("- Select Dept. Settings: Include All Sub-Folders")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["add_Dept."])
         Logging("=> Save settings")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_close"])
         Logging("=> Confirm close popup")
         TesCase_LogResult(**data["testcase_result"]["archive"]["Dept_settings"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["Dept_settings"]["fail"])
         pass
@@ -522,20 +522,20 @@ def delete_public_folder(name_folder_admin):
         Logging(" ")
         PrintYellow("** Delete sub folder")
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["check_all"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_all"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_ok"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
         Logging("- Select sub folder")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_folder"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_OK"])
         Logging("=> Delete sub folder")
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_subfolder"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_subfolder"]["fail"])
         pass
@@ -546,14 +546,14 @@ def delete_public_folder(name_folder_admin):
 #         Logging(" ")
 #         PrintYellow("** Delete public folder")
 #         Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
-#         time.sleep(3)            
+#                     
 #         Logging("- Select parent folder")
 #         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_folder"])
-#         time.sleep(3)
+#         
 #         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_OK"])
 #         Logging("=> Delete public folder")
 #         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder_public"]["pass"])
-#         time.sleep(5)
+#         
 #     except:
 #         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder_public"]["fail"])
 #         pass
@@ -562,15 +562,15 @@ def delete_private_folder(name_folder_private):
     try:
         PrintYellow("** Delete private folder")
         Commands.Wait20s_ClickElement("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_private + "')]")
-        time.sleep(3)
+        
         Logging("- Select parent folder")
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["del_folder"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ManageCompany"]["button_OK"])
         Logging("=> Delete private folder")
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["company_archive"])
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder_privte"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder_privte"]["fail"])
         pass
@@ -582,28 +582,28 @@ def archive_manager():
     Logging(" ")
     PrintYellow("** Add Archive Manager")
     # Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["Company_Archive"])
-    # time.sleep(5)
+    # 
     Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["Archive_Manager"])
     Logging("Access Archive_Manager")
-    time.sleep(5)
+    
 
     try:
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["button_add"])
         Logging("- Add manager archive")
-        time.sleep(5)
+        
 
         Commands.Wait20s_EnterElement(data["archive"]["admin"]["ArchiveManager"]["input_name"], name_manager)
         Logging("- Input name manager archive")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["select_user"])
         Logging("- Select user")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["button_save"])
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["button_OK."])
         Logging("=> Add Archive Manager")
         TesCase_LogResult(**data["testcase_result"]["archive"]["archive_manager"]["pass"])
-        time.sleep(5)
+        
     except:
         Logging("=> Can't add Archive Manager")
         TesCase_LogResult(**data["testcase_result"]["archive"]["archive_manager"]["fail"])
@@ -612,18 +612,18 @@ def archive_manager():
 def delete_manager():
     ''' Delete user manager '''
     try:
-        time.sleep(5)
+        
         PrintYellow("** Delete user manager")
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["pick_user"])
         Logging("- Select user to delete")
-        time.sleep(5)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["button_delete"])
         Logging("- Click button delete")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["ArchiveManager"]["close_popup"])
         Logging("=> Delete Archive Manager")
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_archive_manager"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_archive_manager"]["fail"])
         pass
@@ -642,23 +642,23 @@ def backup():
         Commands.Wait20s_InputElement(data["archive"]["admin"]["backup_folder"]["input_name"], name_backup)
         Logging("- Input name backup")
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["backup_folder"]["selectfolder"])
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["backup_folder"]["choosefolder"])
-        time.sleep(2)
+        
         Logging("- Select folder to backup")
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["backup_folder"]["click_date_range_from"])
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["backup_folder"]["select_date_range_from"])
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["backup_folder"]["click_date_range_to"])
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["backup_folder"]["select_date_range_to"])
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["backup_folder"]["save_backup"])
         Logging("- Save backup") 
-        time.sleep(2)   
+           
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["backup_folder"]["close_popup"])
         Logging("- Backup folder success")
         TesCase_LogResult(**data["testcase_result"]["archive"]["backup"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["backup"]["fail"])
         pass
@@ -672,34 +672,34 @@ def transfer_company_approval():
     PrintYellow("** Transfer compnay -> Approval")
     Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["transfer_company"])
     Logging("- Transfer company")
-    time.sleep(5)
+    
     try:
         ''' select approval menu '''
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_approval"]["approval"])
         Logging("- Transfer company - Approval")
-        time.sleep(5)
+        
         Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_approval"]["folders_option"], dept_key)
         Logging("- Select Dept to transfer")
-        time.sleep(2)
+        
 
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_approval"]["location_option"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_approval"]["location"])
         Logging("- Select location to transfer")
-        time.sleep(2)
+        
 
         ''' select language '''       
         Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_task"]["language_option"], language_key) 
         Logging("- Select language")
-        time.sleep(2)
+        
 
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_approval"]["button_OK"])
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_approval"]["close_popup"])
         Logging("=> Transfer company - Approval")
-        time.sleep(5)
+        
         TesCase_LogResult(**data["testcase_result"]["archive"]["transfer_approval"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["transfer_approval"]["fail"])
         pass
@@ -713,36 +713,36 @@ def transfer_company_board():
         Logging(" ")
         PrintYellow("** Transfer compnay -> Company Board")
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["transfer_company"])
-        time.sleep(2)
+        
 
         ''' select Company Board menu '''
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_board"]["company_board"])
         Logging("- Transfer company - Company Board")
-        time.sleep(2)
+        
         
 
         Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_board"]["board_option"], board_key)          
         Logging("- Select Company Board transfer")
 
-        time.sleep(2)
+        
 
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_board"]["location_option"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_board"]["location"])
         Logging("- Select location to transfer")
-        time.sleep(2)
+        
 
         ''' select language '''       
         Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_task"]["language_option"], language_key) 
         Logging("- Select language")
-        time.sleep(2)
+        
 
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_board"]["button_OK"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_board"]["close_popup"])
         Logging("=> Transfer company - Company Board")
         TesCase_LogResult(**data["testcase_result"]["archive"]["transfer_board"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["transfer_board"]["fail"])
         pass
@@ -758,26 +758,26 @@ def transfer_company_task():
 
         Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_task"]["folders_option"], dept_key)     
         Logging("- Select Dept to transfer")
-        time.sleep(2)
+        
 
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_task"]["location_option"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_task"]["location"])
         Logging("- Select location to transfer")
-        time.sleep(2)
+        
 
         ''' select language '''   
         Commands.Selectbox_By_Visible_Text(data["archive"]["admin"]["transfer"]["menu_task"]["language_option"], language_key) 
         Logging("- Select language")
-        time.sleep(2)
+        
 
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_task"]["button_OK"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["archive"]["admin"]["transfer"]["menu_task"]["close_popup"])
         Logging("=> Transfer company - work dairy")
-        time.sleep(5)
+        
         TesCase_LogResult(**data["testcase_result"]["archive"]["transfer_work_dairy"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["transfer_work_dairy"]["fail"])
         pass

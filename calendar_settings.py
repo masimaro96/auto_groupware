@@ -41,7 +41,7 @@ def calendar(domain_name):
             Logging("Pop up not display")
     except WebDriverException:
         Logging("=> Pop up not display")
-    time.sleep(5)
+    
 
     ''' Access to menu '''
     Logging("- Access menu")
@@ -62,7 +62,7 @@ def calendar(domain_name):
                 setting_user()    
         else:
             Logging("- Calendar: Category type -> Change to folder type")
-            time.sleep(5)
+            
             try:
                 admin_user_category = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["category_type"]["admin_setting"])))
                 if admin_user_category.is_displayed():
@@ -103,11 +103,11 @@ def color():
 def delete():
     Commands.Wait20s_ClickElement(data["calendar"]["settings"]["button_delete"][0])
     Logging("- Select delete sub folder")
-    time.sleep(2)
+    
 
     Commands.Wait20s_ClickElement(data["calendar"]["settings"]["button_delete"][1])
     Logging("=> Confirm delete sub folder successfully")
-    time.sleep(5)
+    
     
 def share_permission():
     Logging("- Select permission for user")
@@ -116,7 +116,7 @@ def share_permission():
     sel = Select(driver.find_element_by_xpath(data["calendar"]["settings"]["dropdown"]))
     sel.select_by_visible_text(random.choice(options_list))
     Logging("=> Select: " + str(random.choice(options_list)))
-    time.sleep(2)
+    
 
 def org():
     key_user = data["calendar"]["settings"]["organization_input_1"]
@@ -125,15 +125,15 @@ def org():
 
     Commands.Wait20s_EnterElement(data["calendar"]["settings"]["organization_input"], key_user)
     Logging("- Input organization")
-    time.sleep(2)
+    
 
     try:
         Commands.Wait20s_ClickElement(data["calendar"]["settings"]["organization_select"])
         Logging("- Choose organization")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["calendar"]["settings"]["organization_add"])
         Logging("- Add organization")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["calendar"]["settings"]["organization_save"])
         Logging("- Save organization")
     except:
@@ -150,15 +150,15 @@ def category():
     Commands.Wait20s_ClickElement(data["calendar"]["settings"]["category"])
     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["settings"]["category"]))).click()
     Logging("- Click Manage Categories")
-    time.sleep(2)
+    
 
     Commands.Wait20s_EnterElement(data["calendar"]["settings"]["input_category_name"], input_category)
     Logging("- Input category name")
-    time.sleep(5)
+    
 
     ''' Change color '''
     Commands.Wait20s_ClickElement(data["calendar"]["settings"]["color"])
-    time.sleep(3)
+    
 
     try:
         color()
@@ -191,24 +191,19 @@ def folder_mycalendar():
             Logging("- Input another name")
     except:
         pass
-    time.sleep(6)
+    
 
     try:
         ''' Check if folder have been create '''
         Logging("** Check if folder have been create **")
-        folder_mycalendar = Waits.Wait20s_ElementLoaded("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(namefolder) + "')]")
-        if folder_mycalendar.is_displayed():
-            Logging("=> Create folder success")
-            TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder_setting"]["pass"])
-        else:
-            Logging("=> Create folder fail")
-            TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder_setting"]["fail"])
-            ValidateFailResultAndSystem("<div>[Calendar]Create folder in my calendar fail </div>")
+        Waits.Wait20s_ElementLoaded("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(namefolder) + "')]")
+        Logging("=> Create folder success")
+        TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder_setting"]["pass"])
     except:
         Logging("=> Create folder fail")
         TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder_setting"]["fail"])
         pass
-    time.sleep(5)
+    
     
     return namefolder
 
@@ -219,7 +214,7 @@ def sub_folder_mycalendar(namefolder):
         Logging("** Create sub folder of main folder have create")
         Commands.Wait20s_ClickElement(data["calendar"]["settings"]["select_folder"])
         Logging("- Show dropdowm parent folder")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//form//li//a[contains(., '" + namefolder + "')]")
         Logging("- Select parent folder")
         Commands.Wait20s_InputElement(data["calendar"]["settings"]["input_folder_name"], name_subfolder)
@@ -229,13 +224,13 @@ def sub_folder_mycalendar(namefolder):
     except:
         pass
 
-    time.sleep(5)
+    
 
     ''' Check if sub folder have been create '''
     try:
         Logging("** Check if sub folder have been create **")
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//span//a[contains(., '" + namefolder + "')]")
-        time.sleep(3)              
+                      
         Waits.Wait20s_ElementLoaded("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(name_subfolder) + "')]")
         Logging("=> Create sub folder success => Pass")
         TesCase_LogResult(**data["testcase_result"]["calendar"]["add_subfolder_setting"]["pass"])
@@ -248,7 +243,7 @@ def sub_folder_mycalendar(namefolder):
 def edit_sub_folder(name_subfolder):
     ''' Pull srcoll bar to down '''
     driver.find_element_by_tag_name("body").send_keys(Keys.HOME)
-    time.sleep(5)
+    
     
     ''' Edit sub folder '''
     try:
@@ -256,7 +251,7 @@ def edit_sub_folder(name_subfolder):
         Logging("** Edit sub folder **")
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(name_subfolder) + "')]")
         Logging("- Select sub folder to edit")
-        time.sleep(2)
+        
 
         try:
             category()
@@ -275,7 +270,7 @@ def delete_sub_folder(name_subfolder):
         Logging("** Delete sub folder **")
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//li//a[contains(., '" + str(name_subfolder) + "')]")
         Logging("- Select sub folder")
-        time.sleep(2)
+        
         delete()
         TesCase_LogResult(**data["testcase_result"]["calendar"]["delete_subfolder_setting"]["pass"])
     except:
@@ -289,23 +284,23 @@ def edit_folder(namefolder):
         Logging("** Edit main folder in my calendar **")
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//span[contains(., '" + namefolder + "')]")
         Logging("- Click folder to edit")
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["calendar"]["settings"]["share_folder"])
         Logging("- Select share folder")
 
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
-        time.sleep(5)
+        
         try: 
             org()
         except:
             pass
         Commands.Wait20s_ClickElement(data["calendar"]["settings"]["button_save"][0])
-        time.sleep(5)
+        
         driver.find_element_by_tag_name("body").send_keys(Keys.HOME)
-        time.sleep(5)
+        
 
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//span[contains(., '" + namefolder + "')]")
-        time.sleep(2)
+        
         try:
             category()
         except:
@@ -315,7 +310,7 @@ def edit_folder(namefolder):
         TesCase_LogResult(**data["testcase_result"]["calendar"]["edit_folder_setting"]["fail"])
         pass
 
-    time.sleep(5)
+    
 
 def delete_folder(namefolder):
     driver.find_element_by_tag_name("body").send_keys(Keys.HOME)
@@ -325,7 +320,7 @@ def delete_folder(namefolder):
         Logging("** Delete main folder")
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//li//a[contains(., '" + namefolder + "')]")
         Logging("- Select folder")
-        time.sleep(2)
+        
         # Keys.End to scroll down
         driver.find_element_by_tag_name("body").send_keys(Keys.HOME)
         delete()
@@ -339,24 +334,24 @@ def share_user():
 
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["share"])
     Logging("- Select share folder")
-    time.sleep(5)
+    
     
     driver.find_element_by_tag_name("body").send_keys(Keys.END)
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["organization"])
-    time.sleep(5)
+    
 
     Commands.Wait20s_InputElement(data["calendar"]["Admin"]["input_organization"], key_org)
     Logging("- Input name organization")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["select_user"])
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["add_user"])
     Logging("- Add user organization")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["save_user"])
     Logging("- Share company calendar success") 
-    time.sleep(5)
+    
 
 def setting_view():
     view_list = int(len(driver.find_elements_by_xpath(data["calendar"]["settings"]["setting_view"])))
@@ -369,7 +364,7 @@ def setting_view():
     
     Logging("- Total of view mode list: " + str(len(view_mode_list)))
     x = random.choice(view_mode_list)
-    time.sleep(2)
+    
     select_mode_view = WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["settings"]["setting_view"] + "[contains(.,'" + str(x) + "')]")))
     select_mode_view.click()
     WebDriverWait(driver, 50).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["settings"]["button_save"][3]))).click()
@@ -381,15 +376,15 @@ def folder_company():
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["company_folder"])
     Logging(" ")
     Logging("** Manage company folders")
-    time.sleep(5)
+    
     Commands.Wait20s_InputElement(data["calendar"]["Admin"]["folder_name"], name) 
     Logging("- Input name of folder")
-    time.sleep(2) 
+     
 
     try:
         ''' Change color '''
         Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["color"])
-        time.sleep(2)
+        
 
         color_list = int(len(driver.find_elements_by_xpath(data["calendar"]["Admin"]["list_color"])))
         
@@ -408,32 +403,27 @@ def folder_company():
         pass
 
     driver.find_element_by_tag_name("body").send_keys(Keys.END)
-    time.sleep(3)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["save"])
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["close_dialog"])
     Logging("=> Create folder in company calendar")
-    time.sleep(5)
+    
 
     try:
         ''' Check folder have create '''
-        folder_company = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.calendar.admin_company']//span//a[contains(., '" + name + "')]")))
-        if folder_company.is_displayed:
-            Logging("=> Create folder success => Pass")
-            TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder"]["pass"])
-        else:
-            Logging("=> Create folder fail => Fail")
-            TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder"]["fail"])
-            ValidateFailResultAndSystem("<div>[Calendar]Create folder admin fail </div>")
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.calendar.admin_company']//span//a[contains(., '" + name + "')]")))
+        Logging("=> Create folder success => Pass")
+        TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder"]["pass"])
     except:
         Logging("=> Create folder fail => Fail")
-        TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder"]["fail"])
+        TesCase_LogResult(**data["testcase_result"]["calendar"]["add_folder"]["fail"]) 
         pass
     return name
 
 def edit_folder_company(name):
     driver.find_element_by_tag_name("body").send_keys(Keys.HOME)
-    time.sleep(5)
+    
     edit_name = data["calendar"]["Admin"]["category_input"] + str(n)
 
     try:
@@ -443,20 +433,20 @@ def edit_folder_company(name):
         Commands.Wait20s_ClickElement("//*[@id='ngw.calendar.admin_company']//span//a[contains(., '" + name + "')]")
         Logging("- Select folder to edit")
 
-        time.sleep(2)
+        
         Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["category_company"])
         Logging("- Click icon add Category List")
-        time.sleep(2) 
+         
         Commands.Wait20s_InputElement(data["calendar"]["Admin"]["category_company_input"], edit_name)
         Logging("- Input name category")
-        time.sleep(2)
+        
 
         Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["add_category"])
         Logging("- Click save")
-        time.sleep(2) 
+         
         Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["close_dialog"])
         Logging("=> Confirm add category success")
-        time.sleep(5)
+        
 
         ''' Set permission to share user '''
         try:
@@ -470,11 +460,11 @@ def edit_folder_company(name):
             pass
         
         driver.find_element_by_tag_name("body").send_keys(Keys.END)
-        time.sleep(5)
+        
         Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["save"])
-        time.sleep(5)
+        
         Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["close_dialog"])
-        time.sleep(5)
+        
         Logging("- Save edit folder company calendar")
         TesCase_LogResult(**data["testcase_result"]["calendar"]["edit_folder"]["pass"])
     except:
@@ -488,7 +478,7 @@ def search_folderlist():
         Logging(" ")
         Logging("** Calendar folder list")
         Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["folder_list"])
-        time.sleep(5)
+        
         Commands.Wait20s_EnterElement(data["calendar"]["Admin"]["search"], key_search)
         Logging("- Input search name")
         Logging("=> Search success")
@@ -540,18 +530,18 @@ def setting_calendar_company():
 
     Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["close_popup"])
     Logging("=> Close pop up")
-    time.sleep(5)
+    
     '''WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["Admin"]["category_type"]))).click()
     Logging("** Change to Category Type")
-    time.sleep(10)'''
+    '''
 
 def change_settings():
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["admin_setting"])
     Logging("** Setting admin")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["folder_type"])
     Logging("=> Use folder type")
-    time.sleep(20)
+    
 
 def category_folder():
     name_category_type = data["calendar"]["category_type"]["input_text"] + str(m)
@@ -564,14 +554,14 @@ def category_folder():
     element.location_once_scrolled_into_view
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["settings"])
     Logging("=> Click settings")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["add_category"])
     Logging("- Add category")
-    time.sleep(5)
+    
 
     ''' Change color '''
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["color"])
-    time.sleep(2)
+    
 
     color_list = int(len(driver.find_elements_by_xpath(data["calendar"]["category_type"]["list_color"])))
     
@@ -588,30 +578,30 @@ def category_folder():
 
     Commands.Wait20s_InputElement(data["calendar"]["category_type"]["input"], name_category_type)
     Logging("- Input name category")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["share"])
     Logging("- Share category")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["org"])
     Logging("- Click org")
-    time.sleep(5)
+    
     Commands.Wait20s_EnterElement(data["calendar"]["category_type"]["input_org"], org_key)
     Logging("- Search org")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["select_user_1"])
     Logging("- Select user")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["add_user"])
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["button_save_org"])
     Logging("- Save org")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["button_save"])
     Logging("=> Save category")
-    time.sleep(5)
+    
 
     Commands.Wait20s_ClickElement("//*[@id='ngw.calendarnew.settings']//tr//td[contains(., '" + name_category_type + "')]//following-sibling::td//a[contains(@ng-click, 'edit(e, item)')]")
-    time.sleep(2)
+    
 
     ''' Change color '''
     Commands.Wait20s_Clear_InputElement(data["calendar"]["category_type"]["category_edit"], name_category_type_edit)
@@ -622,27 +612,27 @@ def category_folder():
 
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["org"])
     Logging("- Click org")
-    time.sleep(5)
+    
     Commands.Wait20s_EnterElement(data["calendar"]["category_type"]["input_org"], org_key)
     Logging("- Search org")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["select_user_2"])
     Logging("- Select user")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["add_user"])
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["button_save_org"])
     Logging("- Save org")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["button_save"])
     Logging("=> Save category")
-    time.sleep(5)
+    
     Commands.Wait20s_ClickElement("//*[@id='ngw.calendarnew.settings']//tr//td[contains(., '" + name_category_type_edit + "')]//following-sibling::td//a[contains(@ng-click, 'delete(e, item)')]")
     Logging("- Select delete category")
-    time.sleep(2)
+    
     Commands.Wait20s_ClickElement(data["calendar"]["category_type"]["delete"])
     Logging("=> Delete category")
-    time.sleep(5)
+    
 
 def setting_user():
     Logging(" ")

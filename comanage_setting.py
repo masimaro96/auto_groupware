@@ -41,17 +41,17 @@ def co_manage(domain_name):
     ''' Access menu -> click admin settings '''
     # driver.find_element_by_xpath(data["co-manage"]["comanage"]).click()
     Logging("- Access menu")
-    time.sleep(10)
+    
     #driver.execute_script("window.scrollTo(-2000, -502)") 
     
 
     try:
         element = Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
         element.location_once_scrolled_into_view
-        time.sleep(3)
+        
         element_1 = Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar_1"])
         element_1.location_once_scrolled_into_view
-        time.sleep(2)
+        
         admin = Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
         if admin.is_displayed():
             Logging("- Account admin")
@@ -66,13 +66,13 @@ def work_type():
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["work_type"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_add"])
         Commands.Wait20s_InputElement(data["co-manage"]["admin"]["worktype"]["input"], text_worktype)
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_save"])
         Logging("=> Create work type")
-        time.sleep(3)
+        
     except:
         pass
 
@@ -85,7 +85,7 @@ def work_type():
         Logging("=> Work type have been create fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["work_type"]["fail"])
         ValidateFailResultAndSystem("<div>[Comanage]Work type have been create fail </div>")
-    time.sleep(5)
+    
 
     return text_worktype
 
@@ -97,7 +97,7 @@ def delete_worktype(text_worktype):
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_OK"])
         Logging("=> Delete work type success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_work_type"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_work_type"]["fail"])
 
@@ -110,7 +110,6 @@ def status_manage():
         driver.execute_script("arguments[0].scrollIntoView();",f)    
 
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["status"]["manage_status"])
-        time.sleep(3)
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["status"]["button_add"])
         Logging("- Add new status")
         Commands.Wait20s_InputElement(data["co-manage"]["admin"]["status"]["input_name"], text_status)
@@ -123,10 +122,8 @@ def status_manage():
         sel = Select(driver.find_element_by_xpath(data["co-manage"]["admin"]["status"]["select_option"]))
         sel.select_by_visible_text(random.choice(options_list))
         Logging("- Select category in random option list")
-        time.sleep(2)
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["status"]["button_save"])
         Logging("=> Create status")
-        time.sleep(5)
     except:
         pass
     
@@ -146,11 +143,9 @@ def delete_status(text_status):
         Logging("** Delete status")
         Commands.Wait20s_ClickElement("//*[@id='ngw.projectnew.adminStatus']//table//tr[contains(., '" + text_status + "')]//following-sibling::td//following-sibling::a//i")
         Logging("- Select status to delete")
-        time.sleep(4)
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_OK"])
         Logging("=> Delete status success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_status"]["pass"])
-        time.sleep(5)
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_status"]["fail"])
 
@@ -159,12 +154,10 @@ def manage_folders():
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
-        time.sleep(2)
         Commands.Wait20s_InputElement(data["co-manage"]["admin"]["folder"]["input"], name)
 
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_save"])
         Logging("=> Create folder")
-        time.sleep(2)
 
         ''' Check folder have create '''
         Logging("** Check folder have create **")
@@ -182,25 +175,20 @@ def sub_folder(name):
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["parent_folder"])
-        time.sleep(2)
         Commands.Wait20s_ClickElement("//*[@id='project-folder-setting-down']//li//a[contains(., '" + name + "')]")
-        time.sleep(2)
         Commands.Wait20s_InputElement(data["co-manage"]["admin"]["folder"]["input"], subname)
-        time.sleep(2)
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_save"])
         Logging("=> Create Sub-folder")
-        time.sleep(5)
+        
 
         ''' Check sub-folder have create '''
         Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
         Logging("- Select parent folder")
-        time.sleep(2)
 
         Logging("** Check sub-folder have create **")
         Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//span//a[contains(., '" + subname + "')]")
         Logging("=> Sub-Folder have create success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])
-        time.sleep(5)
     except:
         Logging("=> Sub-Folder have create fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["fail"])
@@ -211,7 +199,7 @@ def delete_subfolder(subname):
     # subname = data["title"] + date_time
     f = driver.find_element_by_xpath(data["co-manage"]["admin"]["status"]["manage_status"])
     driver.execute_script("arguments[0].scrollIntoView();",f) 
-    time.sleep(5)
+    
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
         Logging("** Delete sub folder")
@@ -223,21 +211,23 @@ def delete_subfolder(subname):
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_del"])
         Logging("=> Delete sub folder success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_subfolder"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_subfolder"]["fail"])
 
 def delete_folder(name):
+    f = driver.find_element_by_xpath(data["co-manage"]["admin"]["status"]["manage_status"])
+    driver.execute_script("arguments[0].scrollIntoView();",f) 
+    
     try:
+        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
         Logging("** Delete folder")
         Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
-        time.sleep(2)
+        Logging("- Select folder")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_delete"])
-        time.sleep(3)
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_del"])
         Logging("=> Delete folder success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_folder"]["pass"])
-        time.sleep(5)
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_folder"]["fail"])
     
@@ -249,27 +239,27 @@ def create_project():
     a = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["project_list"]["list"])))
     a.location_once_scrolled_into_view
     Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["list"])
-    time.sleep(1)
+    
     try:
         Logging("** Create new project")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["list"])
         Logging("- Select list project")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_add"])
         Logging("- Select add button")
-        time.sleep(3)
+        
         Commands.Wait20s_InputElement(data["co-manage"]["admin"]["project_list"]["name_input"], name_project)
         Logging("- Input name project")
-        time.sleep(3)
+        
 
         ''' Select project '''
         ''' Kanban Project '''
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["kanban"])
         Logging("- Select Kanban Project")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_save"])
         Logging("- Save kanban project")
-        time.sleep(3)
+        
     except:
         pass
 
@@ -282,88 +272,88 @@ def create_project():
     except:
         Logging("=> Create kanban project fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["project"]["fail"])
-    time.sleep(5)
+    
 
     '''edit = Commands.Wait20s_ClickElement("//*[@id='ngw.projectnew.project']//strong[contains(., '" + name_project + "')]")
     edit.clear()
-    time.sleep(3)
+    
     edit.send_keys(name_project_edit)
     Logging("- Edit name project")
-    time.sleep(3)
+    
     Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_check_save"])
     Logging("- Save name edit")
-    time.sleep(3)'''
+    '''
     try:
         leader_name = data["co-manage"]["admin"]["project_list"]["name_org"]
 
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_leader"])
         Logging("- Select leader")
-        time.sleep(3)
+        
         Commands.Wait20s_EnterElement(data["co-manage"]["admin"]["project_list"]["input_org_leader"], leader_name)
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_leader"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_leader"])
         Logging("- Select add leader")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_leader"])
         Logging("- Save leader")
-        time.sleep(3)
+        
     except:
         pass
 
     Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_user"])
     Logging("- Select Participant(s)")
-    time.sleep(3)
+    
     Commands.Wait20s_EnterElement(data["co-manage"]["admin"]["project_list"]["input_org_user"], leader_name)
-    time.sleep(3)
+    
 
     try:
         user = Waits.Wait20s_ElementLoaded(data["co-manage"]["admin"]["project_list"]["org_user_1"])
         if user.is_displayed():
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_1"])
-            time.sleep(3)
+            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_2"])
-            time.sleep(3)
+            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_3"])
-            time.sleep(3)
+            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_user"])
             Logging("- Select add Participant(s)")
-            time.sleep(3)
+            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_user"])
             Logging("- Save Participant(s)")
-            time.sleep(3)
+            
         else:
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_user"])
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_1"])
-            time.sleep(3)
+            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_2"])
-            time.sleep(3)
+            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_3"])
-            time.sleep(3)
+            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_user"])
             Logging("- Select add Participant(s)")
-            time.sleep(3)
+            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_user"])
             Logging("- Save Participant(s)")
-            time.sleep(3)
+            
     except:
         Logging("=> Can't select Participant(s)")
     
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_cc"])
         Logging("- Select CC")
-        time.sleep(3)
+        
         Commands.Wait20s_EnterElement(data["co-manage"]["admin"]["project_list"]["input_org_cc"], leader_name)
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_cc"])
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_cc"])
         Logging("- Select add CC")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_cc"])
         Logging("- Save CC")
-        time.sleep(3)
+        
     except:
         pass
 
@@ -371,10 +361,10 @@ def create_project():
         Logging("** Change stauts of project")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["status"])
         Logging("- Select status")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["status_dropdown"])
         Logging("- Click dropdown")
-        time.sleep(3)
+        
 
         options_list = ["On Hold", "In Progress", "Complete"]
 
@@ -384,7 +374,7 @@ def create_project():
         
         Logging("=> Change stauts of project: " + str(random.choice(options_list)))
         TesCase_LogResult(**data["testcase_result"]["comanage"]["change_status"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["change_status"]["fail"])
 
@@ -396,13 +386,13 @@ def move_project(name):
         Logging("** Move project")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["move"])
         Logging("- Select move project")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement("//li//span//a[contains(., '" + name + "')]")
-        time.sleep(3)
+        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_move"])
         Logging("=> Move project success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["move_project"]["pass"])
-        time.sleep(5)
+        
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["move_project"]["fail"])
 
@@ -415,11 +405,11 @@ def delete_project():
                 Logging("** Delete project")
                 Commands.Wait20s_InputElement(data["co-manage"]["admin"]["project_list"]["input_pass"], password_key)
                 Logging("- Input password")
-                time.sleep(3)
+                
                 Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_delete"])
                 Logging("=> Delete success")
                 TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_project"]["pass"])
-                time.sleep(5)
+                
             except:
                 TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_project"]["fail"])
         else:
@@ -427,19 +417,28 @@ def delete_project():
                 Logging("** Delete project")
                 Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["delete_icon"])
                 Logging("- Delete project")
-                time.sleep(3)
+                
                 Commands.Wait20s_InputElement(data["co-manage"]["admin"]["project_list"]["input_pass"], password_key)
                 Logging("- Input password")
-                time.sleep(3)
+                
                 Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["button_delete"])
                 Logging("=> Delete success")
                 TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_project"]["pass"])
-                time.sleep(5)
+                
             except:
                 TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_project"]["fail"])
     except:
         pass
-    time.sleep(5)
+    
+
+def check_popup():
+    try:
+        Waits.Wait20s_ElementLoaded("//*[@id='getUserProjectleaders0_40']//following-sibling::h4[contains(.,'Organization')]")
+        Logging("-> Pop up Organization still display")
+        Commands.Wait20s_InputElement("//*[@id='getUserProjectleaders0_40']//button[contains(.,'Close')]")
+        Logging("- Close pop up")
+    except:
+        Logging("- Pop up have been close")
 
 def admin_execution():
     # name_project_edit = data["title"] + date_time
