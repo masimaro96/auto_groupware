@@ -24,7 +24,7 @@ from sys import platform
 import NQ_function
 
 from framework_sample import *
-from NQ_login_function import local_path, driver, data, ValidateFailResultAndSystem, Logging, TesCase_LogResult#, TestlinkResult_Fail, TestlinkResult_Pass
+from NQ_login_function import local_path, driver, data, Logging, TesCase_LogResult #, TestlinkResult_Fail, TestlinkResult_Pass
 
 #chrome_path = os.path.dirname(Path(__file__).absolute())+"\\chromedriver.exe"
 
@@ -66,38 +66,32 @@ def work_type():
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["work_type"])
-        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_add"])
         Commands.Wait20s_InputElement(data["co-manage"]["admin"]["worktype"]["input"], text_worktype)
-        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_save"])
         Logging("=> Create work type")
-        
     except:
         pass
 
     Logging("** Check work type have been create")
-    work_type = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.projectnew.adminWorkType']//table//tr[contains(., '" + text_worktype + "')]")))
+    work_type = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["worktype"]["work_type_input"] % str(text_worktype))))
     if work_type.is_displayed():
         Logging("=> Work type have been create")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["work_type"]["pass"])
     else:
         Logging("=> Work type have been create fail")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["work_type"]["fail"])
-        ValidateFailResultAndSystem("<div>[Comanage]Work type have been create fail </div>")
-    
 
     return text_worktype
 
 def delete_worktype(text_worktype):
     try:
         Logging("** Delete work type")
-        Commands.Wait20s_ClickElement("//*[@id='ngw.projectnew.adminWorkType']//table//tr[contains(., '" + text_worktype + "')]//following-sibling::td//following-sibling::a//i")
+        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["work_type_input"] % str(text_worktype))
         Logging("- Select work type to delete")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_OK"])
         Logging("=> Delete work type success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_work_type"]["pass"])
-        
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["delete_work_type"]["fail"])
 
@@ -129,7 +123,7 @@ def status_manage():
     
     try:
         Logging("** Check status have been create")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.projectnew.adminStatus']//table//tr[contains(., '" + text_status + "')]")))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["co-manage"]["admin"]["status"]["status_input"] % str(text_status))))
         Logging("=> Status have been create")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["status"]["pass"])
     except:
@@ -141,7 +135,7 @@ def status_manage():
 def delete_status(text_status):
     try:
         Logging("** Delete status")
-        Commands.Wait20s_ClickElement("//*[@id='ngw.projectnew.adminStatus']//table//tr[contains(., '" + text_status + "')]//following-sibling::td//following-sibling::a//i")
+        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["status"]["status_delete"] % str(text_status))
         Logging("- Select status to delete")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["worktype"]["button_OK"])
         Logging("=> Delete status success")
@@ -161,7 +155,7 @@ def manage_folders():
 
         ''' Check folder have create '''
         Logging("** Check folder have create **")
-        Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
+        Waits.Wait20s_ElementLoaded(data["co-manage"]["admin"]["folder"]["name"] % str(name))
         Logging("=> Folder have create success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["folder"]["pass"])
     except:
@@ -175,18 +169,17 @@ def sub_folder(name):
 
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["parent_folder"])
-        Commands.Wait20s_ClickElement("//*[@id='project-folder-setting-down']//li//a[contains(., '" + name + "')]")
+        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["subfolder"] % str(name))
         Commands.Wait20s_InputElement(data["co-manage"]["admin"]["folder"]["input"], subname)
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_save"])
         Logging("=> Create Sub-folder")
         
 
         ''' Check sub-folder have create '''
-        Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//li//a[contains(., '" + name + "')]")
+        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["name"] % str(name))
         Logging("- Select parent folder")
-
         Logging("** Check sub-folder have create **")
-        Waits.Wait20s_ElementLoaded("//*[@id='project_setting_form']//li//span//a[contains(., '" + subname + "')]")
+        Waits.Wait20s_ElementLoaded(data["co-manage"]["admin"]["folder"]["check_subfolder"] % str(subname))
         Logging("=> Sub-Folder have create success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])
     except:
@@ -205,7 +198,7 @@ def delete_subfolder(subname):
         Logging("** Delete sub folder")
         # Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
         # Logging("- Select folder")
-        Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//li//span//a[contains(., '" + subname + "')]")
+        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["check_subfolder"] % str(subname))
         Logging("- Select sub folder")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_delete"])
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_del"])
@@ -222,7 +215,7 @@ def delete_folder(name):
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["manage_folders"])
         Logging("** Delete folder")
-        Commands.Wait20s_ClickElement("//*[@id='project_setting_form']//span//a[contains(., '" + name + "')]")
+        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["name"] % str(name))
         Logging("- Select folder")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_delete"])
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["button_del"])
@@ -386,13 +379,10 @@ def move_project(name):
         Logging("** Move project")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["move"])
         Logging("- Select move project")
-        
-        Commands.Wait20s_ClickElement("//li//span//a[contains(., '" + name + "')]")
-        
+        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["move_name"] % str(name))
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_move"])
         Logging("=> Move project success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["move_project"]["pass"])
-        
     except:
         TesCase_LogResult(**data["testcase_result"]["comanage"]["move_project"]["fail"])
 

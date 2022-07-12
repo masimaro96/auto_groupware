@@ -620,6 +620,7 @@
                 "button_add": "//button[contains(@data-ng-click, 'createWorkType()')]",
                 "input": "//input[@name='subject']",
                 "input_text": "selenium test ",
+                "work_type_input": "//*[@id='ngw.projectnew.adminWorkType']//table//tr[contains(., '%s')]//following-sibling::td//following-sibling::a//i",
                 "button_save": "//div//h1[contains(.,'Work type')]/following::div//button[contains(@type,'button') and contains(@data-style,'zoom-out') and contains(.,'Save')]",
                 "button_OK": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]",
                 "color": "//*[@id='ngw.projectnew.adminWorkType']//form/div/following-sibling::div/div/div",
@@ -630,6 +631,8 @@
                 "button_add": "//button[contains(@data-ng-click, 'createStatus()')]",
                 "input_name": "//input[@name='name']",
                 "name": "selenium test ",
+                "status_input": "//*[@id='ngw.projectnew.adminStatus']//table//tr[contains(., '%s')]",
+                "status_delete": "//*[@id='ngw.projectnew.adminStatus']//table//tr[contains(., '%s')]//following-sibling::td//following-sibling::a//i",
                 "input_description": "//textarea[@name='description']",
                 "description": "test description",
                 "select_option": "//select[@id='sel1']",
@@ -640,10 +643,13 @@
                 "manage_folders": "//span[contains(.,'Manage Folders')]",
                 "input": "//input[@name='folder_name']",
                 "name_folder": "NQuynh_folder ",
+                "name": "//*[@id='project_setting_form']//li//a[contains(., '%s')]",
                 "button_save": "//button[contains(@data-ng-click, 'saveFolder($event)') and contains(., 'Save')]",
 
                 "parent_folder": "//*[contains(@ng-click, 'toggleDropDown($event)')]//following-sibling::span[contains(.,'Project')]",
                 "name_subfolder": "Subfolder ",
+                "subfolder": "//*[@id='project-folder-setting-down']//li//a[contains(., '%s')]",
+                "check_subfolder": "//*[@id='project_setting_form']//li//span//a[contains(., '%s')]",
                 "button_delete": "//button[contains(@data-ng-click, 'deleteFolder($event)') and contains(., 'Delete')]",
                 "button_del": "//button[contains(@ng-click, 'ok()') and contains(., 'OK')]"
             },
@@ -691,6 +697,7 @@
             "input_dropdown": " //*[starts-with(@id, 'react-select') and contains(@id, 'value')]//div[2]/input",
 
             "move": "//*[@id='ngw.projectnew.project']//button[contains(.,'Move')]",
+            "move_name": "//li//span//a[contains(., '%s')]",
             "save_move": "//button[contains(@ng-click, 'save(false)') and contains(., 'Save')]"
         }
         
