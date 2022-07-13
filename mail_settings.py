@@ -204,7 +204,6 @@ def add_signature():
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["signature"]["signature_access"])
         Logging("- Click signature")
         
-
         Logging("- Add signature")
         ''' text '''
         Logging("- Add text signature")
@@ -213,7 +212,7 @@ def add_signature():
         
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["signature"]["text1"])
         Logging("- Select text to signature")
-        
+        time.sleep(5)
         frame_task = driver.find_element_by_class_name("tox-edit-area__iframe")
         driver.switch_to.frame(frame_task)
         Commands.Wait20s_Clear_InputElement(data["mail"]["settings"]["signature"]["text2"], input_text)
@@ -418,10 +417,10 @@ def add_while_list():
 
         Logging("** Search while List")
         Commands.Wait20s_Clear_InputElement(data["mail"]["settings"]["whitelist"]["searchwhitelist"], whilelist)
-        Logging("Input white list")
+        Logging("- Input white list")
         
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["search"])
-        Logging("Search white list")
+        Logging("- Search white list")
         
     except WebDriverException:
         pass
@@ -433,22 +432,22 @@ def add_while_list():
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_whilelist"]["pass"])
     except WebDriverException:
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_whilelist"]["fail"])
+
     return whilelist
 
 def delete_while_list(whilelist):
     try:
         Logging("** Del while List")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["refesh"])
-        Logging("Refresh white list")
+        Logging("- Refresh white list")
         Commands.Wait20s_Clear_InputElement(data["mail"]["settings"]["whitelist"]["searchwhitelist"], whilelist)
-        
+        Logging("- Input white list")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["search"])
-        
+        Logging("- Search while List")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["select_list"])
-        Logging("Select list to delete")
-        
+        Logging("- Select list to delete")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["del_list"])
-        Logging("Delete list")
+        Logging("- Delete list")
         
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_whilelist"]["pass"])
     except WebDriverException:
@@ -460,45 +459,35 @@ def add_folder():
     try:
         Logging(" ")
         Logging("** Folders")
-
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["st_folders"])
         Logging("- Access to Folders")
-        
         Logging("- Create folder")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["add_folder"])
-        
+        time.sleep(5)
         Commands.Wait20s_InputElement(data["mail"]["settings"]["folders"]["input_name"], name_folders)
         Logging("- Input name folder")
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_save"][0])
         Logging("=> Create folders success")
         
-
         try:
-            popup = Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["folders"]["pop_up"])
-            if popup.is_displayed():
-                Logging("Folder have exits - Create new folder")
-                
-                Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["popup_exits"])
-                
-                Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["add_folder"])
-                
-                Commands.Wait20s_InputElement(data["mail"]["settings"]["folders"]["input_name"], name_folders)
-                Logging("- Input name folder")
-                
-                Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_save"][0])
-                Logging("=> Create new folders success")
-            else:
-                Logging("Pop up error duplicate not show")
+            Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["folders"]["pop_up"])
+            Logging("Folder have exits - Create new folder")
+            time.sleep(5)
+            Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["popup_exits"])
+            Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["add_folder"])
+            time.sleep(5)
+            Commands.Wait20s_InputElement(data["mail"]["settings"]["folders"]["input_name"], name_folders)
+            Logging("- Input name folder")
+            Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_save"][0])
+            Logging("=> Create new folders success")
         except WebDriverException:
             Logging("Pop up error duplicate not show")
-        
     except WebDriverException:
         pass
     
     try:
         Logging("** Check folder have create")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='mail_setting_form']//li//a[contains(., '" + str(name_folders) + "')]")))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["folders"]["name"] % str(name_folders))))
         Logging("=> Create folders success")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_folder"]["pass"])
     except:
@@ -510,46 +499,36 @@ def add_folder():
 def share_folder(name_folders):
     org_key = data["mail"]["settings"]["folders"]["org_text"]
     try:
-        Commands.Wait20s_ClickElement("//*[@id='mail_setting_form']//li//a[contains(., '" + name_folders + "')]")
-        
+        Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["name"] % str(name_folders))
         Logging("- Select share permission")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["share"])
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["usingshare"])
         Logging("- Check using share")
-        
+        time.sleep(5)
         Commands.Wait20s_EnterElement(data["mail"]["settings"]["folders"]["org_input"], org_key)
         Logging("- Input name user")
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["org_select"])
         Logging("- Select user")
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["org_add"])
         Logging("- Add user success")
         
-
         options_list = ["Read/Share/Reply/Forward", "Read Mail", "Shared Mail", "Reply/Forward", "Read/Share", "Read/Reply/Forward", "Share/Reply/Forward"]
-
         sel = Select(Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["folders"]["dropdown"]))
-        
+        time.sleep(5)
         sel.select_by_visible_text(random.choice(options_list))
         Logging("- Select permission for user")
         
-        
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_save"][1])
         Logging("=> Share folder success")
-        
-
+        time.sleep(5)
         Logging("** Check Share folder")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["share"])
-        
+        time.sleep(5)
         button_share = Waits.Wait20s_ElementLoaded(data["mail"]["settings"]["folders"]["usingshare"])
         if button_share.is_enabled():
             Logging("=> Share folder success")
         else:
             Logging("=> Share folder fail")
-            ValidateFailResultAndSystem("<div>[Mail]Share folder fail </div>")
         
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_close"])
         
@@ -558,19 +537,15 @@ def share_folder(name_folders):
 
 def upload_eml(name_folders):
     driver.find_element_by_tag_name("body").send_keys(Keys.END)
-    
-
-    Commands.Wait20s_ClickElement("//*[@id='mail_setting_form']//li//a[contains(., '" + name_folders + "')]")
-
+    time.sleep(5)
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["name"] % str(name_folders))
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["Eml"])
-    
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["addfile"])
-    
+    time.sleep(5)
     Commands.Wait20s_InputElement(data["mail"]["settings"]["folders"]["getfile"], NQ_login_function.file_upload)
     Logging("- Select file to upload")
     
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_save"][2])
-
     time.sleep(15)
     Logging("=> Upload EML success")
 
@@ -581,7 +556,6 @@ def backup_mailbox():
 
 def empty_mailbox():
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["empty"])
-    
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["close_popup"])
     Logging("=> Empty folder success")
     
@@ -591,9 +565,7 @@ def delete_folder():
     try:
         Logging("** Delete folder")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["delete"])
-        
         Logging("=> Delete success")
-        
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_folder"]["pass"])
     except:
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_folder"]["fail"])
@@ -612,7 +584,7 @@ def delete_folder():
 def forwarding():
     email = data["mail"]["settings"]["forwarding"]["text_inpiut"]
     Logging(" ")
-   
+    time.sleep(5)
     Commands.Wait20s_ClickElement("//a[contains(@data-defaulthref,'#/mail/forwarding/setting') and contains(.,' Forwarding')]")
     Logging("** Forwarding")
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["forwarding"]["add_forwarding"])
@@ -629,15 +601,14 @@ def forwarding():
     
     Logging("- Total of view mode list: " + str(len(forwarding_list)))
     x = random.choice(forwarding_list)
-    
+    time.sleep(5)
     select_mode_view = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["forwarding"]["option_list"] + "[contains(.,'" + str(x) + "')]")
     select_mode_view
     Logging("- Select Forwarding option")
-
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["forwarding"]["save_button"])
     Logging("- Save forwarding")
-
-    Commands.Wait20s_ClickElement("//*[@id='ngw.mail.forwarding']//table//td[contains(., '" + email + "')]")
+    time.sleep(5)
+    Commands.Wait20s_ClickElement(data["mail"]["settings"]["forwarding"]["email_text"] % str(email))
     Logging("- Select email")
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["forwarding"]["delete_button"])
     Logging("- Delete email have set forwarding")

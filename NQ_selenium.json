@@ -228,7 +228,7 @@
                 "st_folders": "//*[contains(@ng-click, 'goToSetting($event,row)')]//span[contains(., 'Folders')]",
                 "add_folder": "//div[@id='mail_setting_form']//a[contains(@ng-click, 'newForm($event)') and contains(@data-action, 'add')]",
                 "input_name": "//input[@name='folder_name']",
-                "name": "Driver ",
+                "name": "//*[@id='mail_setting_form']//li//a[contains(., '%s')]",
                 "button_save":[
                     "//span[contains(.,'Save')]",
                     "//button[contains(@data-ng-click, 'save()') and contains(., 'Save')]",
@@ -275,7 +275,7 @@
 
                 "delete_button": "//button[contains(@ng-click,'deleteForward()')]",
                 
-                "": "",
+                "email_text": "//*[@id='ngw.mail.forwarding']//table//td[contains(., '%s')]",
                 "": ""
             }
         },
@@ -437,11 +437,11 @@
         "manage_categories": "//a[contains(@ui-sref, 'ngw.todo.category') and contains(.,'Manage Categories')]",
         "manage_categories_add": "//*[@id='ngw.todo.category']//button[contains(@data-ng-click, 'goWrite()') and contains(@data-target, 'write')]",
         "manage_categories_input": "//input[@name='title']",
-        "manage_categories_name": "todo_auto ",
+        "manage_categories_name": "//*[@id='ngw.todo.category']//table//tr[contains(., '%s')]",
         "manage_categories_save": "//button[contains(@data-ng-click, 'ok($event)') and contains(.,' OK')]",
 
         "edit": "//*[@id='ngw.todo.category']//a[contains(@data-ng-click, 'editCategory(row.id)')]",
-        "manage_categories_name_edit": "todo_auto_edit ",
+        "manage_categories_name_edit": "//*[@id='ngw.todo.category']//table//tr[contains(., '%s')]",
 
         "search": "//*[@id='ngw.todo.category']//input[@type='search']",
         "name_search": "edit",
@@ -457,7 +457,7 @@
             "archive": "//span[contains(.,'Archive')]",
             "settings": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]/div/ul/li[contains(@data-category, 'archive')]/a[contains(.,'Settings')]",
             "manage_myarchive": "//span[contains(text(),'Manage My Archive')]",
-            "pass": "//input[@type='password']",
+            "pass": "//*[@id='archive-tab-content']//input[@type='password']",
             "input_pass": "automationtest1!", 
             "button_submit": "//button[contains(.,' Submit')]",
 

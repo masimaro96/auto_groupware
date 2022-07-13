@@ -132,36 +132,33 @@ def categories():
     Commands.Wait20s_ClickElement(data["todo"]["manage_categories_save"])
     Logging("=> Add manage categories")
     
-
-    Logging("** Check categories have been create!!")
-    categories_todo = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.todo.category']//table//tr[contains(., '" + categories_name + "')]")))
-    if categories_todo.is_displayed():
+    try:
+        Logging("** Check categories have been create!!")
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_name"]  % str(categories_name))))
         Logging("=> Categories have been create")
         TesCase_LogResult(**data["testcase_result"]["todo"]["add_categories"]["pass"])
-    else:
+    except:
         Logging("=> Categories create fail")
         TesCase_LogResult(**data["testcase_result"]["todo"]["add_categories"]["fail"])
-        ValidateFailResultAndSystem("<div>[Todo]Categories have been create fail</div>")
     
     return categories_name
 
-def edit_categories(categories_name):
+def edit_categories():
     categories_name_edit = data["title"] + date_time
 
     Commands.Wait20s_ClickElement(data["todo"]["edit"])
     Commands.Wait20s_Clear_InputElement(data["todo"]["manage_categories_input"], categories_name_edit)
     Commands.Wait20s_ClickElement(data["todo"]["manage_categories_save"])
     Logging("=> Edit manage categories")
-    
-    Logging("** Check categories have been create!!")
-    categories_todo_edit = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.todo.category']//table//tr[contains(., '" + categories_name_edit + "')]")))
-    if categories_todo_edit.is_displayed():
+
+    try:
+        Logging("** Check categories have been create!!")
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_name"]  % str(categories_name_edit))))
         Logging("=> Categories have been edit")
         TesCase_LogResult(**data["testcase_result"]["todo"]["edit_categories"]["pass"])
-    else:
+    except:
         Logging("=> Categories edit fail")
         TesCase_LogResult(**data["testcase_result"]["todo"]["edit_categories"]["fail"])
-        ValidateFailResultAndSystem("<div>[Todo]Categories have been edit fail </div>")
 
     return categories_name_edit
 
@@ -177,10 +174,10 @@ def search():
 
 def delete(categories_name_edit):
     try:
-        Commands.Wait20s_ClickElement("//*[@id='ngw.todo.category']//table//tr[contains(., '" + categories_name_edit + "')]")
+        Commands.Wait20s_ClickElement(data["todo"]["manage_categories_name"]  % str(categories_name_edit))
         Logging("- Select category")
         Commands.Wait20s_ClickElement(data["todo"]["del_category"])
-        
+        time.sleep(5)
         Commands.Wait20s_ClickElement(data["todo"]["button_ok"])
         TesCase_LogResult(**data["testcase_result"]["todo"]["delete_categories"]["pass"])
     except:
@@ -200,7 +197,7 @@ def admin_execution():
     
     if bool(categories_name) == True:
         try:
-            categories_name_edit = edit_categories(categories_name)
+            categories_name_edit = edit_categories()
             search()
             
             if bool(categories_name_edit) == True:

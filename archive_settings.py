@@ -58,37 +58,36 @@ def settings_execution():
     Commands.Wait20s_ClickElement(data["archive"]["setting"]["manage_myarchive"])
     Logging("- Click manage my archive")
     
-
     try:
-        password = input_password()
+        password_key = input_password()
     except:
-        password = None
+        password_key = None
 
-    try:
-        name_folder = add_folder()
-    except:
-        name_folder = None
-
-    if bool(name_folder) == True:
+    if bool(password_key) == True:
         try:
-            name_folder_edit = edit_folder(name_folder)
+            name_folder = add_folder()
         except:
-            Logging(">> Can't countinue execution")
-            pass
-        
-        delete_folder(name_folder_edit)
-       
+            name_folder = None
+
+        if bool(name_folder) == True:
+            try:
+                name_folder_edit = edit_folder(name_folder)
+            except:
+                Logging(">> Can't countinue execution")
+                pass
+            
+            delete_folder(name_folder_edit)
     else:
         Logging("=> Create folder fail")
         TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder"]["fail"])
 
 def input_password():
-    password = data["archive"]["setting"]["input_pass"]
+    password_key = data["archive"]["setting"]["input_pass"]
     try:
-        Commands.Wait20s_InputElement(data["archive"]["setting"]["pass"], password)
+        time.sleep(5)
+        Commands.Wait20s_Clear_Click_InputElement(data["archive"]["setting"]["pass"], password_key)
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["button_submit"])
         Logging("** Input password **")
-        
 
         PrintYellow("** Check input password success")
         title_page = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "set-my-arch")))
@@ -96,14 +95,12 @@ def input_password():
             Logging("=> Input password success")
         else:
             Logging("=> Input password fail")
-            ValidateFailResultAndSystem("<div>[Archive]Input password fail </div>")
-        
 
         WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.ID, "set-my-arch")))
-        
     except:
         False
-    return password
+
+    return password_key
 
 def add_folder():
     name_folder = data["title"] + date_time
@@ -148,7 +145,7 @@ def add_folder():
     return name_folder
 
 def edit_folder(name_folder):
-    name_folder_edit = data["title"] + date_time
+    name_folder_edit = data["title"] + " " + str(n)
     try:
         Logging(" ")
         PrintYellow("** Edit folder - name - permission")
@@ -176,15 +173,15 @@ def delete_folder(name_folder_edit):
     try:
         Logging(" ")
         PrintYellow("** Delete folder have edit")
+        time.sleep(5)
         Commands.Wait20s_ClickElement("//*[@id='set-my-arch']//span[contains(., '" + name_folder_edit + "')]")
+        Logging("- Select folder to delete")
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["delete"])
-        
-        Logging("- Select folder to delete - Click button delete")
-        
+        Logging("- Click button delete")
+        time.sleep(5)
         Commands.Wait20s_ClickElement(data["archive"]["setting"]["button_ok"])
         Logging("=> Delete folder success")
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder"]["pass"])
-        
     except:
         TesCase_LogResult(**data["testcase_result"]["archive"]["delete_folder"]["fail"])
         pass

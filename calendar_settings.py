@@ -103,8 +103,7 @@ def color():
 def delete():
     Commands.Wait20s_ClickElement(data["calendar"]["settings"]["button_delete"][0])
     Logging("- Select delete sub folder")
-    
-
+    time.sleep(5)
     Commands.Wait20s_ClickElement(data["calendar"]["settings"]["button_delete"][1])
     Logging("=> Confirm delete sub folder successfully")
     
@@ -112,7 +111,7 @@ def delete():
 def share_permission():
     Logging("- Select permission for user")
     options_list = ["Permission to Read/Write", "Permission to Read/Write/Delete", "Permission to Read/Write/Modify", "Permission to Read/Write/Modify/Delete"]
-
+    time.sleep(5)
     sel = Select(driver.find_element_by_xpath(data["calendar"]["settings"]["dropdown"]))
     sel.select_by_visible_text(random.choice(options_list))
     Logging("=> Select: " + str(random.choice(options_list)))
@@ -122,7 +121,7 @@ def org():
     key_user = data["calendar"]["settings"]["organization_input_1"]
     Commands.Wait20s_ClickElement(data["calendar"]["settings"]["select_organization"])
     Logging("- Select organization")
-
+    time.sleep(5)
     Commands.Wait20s_EnterElement(data["calendar"]["settings"]["organization_input"], key_user)
     Logging("- Input organization")
     
@@ -150,16 +149,13 @@ def category():
     Commands.Wait20s_ClickElement(data["calendar"]["settings"]["category"])
     WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["calendar"]["settings"]["category"]))).click()
     Logging("- Click Manage Categories")
-    
-
+    time.sleep(5)
     Commands.Wait20s_EnterElement(data["calendar"]["settings"]["input_category_name"], input_category)
     Logging("- Input category name")
     
-
     ''' Change color '''
     Commands.Wait20s_ClickElement(data["calendar"]["settings"]["color"])
-    
-
+    time.sleep(5)
     try:
         color()
     except:
@@ -224,13 +220,11 @@ def sub_folder_mycalendar(namefolder):
     except:
         pass
 
-    
-
     ''' Check if sub folder have been create '''
     try:
         Logging("** Check if sub folder have been create **")
         Commands.Wait20s_ClickElement("//*[@id='calendar_setting_form']//span//a[contains(., '" + namefolder + "')]")
-                      
+        time.sleep(5)              
         Waits.Wait20s_ElementLoaded("//*[@id='calendar_setting_form']//span//a[contains(., '" + str(name_subfolder) + "')]")
         Logging("=> Create sub folder success => Pass")
         TesCase_LogResult(**data["testcase_result"]["calendar"]["add_subfolder_setting"]["pass"])
@@ -384,8 +378,7 @@ def folder_company():
     try:
         ''' Change color '''
         Commands.Wait20s_ClickElement(data["calendar"]["Admin"]["color"])
-        
-
+        time.sleep(5)
         color_list = int(len(driver.find_elements_by_xpath(data["calendar"]["Admin"]["list_color"])))
         
         list_color_calendar = []
