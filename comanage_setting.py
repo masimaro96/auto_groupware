@@ -176,9 +176,10 @@ def sub_folder(name):
         
 
         ''' Check sub-folder have create '''
-        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["name"] % str(name))
-        Logging("- Select parent folder")
         Logging("** Check sub-folder have create **")
+        time.sleep(5)
+        Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["folder"]["check_subfolder"] % str(name))
+        Logging("- Select parent folder")
         Waits.Wait20s_ElementLoaded(data["co-manage"]["admin"]["folder"]["check_subfolder"] % str(subname))
         Logging("=> Sub-Folder have create success")
         TesCase_LogResult(**data["testcase_result"]["comanage"]["subfolder"]["pass"])
@@ -281,14 +282,10 @@ def create_project():
 
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_leader"])
         Logging("- Select leader")
-        
         Commands.Wait20s_EnterElement(data["co-manage"]["admin"]["project_list"]["input_org_leader"], leader_name)
-        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_leader"])
-        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_leader"])
         Logging("- Select add leader")
-        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_leader"])
         Logging("- Save leader")
         
@@ -305,48 +302,34 @@ def create_project():
         user = Waits.Wait20s_ElementLoaded(data["co-manage"]["admin"]["project_list"]["org_user_1"])
         if user.is_displayed():
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_1"])
-            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_2"])
-            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_3"])
-            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_user"])
             Logging("- Select add Participant(s)")
-            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_user"])
             Logging("- Save Participant(s)")
             
         else:
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_user"])
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_1"])
-            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_2"])
-            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_user_3"])
-            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_user"])
             Logging("- Select add Participant(s)")
-            
             Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_user"])
             Logging("- Save Participant(s)")
-            
     except:
         Logging("=> Can't select Participant(s)")
     
     try:
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["select_org_cc"])
         Logging("- Select CC")
-        
         Commands.Wait20s_EnterElement(data["co-manage"]["admin"]["project_list"]["input_org_cc"], leader_name)
-        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["org_cc"])
-        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["add_cc"])
         Logging("- Select add CC")
-        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["save_cc"])
-        Logging("- Save CC")
-        
+        Logging("- Save CC")  
     except:
         pass
 
@@ -354,11 +337,9 @@ def create_project():
         Logging("** Change stauts of project")
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["status"])
         Logging("- Select status")
-        
         Commands.Wait20s_ClickElement(data["co-manage"]["admin"]["project_list"]["status_dropdown"])
         Logging("- Click dropdown")
-        
-
+    
         options_list = ["On Hold", "In Progress", "Complete"]
 
         sel = driver.find_element_by_xpath(data["co-manage"]["admin"]["project_list"]["input_dropdown"])

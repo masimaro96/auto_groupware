@@ -537,8 +537,8 @@
                 "add_folder_admin": "//*[@id='archive-tab-content']//a[contains(@data-ng-click, 'categoryAdd()') and contains(@data-action, 'add')]",
                 "del_folder": "//*[@id='archive-tab-content']//a[contains(@data-ng-click, 'categoryDel()') and contains(@data-action, 'remove')]",
                 "input_name_folder": "//form[@id='add-manager']/div[4]/div/input",
-                "name_folder": "NQuynh public ",
-                "name_folderprivate": "NQuynh private ",
+                "name_folder": "//*[@id='archive-tab-content']//span[contains(., '%s')]",
+                "name_folderprivate": "//*[@id='archive-tab-content']//span[contains(., '%s')]",
                 "save_folder": "//button[contains(@data-ng-click, 'save()') and contains(., 'Save')]",
 
                 "folder_admin": "//li[6]/span/a",
