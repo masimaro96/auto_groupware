@@ -134,7 +134,7 @@ def categories():
     
     try:
         Logging("** Check categories have been create!!")
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_name"]  % str(categories_name))))
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_name"] % str(categories_name))))
         Logging("=> Categories have been create")
         TesCase_LogResult(**data["testcase_result"]["todo"]["add_categories"]["pass"])
     except:
@@ -153,7 +153,7 @@ def edit_categories():
 
     try:
         Logging("** Check categories have been create!!")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_name"]  % str(categories_name_edit))))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["todo"]["manage_categories_name"] % str(categories_name_edit))))
         Logging("=> Categories have been edit")
         TesCase_LogResult(**data["testcase_result"]["todo"]["edit_categories"]["pass"])
     except:
@@ -174,7 +174,8 @@ def search():
 
 def delete(categories_name_edit):
     try:
-        Commands.Wait20s_ClickElement(data["todo"]["manage_categories_name"]  % str(categories_name_edit))
+        time.sleep(5)
+        Waits.Wait20s_ElementLoaded(data["todo"]["manage_categories_name"] % str(categories_name_edit))
         Logging("- Select category")
         Commands.Wait20s_ClickElement(data["todo"]["del_category"])
         time.sleep(5)

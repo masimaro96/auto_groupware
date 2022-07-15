@@ -259,34 +259,24 @@ def add_autosort():
     try:
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["autosort"])
         Logging("- Access Auto-Sort")
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["addautosort"])
         Logging("- Click add auto sort")
-        
         Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input1"], from_key)
         Logging("- Input from")       
-        
         Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input2"], to_key)
         Logging("- Input to") 
-        
         Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["input3"], subject_key)
         Logging("- Input subject") 
-        
         Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_sort"]["select1"], mail_key)
         Logging("- Select mail box") 
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["include_mail"])
-        Logging("- Select Include existing mail") 
-        
+        Logging("- Select Include existing mail")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["save_button"])
         Logging("=> Save auto sort") 
-        #TestlinkResult_Pass("WUI-85")
-        
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_auto_sort"]["pass"])
     except WebDriverException:
         Logging("Auto-Sort fail")  
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_auto_sort"]["fail"]) 
-        #TestlinkResult_Fail("WUI-85")
     
     '''Logging("** Check auto sort create success")
     autosort = Commands.Wait20s_ClickElement("//*[@id='ngw.mail.autosort']//table/tbody/tr/td")
@@ -303,14 +293,10 @@ def delete_autosort():
         Logging("** Delete auto sort")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_sort"]["autosort_delete"])
         Logging("=> Delete Auto-Sort")
-        
-        #TestlinkResult_Pass("WUI-86")
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_auto_sort"]["pass"])
-        
     except WebDriverException:
         pass
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_auto_sort"]["fail"])
-        #TestlinkResult_Fail("WUI-86")
 
 def vacation_auto_replies():
     text_key = data["title"] + date_time
@@ -319,19 +305,13 @@ def vacation_auto_replies():
     Logging("** Vacation auto replies")
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["autoreplies"])
     Logging("- Access vacation auto replies")
-    
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["on/off_autoreplies"])
     Logging("- Click turn on vacation auto replies")
-    
-
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["date_end"])
-    
     driver.find_element_by_css_selector(data["mail"]["settings"]["auto_replies"]["select_enddate"]) 
     Logging("- Set date end of auto reply")
-    
     Commands.Wait20s_InputElement(data["mail"]["settings"]["auto_replies"]["input_text"], text_key)
     Logging("- Input message")
-    
     Commands.Wait20s_ClickElement(data["mail"]["settings"]["auto_replies"]["save_button"])   
     Logging("=> Save turn on vacation auto replies")     
     
@@ -407,14 +387,11 @@ def add_while_list():
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["white_list"])
         Logging("- Access to white list")
         
-
         Commands.Wait20s_InputElement(data["mail"]["settings"]["whitelist"]["addlisst"], whilelist)
         Logging("- Add white list")
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["add_button"])
         Logging("=> Save white list")
         
-
         Logging("** Search while List")
         Commands.Wait20s_Clear_InputElement(data["mail"]["settings"]["whitelist"]["searchwhitelist"], whilelist)
         Logging("- Input white list")
@@ -444,6 +421,7 @@ def delete_while_list(whilelist):
         Logging("- Input white list")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["search"])
         Logging("- Search while List")
+        time.sleep(5)
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["select_list"])
         Logging("- Select list to delete")
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["whitelist"]["del_list"])
@@ -452,7 +430,6 @@ def delete_while_list(whilelist):
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_whilelist"]["pass"])
     except WebDriverException:
         TesCase_LogResult(**data["testcase_result"]["mail"]["delete_whilelist"]["fail"])
-        pass
 
 def add_folder():
     name_folders = data["title"] + str(n)
@@ -531,7 +508,6 @@ def share_folder(name_folders):
             Logging("=> Share folder fail")
         
         Commands.Wait20s_ClickElement(data["mail"]["settings"]["folders"]["button_close"])
-        
     except:
         pass
 

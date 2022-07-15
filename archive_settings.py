@@ -340,14 +340,13 @@ def folder_public():
     try:
         Logging(" ")
         PrintYellow(" ** Check folder public have save ** ")
-        folder_public = Waits.Wait20s_ElementLoaded("//*[@id='archive-tab-content']//span[contains(., '" + name_folder_admin + "')]")
+        folder_public = Waits.Wait20s_ElementLoaded(data["archive"]["admin"]["ManageCompany"]["name_folder"] % str(name_folder_admin))
         if folder_public.is_displayed:
             Logging("=> Create folder public success")
             TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_public"]["pass"])
         else:
             Logging("=> Create folder public fail")
             TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_public"]["fail"])
-            ValidateFailResultAndSystem("<div>[Archive]Create folder public fail </div>")
         
     except:
         pass
@@ -383,7 +382,7 @@ def folder_private():
         Logging(" ")
         PrintYellow("**Check folder private have save**")
         time.sleep(5)
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["archive"]["admin"]["ManageCompany"]["name_folder"] % str(name_folder_private))))
+        Waits.Wait20s_ElementLoaded(data["archive"]["admin"]["ManageCompany"]["name_folder"] % str(name_folder_private))
         Logging("=> Create folder private success")
         TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_privte"]["pass"])       
     except:

@@ -177,6 +177,7 @@ class Commands():
 
         WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, xpath)))
         element = driver.find_element_by_xpath(xpath)
+        time.sleep(5)
         element.clear()
         time.sleep(5)
         element.send_keys(value)

@@ -36,6 +36,9 @@
             "input_folder_name": "//*[@id='calendar_setting_form']//input[@name='folder_name']",
             "name_folder": "NQuynh_folder ",
             "name_sub_folder": "Sub_folder ",
+            "folder_setting": "//*[@id='calendar_setting_form']//span//a[contains(., '%s')]",
+            "sub_folder_setting": "//*[@id='calendar_setting_form']//form//li//a[contains(., '%s')]",
+            "del_sub_folder_setting": "//*[@id='calendar_setting_form']//li//a[contains(., '%s')]",
             
             "share_folder": "//input[contains(@data-ng-checked, 'folder.share')]//following-sibling::span",
             "select_organization": "//*[contains(@data-ng-click, 'openTargetOrg()')]",
@@ -70,6 +73,8 @@
             ],
             "calendar_admin": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(@data-ng-click,'showAdminSetting($event)') and contains(.,' Admin')]",
             "setting_calendar": "//a[contains(@href, '/calendar/admin/setting') and contains(., 'Settings')]",
+            "folder_admin_setting": "//*[@id='ngw.calendar.admin_company']//span//a[contains(., '%s')]",
+            "del_folder_admin": "//*[@id='ngw.calendar.admin_folder']//table//tr[contains(., '%s')]",
         
             "birthday": "//*[@id='ngw.calendar.admin_setting']//input[contains(@ng-model, 'settingForm.birthday_calendar_show')]//following-sibling::span",
             "holiday": "//*[@id='ngw.calendar.admin_setting']//input[contains(@ng-model, 'settingForm.holiday_calendar_hide')]//following-sibling::span",
@@ -131,6 +136,7 @@
             "category_edit": "//input[contains(@ng-model, 'new_category.name')]",
             "category_edit_name": "meo meo edit ",
             "descriptions": "//textarea[contains(@ng-model, 'new_category.description')]",
+            "category_type_admin": "//*[@id='ngw.calendarnew.settings']//tr//td[contains(., '%s')]//following-sibling::td//a[contains(@ng-click, 'edit(e, item)')]",
 
             "admin_setting": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(@ng-click, 'goAdminSettings($event)') and contains(., 'Settings')]",
             "folder_type": "//*[@id='ngw.calendarnew.admin_settings']//button[contains(@ng-click, 'changeMode()')]",

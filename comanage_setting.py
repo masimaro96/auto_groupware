@@ -43,7 +43,6 @@ def co_manage(domain_name):
     Logging("- Access menu")
     
     #driver.execute_script("window.scrollTo(-2000, -502)") 
-    
 
     try:
         element = Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
@@ -52,12 +51,11 @@ def co_manage(domain_name):
         element_1 = Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar_1"])
         element_1.location_once_scrolled_into_view
         
-        admin = Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
-        if admin.is_displayed():
-            Logging("- Account admin")
-            admin.click()
-            Logging("- Click setting admin")
-            admin_execution()
+        Waits.Wait20s_ElementLoaded(data["co-manage"]["pull_the_scroll_bar"])
+        Logging("- Account admin")
+        Commands.Wait20s_ClickElement(data["co-manage"]["pull_the_scroll_bar"])
+        Logging("- Click setting admin")
+        admin_execution()
     except:
         Logging("- Account user")
 
