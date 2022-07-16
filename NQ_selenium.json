@@ -221,6 +221,8 @@
                 "input_list_1": "quynh2@qa1.hanbiro.net",
                 "input_list_2": "quynh3@qa1.hanbiro.net",
                 "add_button": "//*[@id='ngw.mail.whitelist']//button[contains(@ng-click, 'addWhiteList()') and contains(., 'Add')]",
+
+                "while_list_test": "//*[@id='ngw.mail.whitelist']//td[contains(., '%s')]",
                 
                 "searchwhitelist": "//div[@id='ngw.mail.whitelist']/div/div[2]/div[4]/div/span/input",
                 "input_search_1": "quynh2@qa1.hanbiro.net",
@@ -302,8 +304,9 @@
                 "user_2": "//*[@id='aliasDomainOrg']//a[contains(text(),'Selenium/AutomationTest2')]",
                 "add_button": "//div[@id='aliasDomainOrg']/div/div/div[2]/div[2]/div/div/a/i",
                 "save_button": "//*[@id='aliasDomainOrg']//button[contains(.,'Save')]",
-                "": "",
-                "": ""
+
+                "alias_domain_check": "//*[@id='ngw.mail.adminalias_domain']//table[contains(., '%s')]",
+                "del_alias_domain_check": "//*[@id='ngw.mail.adminalias_domain']//table[contains(., '%s')]//span"
             },
             
             "approval_mailbox":{
@@ -353,6 +356,7 @@
             
             "sentlimit":{
                 "send": "//*[starts-with(@id, 'mCSB') and contains(@id, 'container')]//a[contains(., 'Sent Restriction')]",
+                "limit_data": "//*[@id='domain-limit']//td[contains(., '%s')]",
                 "input":[
                     "//input[@type='search']",
                     "//div[@id='file-limit']/div/div/div/span/input"

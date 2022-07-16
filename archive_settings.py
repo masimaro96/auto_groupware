@@ -340,21 +340,17 @@ def folder_public():
     try:
         Logging(" ")
         PrintYellow(" ** Check folder public have save ** ")
-        folder_public = Waits.Wait20s_ElementLoaded(data["archive"]["admin"]["ManageCompany"]["name_folder"] % str(name_folder_admin))
-        if folder_public.is_displayed:
-            Logging("=> Create folder public success")
-            TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_public"]["pass"])
-        else:
-            Logging("=> Create folder public fail")
-            TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_public"]["fail"])
-        
+        Waits.Wait20s_ElementLoaded(data["archive"]["admin"]["ManageCompany"]["name_folder"] % str(name_folder_admin))
+        Logging("=> Create folder public success")
+        TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_public"]["pass"])
     except:
-        pass
-    
+        Logging("=> Create folder public fail")
+        TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_public"]["fail"])
+            
     return name_folder_admin
 
 def folder_private():
-    name_folder_private = data["title"] + date_time + str(" private")
+    name_folder_private = data["title"] + " " + str(n)
 
     ''' Create folder private -> Permission Disable '''
     try:
@@ -380,14 +376,13 @@ def folder_private():
     ''' Check folder private have create '''
     try:
         Logging(" ")
-        PrintYellow("**Check folder private have save**")
-        time.sleep(5)
+        PrintYellow(" ** Check folder private have save ** ")
         Waits.Wait20s_ElementLoaded(data["archive"]["admin"]["ManageCompany"]["name_folder"] % str(name_folder_private))
         Logging("=> Create folder private success")
-        TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_privte"]["pass"])       
+        TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_private"]["pass"])
     except:
         Logging("=> Create folder private fail")
-        TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_privte"]["fail"]) 
+        TesCase_LogResult(**data["testcase_result"]["archive"]["add_folder_private"]["fail"])
     
     return name_folder_private
     

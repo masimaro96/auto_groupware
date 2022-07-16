@@ -404,7 +404,7 @@ def add_while_list():
     
     try:
         Logging("** Check add while list success")
-        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, "//*[@id='ngw.mail.whitelist']//td[contains(., '" + whilelist + "')]")))
+        WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings"]["whitelist"]["while_list_test"] % str(whilelist))))
         Logging("=> Add while list success")
         TesCase_LogResult(**data["testcase_result"]["mail"]["add_whilelist"]["pass"])
     except WebDriverException:
@@ -653,15 +653,11 @@ def add_alias_domain():
     aliasdomain_name = data["mail"]["settings_admin"]["alias_domian"]["aliasdomain_input"]
     try:
         Logging("** Add alias domain")
-
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["aliasdomain"])
         Logging("- Access alias domain")
-        
-
         Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["alias_domian"]["input4"], aliasdomain_name)
         Logging("- Input domain")
-        
-
+    
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["add_aliasdomain"])
         Logging("- Add alias domain")
         
@@ -670,10 +666,9 @@ def add_alias_domain():
     
     try:
         Logging("** Check alias domain have add")
-        Waits.Wait20s_ElementLoaded("//*[@id='ngw.mail.adminalias_domain']//table[contains(., '" + aliasdomain_name + "')]")
+        Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["alias_domian"]["alias_domain_check"] % str(aliasdomain_name))
         Logging("=> Add alias domain success")
         TesCase_LogResult(**data["testcase_result"]["mail"]["alias_domain"]["pass"])
-         
     except:
         Logging("=> Add alias domain fail")
         TesCase_LogResult(**data["testcase_result"]["mail"]["alias_domain"]["fail"])
@@ -683,18 +678,13 @@ def add_alias_domain():
 def delete_alias_domain(aliasdomain_name):
     Logging("** Delete alias domain")
     try:
-        Commands.Wait20s_ClickElement("//*[@id='ngw.mail.adminalias_domain']//table[contains(., '" + aliasdomain_name + "')]//span")
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["del_alias_domain_check"] % str(aliasdomain_name))
         Logging("- Select alias domain")
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["alias_domian"]["del_aliasdomain"])
         Logging("=> Delete alias domain")
-        
-        #TestlinkResult_Pass("WUI-131")
         TesCase_LogResult(**data["testcase_result"]["mail"]["del_alias_domain"]["pass"])
     except:
         TesCase_LogResult(**data["testcase_result"]["mail"]["del_alias_domain"]["fail"])
-        #TestlinkResult_Fail("WUI-131")
-        pass
 
 def add_domain_user():
     text = data["mail"]["settings_admin"]["alias_domian"]["add_domain"]
@@ -723,7 +713,6 @@ def approval_mailbox():
     element_admin = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail"])
     element_admin.location_once_scrolled_into_view
 
-    
     element_admin1 = Waits.Wait20s_ElementLoaded(data["mail"]["settingsmail_1"])
     element_admin1.location_once_scrolled_into_view
 
@@ -737,7 +726,6 @@ def approval_mailbox():
             delete_approval_mail_box()
     except WebDriverException:
         Logging("=> Domain don't have menu approval mail box")
-        pass
     
 
 def Forced_approval():
@@ -923,78 +911,73 @@ def send_limit():
 
     try:
         send_limit = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, data["mail"]["settings_admin"]["sentlimit"]["send"])))
-        if send_limit.is_displayed():
-            send_limit
-            
-            Logging("-> Asset send limit")
-            
-            Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["sentlimit"]["input"][0], text_domain)
-            
-            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_add"][0])
-            Logging("** Create domain")
-            
-
-            Logging("** Check domain limt create success")
-            domain = Waits.Wait20s_ElementLoaded("//*[@id='domain-limit']//td[contains(., '" + text_domain + "')]")
-            if domain.is_displayed():
-                Logging("=> Create domain limit success")
-                TesCase_LogResult(**data["testcase_result"]["mail"]["add_domain_limt"]["pass"])
-            else:
-                Logging("=> Create domain limit fail")
-                TesCase_LogResult(**data["testcase_result"]["mail"]["add_domain_limt"]["fail"])
-                ValidateFailResultAndSystem("<div>[Mail]Create domain limit fail </div>")
-            
-
-            try:
-                Logging("** Delete domain")
-                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["select"][0])
-                
-                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_delete"])
-                
-                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["close_popup"])
-                Logging("=> Delete domain")
-                
-                TesCase_LogResult(**data["testcase_result"]["mail"]["del_domain_limt"]["pass"])
-            except:
-                TesCase_LogResult(**data["testcase_result"]["mail"]["del_domain_limt"]["fail"])
-                
-            
-            Logging("** Create file limit")
-            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["file"])
-            
-            Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["sentlimit"]["input"][1], text_file)
-            
-            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_add"][1])
-            Logging("=> File limit have create")
-            
-
-            try:
-                Logging("** Check file limit create success")
-                Waits.Wait20s_ElementLoaded("//*[@id='file-limit']//td[contains(., '" + text_file + "')]")
-                Logging("=> Create file limit success")
-                TesCase_LogResult(**data["testcase_result"]["mail"]["add_file_limt"]["pass"])
-            except:
-                Logging("=> Create file limit fail")
-                TesCase_LogResult(**data["testcase_result"]["mail"]["add_file_limt"]["fail"])
-            
-
-            try:
-                Logging("** Delete file limit")
-                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["select"][1])
-                
-                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_delete"])
-                
-                Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["close_popup"])
-                Logging("=> Delete file limit")
-                TesCase_LogResult(**data["testcase_result"]["mail"]["del_file_limit"]["pass"])
-            except:
-                TesCase_LogResult(**data["testcase_result"]["mail"]["del_file_limit"]["fail"])
-               
+        send_limit.click()
+        
+        Logging("-> Asset send limit")
+        
+        Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["sentlimit"]["input"][0], text_domain)
+        
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_add"][0])
+        Logging("** Create domain")
+        
+        Logging("** Check domain limt create success")
+        domain = Waits.Wait20s_ElementLoaded(data["mail"]["settings_admin"]["sentlimit"]["limit_data"] % str(text_domain))
+        if domain.is_displayed():
+            Logging("=> Create domain limit success")
+            TesCase_LogResult(**data["testcase_result"]["mail"]["add_domain_limt"]["pass"])
         else:
-            print("=> Domain don't have send limit")
+            Logging("=> Create domain limit fail")
+            TesCase_LogResult(**data["testcase_result"]["mail"]["add_domain_limt"]["fail"])
+            ValidateFailResultAndSystem("<div>[Mail]Create domain limit fail </div>")
+        
+
+        try:
+            Logging("** Delete domain")
+            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["select"][0])
+            
+            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_delete"])
+            
+            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["close_popup"])
+            Logging("=> Delete domain")
+            
+            TesCase_LogResult(**data["testcase_result"]["mail"]["del_domain_limt"]["pass"])
+        except:
+            TesCase_LogResult(**data["testcase_result"]["mail"]["del_domain_limt"]["fail"])
+            
+        
+        Logging("** Create file limit")
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["file"])
+        
+        Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["sentlimit"]["input"][1], text_file)
+        
+        Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_add"][1])
+        Logging("=> File limit have create")
+
+        try:
+            Logging("** Check file limit create success")
+            Waits.Wait20s_ElementLoaded("//*[@id='file-limit']//td[contains(., '" + text_file + "')]")
+            Logging("=> Create file limit success")
+            TesCase_LogResult(**data["testcase_result"]["mail"]["add_file_limt"]["pass"])
+        except:
+            Logging("=> Create file limit fail")
+            TesCase_LogResult(**data["testcase_result"]["mail"]["add_file_limt"]["fail"])
+        
+
+        try:
+            Logging("** Delete file limit")
+            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["select"][1])
+            
+            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["button_delete"])
+            
+            Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["sentlimit"]["close_popup"])
+            Logging("=> Delete file limit")
+            TesCase_LogResult(**data["testcase_result"]["mail"]["del_file_limit"]["pass"])
+        except:
+            TesCase_LogResult(**data["testcase_result"]["mail"]["del_file_limit"]["fail"])
+               
     except:
         Logging("=> Domain don't have send limit")
-        pass
+       
     
 
 def company_signature():
@@ -1004,8 +987,6 @@ def company_signature():
    
     Commands.Wait20s_ClickElement("//a[contains(@data-defaulthref, '#/mail/admin/signature')]")
     
-    
-
     force_list = int(len(driver.find_elements_by_xpath(data["mail"]["settings_admin"]["signature_company"]["force_list"])))
     force_apply_list = []
     i = 0
@@ -1103,13 +1084,11 @@ def alias_account():
         Commands.Wait20s_InputElement(data["mail"]["settings_admin"]["aliasaccount"]["input_allias"], name_alias)
         Logging("- Input alias account")
         
-        
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["choose_org"])
         
         Commands.Wait20s_EnterElement(data["mail"]["settings_admin"]["aliasaccount"]["input_org"], name_org)
         Logging("- Input user")
         
-
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["select_org"])
         Logging("- Select user")
         
@@ -1119,7 +1098,6 @@ def alias_account():
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["button_save_org"])
         Logging("=> Save Organization")
         
-
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["aliasaccount"]["button_save"])
         Logging("=> Save alias account")
         
@@ -1149,7 +1127,6 @@ def log_analysis():
         Commands.Wait20s_ClickElement(data["mail"]["settings_admin"]["log_analysis"]["search"])
         Logging("=> Search")
         
-
         type_select = Waits.Wait20s_ElementLoaded("//*[@id='mail_admin_log_analysis']//div[contains(@data-ng-show, 'isListView()')]")
         type_select_text = type_select.text
         text = type_select_text.split(" ")[1]
